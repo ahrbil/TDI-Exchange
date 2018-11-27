@@ -1,0 +1,26 @@
+{
+  "name": "@tdi-exchange/server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node index.js"
+  },
+  "keywords": [],
+  "author": "ahrbil",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-modules/epoxy": "^0.2.10",
+    "@graphql-modules/sonar": "^0.2.10",
+    "apollo-server-express": "^2.2.3",
+    "express": "^4.16.4",
+    "graphql": "^14.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "nodemon": "^1.18.6"
+  }
+}

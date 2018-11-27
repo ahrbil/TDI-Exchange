@@ -1,0 +1,15 @@
+type User {
+  id: ID! @unique
+  userName: String!
+}
+type Question {
+  id: ID! @unique
+  header: String!
+  body: String
+  views: Int
+}
+type Answer {
+  id: ID! @unique
+  body: String!
+  isVerified: Bool
+}
