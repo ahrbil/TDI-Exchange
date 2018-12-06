@@ -1,0 +1,28 @@
+type User {
+  id: ID! @unique
+  facebookId: String @unique
+  googleId: String @unique
+  userName: String
+  avatar: String
+  MyQuestions: [Question!]!
+  MyAnswers: [Answer!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+type Question {
+  id: ID! @unique
+  header: String!
+  body: String
+  askedBy: User!
+  answers: [Answer!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+type Answer {
+  id: ID! @unique
+  body: String!
+  answeredBy: User!
+  answeredTo: Question!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

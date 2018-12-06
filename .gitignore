@@ -54,7 +54,7 @@ typings/
 node_modules
 
 coverage
-
+generated
 build
 dist
 

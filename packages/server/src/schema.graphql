@@ -1,0 +1,31 @@
+#import * from "../generated/prisma.graphql"
+
+type User {
+  id: ID!
+  userName: String
+  avatar: String
+  MyQuestions: [Question!]!
+  MyAnswers: [Answer!]!
+}
+
+type Question {
+  id: ID! @unique
+  header: String!
+  body: String
+  askedBy: User!
+  answers: [Answer!]!
+  totalAnswers: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  hello: String!
+  me: User
+  allQuestions: [Question!]!
+}
+
+type Mutation {
+  createQuestion(header: String!, body: String): Question!
+  createAnswer(questionId: ID!, body: String!): Answer!
+}
