@@ -1,9 +1,8 @@
-// eslint-disable-next-line
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { importSchema } from "graphql-import";
 
-import prisma from "../prisma";
+import prisma from "./prisma";
 import resolvers from "./resolvers";
 import middleWare from "./middlewares";
 import authRoute from "./routes/auth";

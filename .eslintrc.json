@@ -1,29 +1,27 @@
 {
-  "extends": [
-    "airbnb",
-    "plugin:security/recommended",
-    "plugin:prettier/recommended"
-  ],
-  "plugins": ["security", "prettier"],
-  "env": {
-    "node": true,
-    "browser": true
-  },
-  "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "printWidth": 80,
-        "tabWidth": 2,
-        "useTabs": false,
-        "semi": true,
-        "singleQuote": false,
-        "bracketSpacing": true,
-        "trailingComma": "all"
-      }
+    "extends": [
+      "airbnb",
+      "plugin:security/recommended",
+      "plugin:prettier/recommended"
     ],
-    "import/prefer-default-export": 0,
-    "no-unused-vars": "warn",
-    "import/no-dynamic-require": 0
+    "plugins": ["security", "prettier"],
+    "env": {
+      "node": true,
+      "browser": true
+    },
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "printWidth": 80,
+          "tabWidth": 2,
+          "useTabs": false,
+          "semi": true,
+          "singleQuote": false,
+          "bracketSpacing": true,
+          "trailingComma": "all"
+        }
+      ],
+      "no-unused-vars": "warn"
+    }
   }
-}

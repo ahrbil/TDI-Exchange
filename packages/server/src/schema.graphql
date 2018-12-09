@@ -9,7 +9,7 @@ type User {
 }
 
 type Question {
-  id: ID! @unique
+  id: ID!
   header: String!
   body: String
   askedBy: User!

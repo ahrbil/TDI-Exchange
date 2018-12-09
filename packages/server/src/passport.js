@@ -2,7 +2,7 @@ import passport from "passport";
 import FacebookStrategy from "passport-facebook";
 import GoogleStrategy from "passport-google-oauth20";
 
-import prisma from "../prisma";
+import prisma from "./prisma";
 
 const initPassport = () => {
   passport.serializeUser((user, done) => {

@@ -9,13 +9,13 @@ const Question = {
   answers: (parent, args, context) =>
     context.prisma.question({ id: parent.id }).answers(),
   totalAnswers: async (parent, args, context) => {
-    const t = await context.prisma
+    const total = await context.prisma
       .answersConnection({
         where: { answeredTo: { id: parent.id } },
       })
       .aggregate()
       .count();
-    return t;
+    return total;
   },
   createdAt: parent => parent.createdAt,
   updatedAt: parent => parent.updatedAt,
