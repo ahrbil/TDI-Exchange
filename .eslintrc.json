@@ -1,27 +1,29 @@
 {
-    "extends": [
-      "airbnb",
-      "plugin:security/recommended",
-      "plugin:prettier/recommended"
+  "extends": [
+    "airbnb",
+    "plugin:security/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["security", "prettier"],
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 80,
+        "tabWidth": 2,
+        "useTabs": false,
+        "semi": true,
+        "singleQuote": false,
+        "bracketSpacing": true,
+        "trailingComma": "all"
+      }
     ],
-    "plugins": ["security", "prettier"],
-    "env": {
-      "node": true,
-      "browser": true
-    },
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "printWidth": 80,
-          "tabWidth": 2,
-          "useTabs": false,
-          "semi": true,
-          "singleQuote": false,
-          "bracketSpacing": true,
-          "trailingComma": "all"
-        }
-      ],
-      "no-unused-vars": "warn"
-    }
+    "no-unused-vars": "warn",
+    "react/jsx-filename-extension": 0,
+    "jsx-a11y/accessible-emoji": "warn"
   }
+}

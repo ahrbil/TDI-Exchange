@@ -55,7 +55,7 @@ class FullEditor extends React.Component {
     };
   }
 
-  getPluginsReady = () => {
+  getPluginsReady = (props) => {
     const codePlugin = createCodeEditorPlugin();
     const blockBreakoutPlugin = createBlockBreakoutPlugin();
     const richButtons = createRichButtonsPlugin();

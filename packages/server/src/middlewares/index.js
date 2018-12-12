@@ -4,7 +4,6 @@ import cookieParser from "cookie-parser";
 import cookieSession from "cookie-session";
 
 const middleWare = Router();
-
 middleWare.use(
   cookieSession({
     keys: [process.env.SESSION_SECRET],

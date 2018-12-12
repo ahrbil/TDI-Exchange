@@ -24,7 +24,7 @@ authRoute.get(
   "/google/callback",
   passport.authenticate("google"),
   (req, res) => {
-    res.redirect("/graphql");
+    res.redirect("http://localhost:3000");
   },
 );
 

@@ -1,5 +1,5 @@
 import React from "react";
-import styled,{css} from "styled-components";
+import styled, { css } from "styled-components";
 
 import Icon from "./Icon";
 
@@ -26,10 +26,12 @@ const RichBtnStyle = styled.button`
   &:hover {
     background-color: ${props => props.theme.hv_white};
   }
-  ${props=>props.isActive && css`
+  ${props =>
+    props.isActive &&
+    css`
       border: 2px solid #6495ed;
-      background-color: ${props => props.theme.hv_white};
-  `}
+      background-color: ${props.theme.hv_white};
+    `}
 `;
 const LabelFile = styled(RichBtnStyle)`
   input {
@@ -53,7 +55,7 @@ const RichBtn = ({
     isActive={isActive}
     onClick={(inline && toggleInlineStyle) || (block && toggleBlockType)}
   >
-    <Icon iconName={iconName} style={style}/>
+    <Icon iconName={iconName} style={style} />
   </RichBtnStyle>
 );
 
