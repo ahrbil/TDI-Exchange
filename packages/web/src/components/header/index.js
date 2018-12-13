@@ -8,10 +8,11 @@ import Logo from "../logo";
 import Profile from "../profile";
 import Search from "../search";
 import Button from "../button";
+import { AuthConsumer } from "../../context/AuthContext";
 
 const Header = () => (
-  <IsAuth>
-    {currentUser => (
+  <AuthConsumer>
+    {({ currentUser }) => (
       <StyledHeader>
         <Container>
           <Logo />
@@ -27,7 +28,7 @@ const Header = () => (
         </Container>
       </StyledHeader>
     )}
-  </IsAuth>
+  </AuthConsumer>
 );
 
 export default Header;

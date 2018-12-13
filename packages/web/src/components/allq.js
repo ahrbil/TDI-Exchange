@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { Query } from "react-apollo";
 import { ALL_QUESTIONS } from "../queries";
 
@@ -8,21 +9,35 @@ const AllQ = props => (
       if (loading) {
         return <h1>loading</h1>;
       }
-      const { allQuestions } = data;
+      const allQuestions = data && data.allQuestions;
       return (
-        <div>
+        <Questions>
+          <aside style={{ gridArea: "aside" }}>ASIIIIDE👏👏🍳</aside>
           {allQuestions.map(question => (
-            <div key={question.id}>
-              <h3>{question.header}</h3>
+            <div key={question.id} className="q">
+              <h1 style={{ fontSize: "21px", fontWeight: 700 }}>
+                {question.header}
+              </h1>
               <p>{question.updatedAt}</p>
-              <h5>{question.askedBy.userName}</h5>
+              <h4>{question.askedBy.userName}</h4>
               <img src={question.askedBy.avatar} alt="t" />
             </div>
           ))}
-        </div>
+        </Questions>
       );
     }}
   </Query>
 );
 
 export default AllQ;
+
+const Questions = styled.div`
+  border: 1px solid salmon;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: repeat(auto-fill, minmax(150px, auto));
+  grid-template-areas: "q  aside";
+  .q {
+    color: burlywood;
+  }
+`;

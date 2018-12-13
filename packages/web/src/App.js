@@ -2,12 +2,14 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import { Router } from "@reach/router";
 
 import "./App.css";
 import theme from "./theme";
 import Header from "./components/header";
 import AllQ from "./components/allq";
 import { Container, Wrapper } from "./components/style";
+import { AuthProvider } from "./context/AuthContext";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -17,12 +19,16 @@ const client = new ApolloClient({
 const App = () => (
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
-      <Container>
-        <Header />
-        <Wrapper>
-          <AllQ />
-        </Wrapper>
-      </Container>
+      <AuthProvider>
+        <Container>
+          <Header />
+          <Wrapper>
+            <Router>
+              <AllQ path="/" />
+            </Router>
+          </Wrapper>
+        </Container>
+      </AuthProvider>
     </ThemeProvider>
   </ApolloProvider>
 );
