@@ -9,6 +9,8 @@ import { FormatListNumbered } from "styled-icons/material/FormatListNumbered";
 import { FormatListBulleted } from "styled-icons/material/FormatListBulleted";
 import { ImageAlt } from "styled-icons/boxicons-regular/ImageAlt";
 import { SignOutAlt } from "styled-icons/fa-solid/SignOutAlt";
+import { QuestionAnswer } from "styled-icons/material/QuestionAnswer";
+
 import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
 import { ReactComponent as H3 } from "../svgs/h3.svg";
 import { ReactComponent as H2 } from "../svgs/h2.svg";
@@ -40,6 +42,8 @@ const Glyph = ({ iconName }) => {
       return <ImageAlt />;
     case "logout":
       return <SignOutAlt />;
+    case "answers":
+      return <QuestionAnswer />;
     default:
       break;
   }

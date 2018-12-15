@@ -7,9 +7,9 @@ import { Router } from "@reach/router";
 import "./App.css";
 import theme from "./theme";
 import Header from "./components/header";
-import AllQ from "./components/allq";
 import { Container, Wrapper } from "./components/style";
 import { AuthProvider } from "./context/AuthContext";
+import Home from "./pages/Home";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -24,7 +24,7 @@ const App = () => (
           <Header />
           <Wrapper>
             <Router>
-              <AllQ path="/" />
+              <Home path="/" />
             </Router>
           </Wrapper>
         </Container>

@@ -9,10 +9,20 @@ export const Wrapper = styled.div`
   margin-top: 80px;
 `;
 export const ButtonWrapper = styled.div`
-  grid-area: profile / profile / profile / profile;
+  grid-area: profile;
+`;
+export const HomeGrid = styled.div`
+  display: grid;
+  grid-template-columns: 3fr minmax(240px, 1fr);
+  grid-template-areas: "questions aside";
+  grid-gap: 32px;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
 `;
 export const SearchWrapper = styled.div`
-  grid-area: search / search / search / search;
+  grid-area: search;
   position: relative;
   &:focus-within {
     grid-area: logo / logo / profile/ profile;

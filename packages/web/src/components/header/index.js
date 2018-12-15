@@ -41,10 +41,11 @@ const StyledHeader = styled.header`
   border: none;
   box-shadow: 0px 1px 1px #d9d9d9;
   background-color: white;
+  z-index: 1000;
   > div {
     display: grid;
     grid-template-columns: auto auto 1fr auto;
-    grid-template-areas: "logo search area profile";
+    grid-template-areas: "logo search . profile";
     grid-template-rows: 1fr;
     max-width: 1080px;
     align-items: center;

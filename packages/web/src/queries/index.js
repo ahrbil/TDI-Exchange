@@ -14,7 +14,8 @@ export const ALL_QUESTIONS = gql`
     allQuestions {
       id
       header
-      updatedAt
+      totalAnswers
+      createdAt
       askedBy {
         userName
         avatar
