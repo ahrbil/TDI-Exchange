@@ -10,6 +10,7 @@ import Header from "./components/header";
 import { Container, Wrapper } from "./components/style";
 import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home";
+import Footer from "./components/footer";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -28,6 +29,7 @@ const App = () => (
             </Router>
           </Wrapper>
         </Container>
+        <Footer />
       </AuthProvider>
     </ThemeProvider>
   </ApolloProvider>
