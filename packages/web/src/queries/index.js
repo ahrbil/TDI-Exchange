@@ -1,5 +1,18 @@
 import { gql } from "apollo-boost";
 
+const QUESTION_FRAGMENT = gql`
+  fragment questionFragment on Question {
+    id
+    header
+    totalAnswers
+    createdAt
+    askedBy {
+      userName
+      avatar
+    }
+  }
+`;
+
 export const CURRENT_USER = gql`
   query CURRENT_USER {
     me {
@@ -12,14 +25,27 @@ export const CURRENT_USER = gql`
 export const ALL_QUESTIONS = gql`
   query ALL_QUESTIONS {
     allQuestions {
-      id
-      header
-      totalAnswers
-      createdAt
-      askedBy {
-        userName
-        avatar
+      ...questionFragment
+    }
+  }
+  ${QUESTION_FRAGMENT}
+`;
+
+export const QUESTION_WITH_DETAILS = gql`
+  query QUESTION_WITH_DETAILS($id: ID!) {
+    question(id: $id) {
+      ...questionFragment
+      body
+      answers {
+        id
+        body
+        createdAt
+        answeredBy {
+          userName
+          avatar
+        }
       }
     }
   }
+  ${QUESTION_FRAGMENT}
 `;

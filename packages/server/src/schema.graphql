@@ -23,6 +23,7 @@ type Query {
   hello: String!
   me: User
   allQuestions: [Question!]!
+  question(id: ID!): Question!
 }
 
 type Mutation {

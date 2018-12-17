@@ -11,6 +11,7 @@ import { Container, Wrapper } from "./components/style";
 import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home";
 import Footer from "./components/footer";
+import QuestionDetails from "./pages/QuestionDetails";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -26,6 +27,7 @@ const App = () => (
           <Wrapper>
             <Router>
               <Home path="/" />
+              <QuestionDetails path="/questions/:qid" />
             </Router>
           </Wrapper>
         </Container>

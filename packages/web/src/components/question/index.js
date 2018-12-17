@@ -2,40 +2,43 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { Link } from "@reach/router";
 import { QuestionHeader, QuestionBody, QuestionFooter } from "./style";
 import { getRelativeTimePosted } from "../../utils";
 import Icon from "../icons";
 
 const Question = ({ question }) => (
-  <QuestionContainer>
-    <QuestionHeader>
-      <img src={question.askedBy.avatar} alt={question.askedBy.userName} />
-      <h3>{question.askedBy.userName}</h3>
-    </QuestionHeader>
-    <QuestionBody>
-      <h1>{question.header}</h1>
-    </QuestionBody>
-    <QuestionFooter>
-      <div className="total-answers">
-        <Icon
-          iconName="answers"
-          style={{ width: "18px", height: "18px", marginRight: "2px" }}
-        />
-        <span>
-          <strong
-            style={{ fontWeight: "700", fontSize: "0.9rem", padding: "5px" }}
-          >
-            {question.totalAnswers}
-          </strong>
-          {`Answer${question.totalAnswers > 1 ? "s" : ""}`}
+  <Link to={`/questions/${question.id}`}>
+    <QuestionContainer>
+      <QuestionHeader>
+        <img src={question.askedBy.avatar} alt={question.askedBy.userName} />
+        <h3>{question.askedBy.userName}</h3>
+      </QuestionHeader>
+      <QuestionBody>
+        <h1>{question.header}</h1>
+      </QuestionBody>
+      <QuestionFooter>
+        <div className="total-answers">
+          <Icon
+            iconName="answers"
+            style={{ width: "18px", height: "18px", marginRight: "2px" }}
+          />
+          <span>
+            <strong
+              style={{ fontWeight: "700", fontSize: "0.9rem", padding: "5px" }}
+            >
+              {question.totalAnswers}
+            </strong>
+            {`Answer${question.totalAnswers > 1 ? "s" : ""}`}
+          </span>
+        </div>
+        <Divider />
+        <span className="asked-at">
+          {`Asked ${getRelativeTimePosted(question.createdAt)}`}
         </span>
-      </div>
-      <Divider />
-      <span className="asked-at">
-        {`Asked ${getRelativeTimePosted(question.createdAt)}`}
-      </span>
-    </QuestionFooter>
-  </QuestionContainer>
+      </QuestionFooter>
+    </QuestionContainer>
+  </Link>
 );
 
 export default Question;
@@ -62,6 +65,7 @@ const QuestionContainer = styled.div`
   border: 1px solid #f2f2f2;
   box-shadow: 1px 1px ${props => props.theme.shadow.primary};
   transition: box-shadow 0.2s ease-in;
+  background-color: ${props => props.theme.white};
   cursor: pointer;
   &:hover,
   &:active,

@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "@reach/router";
 import Button from "../button";
 
 const Aside = () => (
   <AsideContainer>
-    <Button>Ask A Question</Button>
+    <Link to="/ask-a-question">
+      <Button>Ask A Question</Button>
+    </Link>
   </AsideContainer>
 );
 

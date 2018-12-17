@@ -16,6 +16,10 @@ const Query = {
     const allQuestions = await context.prisma.questions();
     return allQuestions;
   },
+  question: async (parent, args, context) => {
+    const singleQuestion = await context.prisma.question({ id: args.id });
+    return singleQuestion;
+  },
 };
 
 export default Query;
