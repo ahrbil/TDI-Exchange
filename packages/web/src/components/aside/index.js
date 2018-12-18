@@ -6,7 +6,7 @@ import Button from "../button";
 const Aside = () => (
   <AsideContainer>
     <Link to="/ask-a-question">
-      <Button>Ask A Question</Button>
+      <Button secondary>Ask A Question</Button>
     </Link>
   </AsideContainer>
 );
@@ -18,8 +18,4 @@ const AsideContainer = styled.div`
   align-items: stretch;
   display: flex;
   flex-direction: column;
-  ${Button} {
-    width: 100%;
-    background-color: #01ce77;
-  }
 `;

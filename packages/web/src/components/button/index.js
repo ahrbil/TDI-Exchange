@@ -1,7 +1,14 @@
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
 import RichBtn, { InputFileBtn } from "./editorBtns";
 
-const Button = styled.button`
+const Button = ({ style, loading, secondary, children, ...rest }) => (
+  <ButtonStyle style={style} disabled={loading} secondary={secondary} {...rest}>
+    {loading ? "Loading" : children}
+  </ButtonStyle>
+);
+
+const ButtonStyle = styled.button`
   display: flex;
   flex: none;
   align-self: center;
@@ -11,17 +18,34 @@ const Button = styled.button`
   font-weight: 600;
   white-space: nowrap;
   word-break: keep-all;
-  cursor: pointer;
+  cursor: ${props => (props.disabled ? `not-allowed` : `pointer`)};
   font-size: 15px;
   position: relative;
   text-align: center;
   padding: 12px 32px;
   color: white;
-  background-color: ${props => props.theme.color.primary};
   transition: box-shadow 0.2s ease-out;
   &:hover {
-    box-shadow: 3px 3px 18px 0px #d3d3d9;
+    box-shadow: ${props =>
+      props.disabled ? "none" : `3px 3px 18px 0px #d3d3d9`};
   }
+  ${props =>
+    props.secondary &&
+    css`
+      width: 100%;
+    `};
+  ${props =>
+    props.disabled
+      ? css`
+          background-color: ${props.secondary
+            ? props.theme.disabled.secondary
+            : props.theme.disabled.primary};
+        `
+      : css`
+          background-color: ${props.secondary
+            ? props.theme.color.secondary
+            : props.theme.color.primary};
+        `}
 `;
 
 export default Button;

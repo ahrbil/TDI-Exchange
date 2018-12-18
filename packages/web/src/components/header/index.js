@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "@reach/router";
 
-import IsAuth from "../isAuth";
 import { Container, ButtonWrapper } from "../style";
 import Logo from "../logo";
 import Profile from "../profile";
