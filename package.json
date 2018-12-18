@@ -10,10 +10,13 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-security": "^1.4.0",
+    "husky": "^1.3.0",
     "lerna": "^3.4.3",
-    "prettier": "^1.15.3"
+    "prettier": "^1.15.3",
+    "pretty-quick": "^1.8.0"
   },
   "scripts": {},
+  "precommit": "lint-stage",
   "workspaces": {
     "packages": [
       "packages/*"

@@ -1,4 +1,5 @@
 import React from "react";
+import styled from 'styled-components';
 import { Mutation } from "react-apollo";
 import { EditorState, convertToRaw } from "draft-js";
 
@@ -11,7 +12,6 @@ export default class CreateAnswer extends React.Component {
     super(props);
     this.state = {
       editorState: EditorState.createEmpty(),
-      rawEditorState: "",
     };
   }
 
@@ -36,14 +36,10 @@ export default class CreateAnswer extends React.Component {
   }
 
   render() {
-    const {rawEditorState} = this.state;
-    const {questionId} = this.props;
     return (
-      <Mutation 
-        mutation={CREATE_ANSWER} 
-        variables={{questionId, body:rawEditorState}}>
+      <Mutation mutation={CREATE_ANSWER} >
         {(createAnswer, { loading,error }) => (
-          <div>
+          <CreateAnswerCard>
             <RichEditor 
               editorState = {this.state.editorState} 
               onChange={this.handleEditorChange} 
@@ -52,12 +48,17 @@ export default class CreateAnswer extends React.Component {
             <Button 
               loading ={loading || error} 
               onClick = {() => this.handleClick(createAnswer)}
+              style={{ marginTop: "1rem"}}
             >
               Publish Your Answer
             </Button>
-          </div>
+          </CreateAnswerCard>
         )}
       </Mutation>
     );
   }
 }
+
+const CreateAnswerCard = styled.div`
+  margin-top: 3rem;
+`;
