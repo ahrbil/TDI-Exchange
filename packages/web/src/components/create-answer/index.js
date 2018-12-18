@@ -1,6 +1,6 @@
 import React from "react";
 import { Mutation } from "react-apollo";
-import { EditorState, convertToRaw,convertToHTML } from "draft-js";
+import { EditorState, convertToRaw } from "draft-js";
 
 import RichEditor from "../editor";
 import { CREATE_ANSWER } from "../../queries";
@@ -11,41 +11,51 @@ export default class CreateAnswer extends React.Component {
     super(props);
     this.state = {
       editorState: EditorState.createEmpty(),
+      rawEditorState: "",
     };
   }
 
-  handleEditoChange = editorState => {
+  handleEditorChange = (editorState) => {
     this.setState({
       editorState,
     });
   };
 
-  logToRaw = () => {
+  saveEditorStateToRaw = () => {
     const content = this.state.editorState.getCurrentContent();
     const contentToRaw = JSON.stringify(convertToRaw(content),null,2);
-    this.setState({rawState:contentToRaw})
-    console.log(contentToRaw);
+    return contentToRaw
   };
 
-  handleSubmitBtn = () => {
-    let body = this.state.rawState;
-    const id = this.props.id;
-    console.log(this.props);
-    this.props.createAnswer({variables:{questionId: id,body}});
+  handleClick = (createAnswer) => {
+    const {questionId} = this.props;
+    const body = this.saveEditorStateToRaw();
+    createAnswer({variables:{
+      questionId, body
+    }})
   }
 
   render() {
+    const {rawEditorState} = this.state;
+    const {questionId} = this.props;
     return (
-      <Mutation mutation={CREATE_ANSWER}>
-        {(createAnswer, { loading }) => (
-          <>
+      <Mutation 
+        mutation={CREATE_ANSWER} 
+        variables={{questionId, body:rawEditorState}}>
+        {(createAnswer, { loading,error }) => (
+          <div>
             <RichEditor 
               editorState = {this.state.editorState} 
-              onChange={this.handleEditoChange} 
+              onChange={this.handleEditorChange} 
               placeholder="Write your answer here ..."
             /> 
-            <Button onClick={this.logToRaw}>Publish Your Answer</Button>
-          </>
+            <Button 
+              loading ={loading || error} 
+              onClick = {() => this.handleClick(createAnswer)}
+            >
+              Publish Your Answer
+            </Button>
+          </div>
         )}
       </Mutation>
     );

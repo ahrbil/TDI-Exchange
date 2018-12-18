@@ -60,4 +60,5 @@ dist
 
 # for bash scripts
 .sh
+# for vscode 
 .vscode

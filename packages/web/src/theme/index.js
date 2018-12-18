@@ -9,6 +9,11 @@ const theme = {
   },
   color: {
     primary: "#2d2bc6",
+    secondary: "#01ce77",
+  },
+  disabled: {
+    primary: "#6262EF",
+    secondary: "#7BF98A",
   },
   border: {
     rd: "4.71px",
