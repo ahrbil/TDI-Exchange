@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import RichBtn, { InputFileBtn } from "./editorBtns";
 
 const Button = styled.button`
   display: flex;
@@ -24,3 +25,4 @@ const Button = styled.button`
 `;
 
 export default Button;
+export { RichBtn, InputFileBtn };

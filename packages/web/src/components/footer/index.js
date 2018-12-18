@@ -5,7 +5,11 @@ const Footer = () => (
   <FooterContainer>
     <div>
       <span>made with ❤ by </span>
-      <a href="https://www.linkedin.com/in/ahrbil" target="_blanc">
+      <a
+        href="https://www.linkedin.com/in/ahrbil"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         ahrbil
       </a>
     </div>

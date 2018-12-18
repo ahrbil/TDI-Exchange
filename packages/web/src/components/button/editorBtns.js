@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import Icon from "./Icon";
+import Icon from "../icons";
 
 const RichBtnStyle = styled.button`
   box-shadow: 0px 3px 3px rgba(12, 52, 75, 0.1);

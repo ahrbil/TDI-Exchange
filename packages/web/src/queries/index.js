@@ -49,3 +49,11 @@ export const QUESTION_WITH_DETAILS = gql`
   }
   ${QUESTION_FRAGMENT}
 `;
+
+export const CREATE_ANSWER = gql`
+  mutation creatAnswer($questionId: ID!, $body: String!) {
+    createAnswer(questionId: $questionId, body: $body) {
+      id
+    }
+  }
+`;
