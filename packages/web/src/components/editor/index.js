@@ -1,6 +1,6 @@
 import React from "react";
 import Editor from "draft-js-plugins-editor";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import createLinkifyPlugin from "draft-js-linkify-plugin";
 import createRichButtonsPlugin from "draft-js-richbuttons-plugin";
 import Prism from "prismjs";
@@ -38,7 +38,7 @@ const Img = props => {
       style={{
         width: "100%",
         maxWidth: "100%",
-        height: "auto",
+        height: "auto"
       }}
     />
   );
@@ -49,23 +49,23 @@ class RichEditor extends React.Component {
     super(props);
     const plugins = this.getPluginsReady(props);
     this.state = {
-      ...plugins,
+      ...plugins
     };
   }
 
-  getPluginsReady = (props) => {
+  getPluginsReady = props => {
     const codePlugin = createCodeEditorPlugin();
     const blockBreakoutPlugin = createBlockBreakoutPlugin();
     const richButtons = createRichButtonsPlugin();
     const prismPlugin = createPrismPlugin({
-      prism: Prism,
+      prism: Prism
     });
     const linkifyPlugin = createLinkifyPlugin({
-      target: "_blank",
+      target: "_blank"
     });
     const markdownPlugin = createMarkdownPlugin({ languages });
     const imagePlugin = createImagePlugin({
-      imageComponent: Img,
+      imageComponent: Img
     });
     return {
       plugins: [
@@ -75,17 +75,17 @@ class RichEditor extends React.Component {
         prismPlugin,
         linkifyPlugin,
         markdownPlugin,
-        imagePlugin,
+        imagePlugin
       ],
       addImage: imagePlugin.addImage,
-      editorButtons : {
+      editorButtons: {
         ItalicButton: richButtons.ItalicButton,
         BoldButton: richButtons.BoldButton,
         MonospaceButton: richButtons.MonospaceButton,
         UnderlineButton: richButtons.UnderlineButton,
         CodeButton: richButtons.CodeButton,
         OLButton: richButtons.OLButton,
-        ULButton: richButtons.ULButton,
+        ULButton: richButtons.ULButton
       }
     };
   };
@@ -97,38 +97,34 @@ class RichEditor extends React.Component {
     reader.addEventListener("load", () => {
       const newState = this.state.addImage(
         this.state.editorState,
-        reader.result,
+        reader.result
       );
       this.props.onChange(newState);
     });
   };
 
   render() {
-    const { plugins,editorButtons } = this.state;
-    const {
-      editorState,
-      onChange,
-      placeholder,
-      readOnly } = this.props ;
+    const { plugins, editorButtons } = this.state;
+    const { editorState, onChange, placeholder, readOnly } = this.props;
     return (
-        <E>
-          {!readOnly && <ToolBar editorButtons={editorButtons}/>}
-          <EditorArea className="markdown">
-            <Editor
-              editorState={editorState}
-              onChange={onChange}
-              plugins={plugins}
-              customStyleMap={customStyleMap}
-              stripPastedStyles={true}
-              spellCheck={true}
-              autoCapitalize="sentences"
-              autoComplete="on"
-              autoCorrect="on"
-              placeholder= {placeholder}
-              readOnly={readOnly}
-            />
-          </EditorArea>
-        </E>
+      <E readOnly={readOnly}>
+        {!readOnly && <ToolBar editorButtons={editorButtons} />}
+        <EditorArea className="markdown" readOnly={readOnly}>
+          <Editor
+            editorState={editorState}
+            onChange={onChange}
+            plugins={plugins}
+            customStyleMap={customStyleMap}
+            stripPastedStyles={true}
+            spellCheck={true}
+            autoCapitalize="sentences"
+            autoComplete="on"
+            autoCorrect="on"
+            placeholder={readOnly ? "" : placeholder}
+            readOnly={readOnly}
+          />
+        </EditorArea>
+      </E>
     );
   }
 }
@@ -136,12 +132,16 @@ export default RichEditor;
 
 const EditorArea = styled.div`
   width: 100%;
-  min-height: 200px;
+  min-height: ${props => (props.readOnly ? "0px" : "200px")};
   padding: 0.7rem;
 `;
 
 const E = styled.div`
   width: 100%;
-  border: 2px solid ${props => props.theme.br_toolbar};
+  ${props =>
+    !props.readOnly &&
+    css`
+      border: 2px solid ${props => props.theme.br_toolbar};
+    `};
   border-radius: 4px;
 `;

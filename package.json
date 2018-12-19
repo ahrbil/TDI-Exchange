@@ -16,7 +16,11 @@
     "pretty-quick": "^1.8.0"
   },
   "scripts": {},
-  "precommit": "lint-stage",
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "workspaces": {
     "packages": [
       "packages/*"

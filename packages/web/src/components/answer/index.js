@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { QuestionHeader } from "../question/style";
 import { getRelativeTimePosted } from "../../utils";
+import RichRender from "../rich-texte-rendrer";
 
 const Answer = ({ answer }) => (
   <AnswerStyle>
@@ -10,7 +11,7 @@ const Answer = ({ answer }) => (
       <h3>{answer.answeredBy.userName}</h3>
       <span>{getRelativeTimePosted(answer.createdAt)}</span>
     </AnswerHeader>
-    <AnswerBody>{answer.body}</AnswerBody>
+    <RichRender body={answer.body} />
   </AnswerStyle>
 );
 
@@ -23,10 +24,6 @@ const AnswerStyle = styled.div`
   &:focus {
     background-color: #f8f8f8;
   }
-`;
-
-const AnswerBody = styled.div`
-  margin-left: 46px;
 `;
 
 const AnswerHeader = styled(QuestionHeader)`
