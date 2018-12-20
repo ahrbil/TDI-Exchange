@@ -11,7 +11,9 @@ const Answer = ({ answer }) => (
       <h3>{answer.answeredBy.userName}</h3>
       <span>{getRelativeTimePosted(answer.createdAt)}</span>
     </AnswerHeader>
-    <RichRender body={answer.body} />
+    <div className="markdown">
+      <RichRender body={answer.body} />
+    </div>
   </AnswerStyle>
 );
 

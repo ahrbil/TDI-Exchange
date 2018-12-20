@@ -6,16 +6,16 @@ import RichEditor from "../editor";
 class RichRender extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      editorState: EditorState.createEmpty()
-    };
-  }
-  handleChange = () => {};
-
-  componentDidMount = () => {
     const bodyFromJson = JSON.parse(this.props.body);
     const fromRaw = convertFromRaw(bodyFromJson);
-    this.setState({ editorState: EditorState.createWithContent(fromRaw) });
+
+    this.state = {
+      editorState: EditorState.createWithContent(fromRaw)
+    };
+  }
+
+  handleChange = editorState => {
+    this.setState({ editorState });
   };
 
   render() {

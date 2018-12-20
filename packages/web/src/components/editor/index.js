@@ -69,11 +69,11 @@ class RichEditor extends React.Component {
     });
     return {
       plugins: [
+        linkifyPlugin,
         codePlugin,
         blockBreakoutPlugin,
         richButtons,
         prismPlugin,
-        linkifyPlugin,
         markdownPlugin,
         imagePlugin
       ],
@@ -120,7 +120,7 @@ class RichEditor extends React.Component {
             autoCapitalize="sentences"
             autoComplete="on"
             autoCorrect="on"
-            placeholder={readOnly ? "" : placeholder}
+            placeholder={placeholder}
             readOnly={readOnly}
           />
         </EditorArea>

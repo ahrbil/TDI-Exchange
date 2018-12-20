@@ -1,5 +1,5 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Mutation } from "react-apollo";
 import { EditorState, convertToRaw } from "draft-js";
 
@@ -11,44 +11,47 @@ export default class CreateAnswer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorState: EditorState.createEmpty(),
+      editorState: EditorState.createEmpty()
     };
   }
 
-  handleEditorChange = (editorState) => {
+  handleEditorChange = editorState => {
     this.setState({
-      editorState,
+      editorState
     });
   };
 
   saveEditorStateToRaw = () => {
     const content = this.state.editorState.getCurrentContent();
-    const contentToRaw = JSON.stringify(convertToRaw(content),null,2);
-    return contentToRaw
+    const contentToRaw = JSON.stringify(convertToRaw(content));
+    return contentToRaw;
   };
 
-  handleClick = (createAnswer) => {
-    const {questionId} = this.props;
+  handleClick = createAnswer => {
+    const { questionId } = this.props;
     const body = this.saveEditorStateToRaw();
-    createAnswer({variables:{
-      questionId, body
-    }})
-  }
+    createAnswer({
+      variables: {
+        questionId,
+        body
+      }
+    });
+  };
 
   render() {
     return (
-      <Mutation mutation={CREATE_ANSWER} >
-        {(createAnswer, { loading,error }) => (
+      <Mutation mutation={CREATE_ANSWER}>
+        {(createAnswer, { loading, error }) => (
           <CreateAnswerCard>
-            <RichEditor 
-              editorState = {this.state.editorState} 
-              onChange={this.handleEditorChange} 
+            <RichEditor
+              editorState={this.state.editorState}
+              onChange={this.handleEditorChange}
               placeholder="Write your answer here ..."
-            /> 
-            <Button 
-              loading ={loading || error} 
-              onClick = {() => this.handleClick(createAnswer)}
-              style={{ marginTop: "1rem"}}
+            />
+            <Button
+              loading={loading || error}
+              onClick={() => this.handleClick(createAnswer)}
+              style={{ marginTop: "1rem" }}
             >
               Publish Your Answer
             </Button>
