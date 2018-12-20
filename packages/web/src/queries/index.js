@@ -57,3 +57,11 @@ export const CREATE_ANSWER = gql`
     }
   }
 `;
+
+export const CREATE_QUESTION = gql`
+  mutation createQuestion($header: String!, $body: String) {
+    createQuestion(header: $header, body: $body) {
+      id
+    }
+  }
+`;

@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { Mutation } from "react-apollo";
-import { EditorState, convertToRaw } from "draft-js";
+import { EditorState } from "draft-js";
 
 import RichEditor from "../editor";
 import { CREATE_ANSWER } from "../../queries";
 import Button from "../button";
+import { saveEditorStateToRaw } from "../../utils";
 
 export default class CreateAnswer extends React.Component {
   constructor(props) {
@@ -21,15 +22,10 @@ export default class CreateAnswer extends React.Component {
     });
   };
 
-  saveEditorStateToRaw = () => {
-    const content = this.state.editorState.getCurrentContent();
-    const contentToRaw = JSON.stringify(convertToRaw(content));
-    return contentToRaw;
-  };
-
   handleClick = createAnswer => {
+    const state = this.state.editorState.getCurrentContent();
     const { questionId } = this.props;
-    const body = this.saveEditorStateToRaw();
+    const body = saveEditorStateToRaw(state);
     createAnswer({
       variables: {
         questionId,
