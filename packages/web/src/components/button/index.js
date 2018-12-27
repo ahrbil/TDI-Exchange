@@ -8,7 +8,7 @@ const Button = ({ style, loading, secondary, children, ...rest }) => (
   </ButtonStyle>
 );
 
-const ButtonStyle = styled.button`
+export const ButtonStyle = styled.button`
   display: flex;
   flex: none;
   align-self: center;

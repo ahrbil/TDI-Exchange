@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import Footer from "./components/footer";
 import QuestionDetails from "./pages/QuestionDetails";
 import CreateQuestion from "./components/create-question";
+import SignIn from "./pages/SignIn";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -30,6 +31,7 @@ const App = () => (
               <Home path="/" />
               <QuestionDetails path="/questions/:qid" />
               <CreateQuestion path="/ask-a-question" />
+              <SignIn path="/sign-in" />
             </Router>
           </Wrapper>
         </Container>

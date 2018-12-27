@@ -19,7 +19,7 @@ const Header = () => (
           {currentUser && <Profile user={{ ...currentUser }} />}
           {!currentUser && (
             <ButtonWrapper>
-              <Link to="/signin">
+              <Link to="/sign-in">
                 <Button>Sign In</Button>
               </Link>
             </ButtonWrapper>

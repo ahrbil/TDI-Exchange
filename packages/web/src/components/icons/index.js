@@ -10,6 +10,8 @@ import { FormatListBulleted } from "styled-icons/material/FormatListBulleted";
 import { ImageAlt } from "styled-icons/boxicons-regular/ImageAlt";
 import { SignOutAlt } from "styled-icons/fa-solid/SignOutAlt";
 import { QuestionAnswer } from "styled-icons/material/QuestionAnswer";
+import { Facebook2 } from "styled-icons/icomoon/Facebook2";
+import { Google2 } from "styled-icons/icomoon/Google2";
 
 import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
 import { ReactComponent as H3 } from "../svgs/h3.svg";
@@ -44,6 +46,10 @@ const Glyph = ({ iconName }) => {
       return <SignOutAlt />;
     case "answers":
       return <QuestionAnswer />;
+    case "fb":
+      return <Facebook2 />;
+    case "google":
+      return <Google2 />;
     default:
       break;
   }
