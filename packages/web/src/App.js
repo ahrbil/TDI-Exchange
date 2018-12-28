@@ -14,6 +14,7 @@ import Footer from "./components/footer";
 import QuestionDetails from "./pages/QuestionDetails";
 import CreateQuestion from "./components/create-question";
 import SignIn from "./pages/SignIn";
+import AuthRoute from "./components/AuthRoute";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -24,14 +25,14 @@ const App = () => (
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
       <AuthProvider>
+        <Header />
         <Container>
-          <Header />
           <Wrapper>
             <Router>
               <Home path="/" />
               <QuestionDetails path="/questions/:qid" />
-              <CreateQuestion path="/ask-a-question" />
               <SignIn path="/sign-in" />
+              <AuthRoute path="/ask-a-question" render={<CreateQuestion />} />
             </Router>
           </Wrapper>
         </Container>
