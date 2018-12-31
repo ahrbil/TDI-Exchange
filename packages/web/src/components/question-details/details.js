@@ -5,11 +5,12 @@ import { getRelativeTimePosted } from "../../utils";
 import Answer from "../answer";
 import CreateAnswer from "../create-answer";
 import { AuthConsumer } from "../../context/AuthContext";
+import RichRender from "../rich-texte-rendrer";
 import {
   DetailsContainerStyle,
   QuestionDetails,
   AnswersSection,
-  H1,
+  ActionBarStyle
 } from "./style";
 
 const Details = ({ question }) => (
@@ -27,9 +28,15 @@ const Details = ({ question }) => (
           <h1>{question.header}</h1>
         </QuestionBody>
         {/* question body if it is exists */}
-        {question.body && <QuestionDetails>{question.body}</QuestionDetails>}
+        {question.body && (
+          <QuestionDetails>
+            <RichRender body={question.body} />
+          </QuestionDetails>
+        )}
         {/* total answer a question have */}
-        <H1>{`${question.totalAnswers} Answers`}</H1>
+        <ActionBarStyle>
+          <span>{`${question.totalAnswers} Answers`}</span>
+        </ActionBarStyle>
         {/* answer section */}
         <AnswersSection>
           {question.answers.map(answer => (
@@ -37,6 +44,9 @@ const Details = ({ question }) => (
           ))}
         </AnswersSection>
         {/* create answer input */}
+        <ActionBarStyle>
+          <span />
+        </ActionBarStyle>
         {currentUser && <CreateAnswer questionId={question.id} />}
       </DetailsContainerStyle>
     )}

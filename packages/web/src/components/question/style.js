@@ -20,6 +20,7 @@ export const QuestionBody = styled.div`
   font-size: 0.7rem;
   > h1 {
     padding-top: 12px;
+    line-height: 1.25;
   }
 `;
 export const QuestionFooter = styled.div`
@@ -29,6 +30,7 @@ export const QuestionFooter = styled.div`
   color: #4d4d4dc4;
   font-size: 0.8rem;
   font-weight: 500;
+  margin-top: 16px;
   .asked-at {
     font-size: inherit;
     color: inherit;

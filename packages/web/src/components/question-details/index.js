@@ -6,7 +6,11 @@ import Details from "./details";
 
 const QuestionWithDetails = ({ route }) => (
   <QuestionDetailsContainer>
-    <Query query={QUESTION_WITH_DETAILS} variables={{ id: route.qid }}>
+    <Query
+      query={QUESTION_WITH_DETAILS}
+      variables={{ id: route.qid }}
+      fetchPolicy="cache-first"
+    >
       {({ data, loading, error }) => {
         if (loading && !data) {
           return <h1>loading</h1>;

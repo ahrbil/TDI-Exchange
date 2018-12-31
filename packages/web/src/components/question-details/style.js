@@ -7,12 +7,12 @@ export const DetailsContainerStyle = styled.div`
   flex-direction: column;
   align-items: stretch;
   flex: 0 0 auto;
-  padding: 12px;
   margin-bottom: 16px;
   border-radius: ${props => props.theme.border.rd};
   border: 1px solid #f2f2f2;
   background-color: ${props => props.theme.white};
   ${QuestionHeader} {
+    padding: 16px;
     h3 {
       margin-right: auto;
     }
@@ -23,21 +23,30 @@ export const DetailsContainerStyle = styled.div`
     }
   }
   ${QuestionBody} {
+    padding: 0 16px;
     h1 {
       margin: 0;
+      padding: 0;
     }
-    padding: 0.7rem 0;
   }
 `;
 
 export const QuestionDetails = styled.div``;
 export const AnswersSection = styled.div`
-  margin-top: 0.6rem;
+  > div {
+    border-bottom: 1px solid #f2f2f2;
+  }
+  > div:last-of-type {
+    border: none;
+  }
 `;
 
-export const H1 = styled.h1`
-  font-size: 1.5rem;
-  font-weight: 600;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid #e3e3e3;
+export const ActionBarStyle = styled.div`
+  background-color: #f8f8f8;
+  margin-top: 1.5rem;
+  padding: 9px 16px;
+  span {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
 `;

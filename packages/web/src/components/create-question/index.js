@@ -39,7 +39,7 @@ class CreateQuestion extends React.Component {
         header,
         body
       }
-    });
+    }).then(() => this.setState({ editorState: EditorState.createEmpty() }));
   };
 
   render() {
@@ -48,13 +48,13 @@ class CreateQuestion extends React.Component {
         {(createQuestion, { loading, error }) => (
           <div>
             <QuestionInput
-              placeholder="Your question ..."
+              placeholder="Your question..."
               onChange={this.handleTextInputChange}
             />
             <RichEditor
               editorState={this.state.editorState}
               onChange={this.handleEditorChange}
-              placeholder="More details about your question ..."
+              placeholder="More details about your question..."
             />
             <Button
               onClick={() => this.handleClick(createQuestion)}
@@ -72,7 +72,7 @@ class CreateQuestion extends React.Component {
 
 export default CreateQuestion;
 
-const QuestionInput = styled.textarea`
+const QuestionInput = styled.input`
   height: 3.5rem;
   padding: 0.5rem;
   width: 100%;

@@ -132,8 +132,8 @@ export default RichEditor;
 
 const EditorArea = styled.div`
   width: 100%;
-  min-height: ${props => (props.readOnly ? "0px" : "200px")};
-  padding: 0.7rem;
+  min-height: ${props => (props.readOnly ? "0px" : "100px")};
+  padding: 16px;
 `;
 
 const E = styled.div`
@@ -143,5 +143,4 @@ const E = styled.div`
     css`
       border: 2px solid ${props => props.theme.br_toolbar};
     `};
-  border-radius: 4px;
 `;

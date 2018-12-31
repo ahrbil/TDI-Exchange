@@ -81,9 +81,9 @@ textarea {
 .markdown p + p {
   margin-top: 16px;
 }
-.markdown > *:first-of-type {
+/* .markdown > *:first-of-type {
   margin-top: 16px;
-}
+} */
 .markdown img {
   margin-top: 16px;
   max-width: 100%;

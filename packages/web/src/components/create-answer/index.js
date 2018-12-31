@@ -31,7 +31,7 @@ export default class CreateAnswer extends React.Component {
         questionId,
         body
       }
-    });
+    }).then(() => this.setState({ editorState: EditorState.createEmpty() }));
   };
 
   render() {
@@ -42,7 +42,7 @@ export default class CreateAnswer extends React.Component {
             <RichEditor
               editorState={this.state.editorState}
               onChange={this.handleEditorChange}
-              placeholder="Write your answer here ..."
+              placeholder="Write your answer here..."
             />
             <Button
               loading={loading || error}
@@ -58,6 +58,4 @@ export default class CreateAnswer extends React.Component {
   }
 }
 
-const CreateAnswerCard = styled.div`
-  margin-top: 3rem;
-`;
+const CreateAnswerCard = styled.div``;

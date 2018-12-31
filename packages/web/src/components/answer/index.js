@@ -11,20 +11,20 @@ const Answer = ({ answer }) => (
       <h3>{answer.answeredBy.userName}</h3>
       <span>{getRelativeTimePosted(answer.createdAt)}</span>
     </AnswerHeader>
-    <div className="markdown">
-      <RichRender body={answer.body} />
-    </div>
+    <RichRender body={answer.body} />
   </AnswerStyle>
 );
 
 export default Answer;
 
 const AnswerStyle = styled.div`
-  margin-top: 1rem;
   &:hover,
   &:active,
   &:focus {
     background-color: #f8f8f8;
+  }
+  .markdown {
+    padding-top: 0;
   }
 `;
 
