@@ -12,6 +12,7 @@ import { SignOutAlt } from "styled-icons/fa-solid/SignOutAlt";
 import { QuestionAnswer } from "styled-icons/material/QuestionAnswer";
 import { Facebook2 } from "styled-icons/icomoon/Facebook2";
 import { Google2 } from "styled-icons/icomoon/Google2";
+import { Close } from "styled-icons/material/Close";
 
 import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
 import { ReactComponent as H3 } from "../svgs/h3.svg";
@@ -50,6 +51,8 @@ const Glyph = ({ iconName }) => {
       return <Facebook2 />;
     case "google":
       return <Google2 />;
+    case "close":
+      return <Close />;
     default:
       break;
   }

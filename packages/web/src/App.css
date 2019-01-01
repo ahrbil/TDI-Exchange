@@ -38,6 +38,19 @@ body {
   max-height: 100%;
   -webkit-overflow-scrolling: touch;
 }
+.portal {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 1099;
+  padding: 1.2rem;
+}
 a {
   color: currentColor;
   text-decoration: none;
