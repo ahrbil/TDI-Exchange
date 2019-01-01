@@ -11,12 +11,6 @@ import {
 } from "./style";
 
 class Modal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: true
-    };
-  }
   openModal = () => {
     this.setState({ isOpen: true });
   };
@@ -24,21 +18,20 @@ class Modal extends React.Component {
     this.setState({ isOpen: false });
   };
   render() {
-    const { isOpen } = this.state;
-    const { title, children } = this.props;
+    const { title, children, isOpen, closeModal } = this.props;
     return (
       isOpen && (
         <Portal>
           <ModalWrapper>
             <ModalHeader>
               <ModalTitle>{title}</ModalTitle>
-              <ModalCloseBtn onClick={this.closeModal}>
+              <ModalCloseBtn onClick={closeModal}>
                 <Icon iconName="close" />
               </ModalCloseBtn>
             </ModalHeader>
-            {children && children(this.openModal)}
+            {children}
           </ModalWrapper>
-          <ModalBackground onClick={this.closeModal} className="portal" />
+          <ModalBackground onClick={closeModal} className="portal" />
         </Portal>
       )
     );

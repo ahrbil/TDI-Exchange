@@ -3,10 +3,10 @@ import React from "react";
 import { QuestionHeader, QuestionBody } from "../question/style";
 import { getRelativeTimePosted } from "../../utils";
 import Answer from "../answer";
-import Modal from "../modal";
 import CreateAnswer from "../create-answer";
 import { AuthConsumer } from "../../context/AuthContext";
 import RichRender from "../rich-texte-rendrer";
+import LogInModal from "../login-as-modal";
 import {
   DetailsContainerStyle,
   QuestionDetails,
@@ -46,8 +46,11 @@ const Details = ({ question }) => (
         </AnswersSection>
         {/* create answer input */}
         {currentUser && <CreateAnswer questionId={question.id} />}
-        {!currentUser && <ActionBarStyle>login</ActionBarStyle>}
-        <Modal />
+        {!currentUser && (
+          <ActionBarStyle>
+            <LogInModal />
+          </ActionBarStyle>
+        )}
       </DetailsContainerStyle>
     )}
   </AuthConsumer>

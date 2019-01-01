@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import Icon from "../components/icons";
-import AuthBtns from "../components/button/AuthButtons";
+import LogInBtns from "../components/log-in-btns";
 
 const SignIn = () => (
   <SignInContainer>
@@ -10,16 +9,7 @@ const SignIn = () => (
       <h1>Get started by signing in</h1>
       <p>spreed your help and grow your knowledge</p>
     </div>
-    <LogInBtns>
-      <AuthBtns type="facebook">
-        <Icon iconName="fb" />
-        <span>Sign in with Facebook</span>
-      </AuthBtns>
-      <AuthBtns type="google">
-        <Icon iconName="google" />
-        <span>Sign in with Google</span>
-      </AuthBtns>
-    </LogInBtns>
+    <LogInBtns />
   </SignInContainer>
 );
 
@@ -46,10 +36,4 @@ const SignInContainer = styled.div`
     line-height: 1.5;
     margin-bottom: 0.6rem;
   }
-`;
-
-const LogInBtns = styled.div`
-  display: grid;
-  grid-gap: 1rem;
-  padding: 30px 10px;
 `;

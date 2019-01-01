@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const ModalWrapper = styled.div`
-  width: 400px;
-  height: 400px;
   max-width: 100%;
   max-height: 100%;
   background-color: white;
@@ -11,6 +9,7 @@ export const ModalWrapper = styled.div`
   border-radius: 4.71px;
   padding: 1.2rem;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 24px;
+  overflow: overlay;
 `;
 export const ModalHeader = styled.div`
   display: flex;
