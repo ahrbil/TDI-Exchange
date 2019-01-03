@@ -6,43 +6,57 @@ import { EditorState } from "draft-js";
 import RichEditor from "../editor";
 import { CREATE_ANSWER } from "../../queries";
 import Button from "../button";
-import { saveEditorStateToRaw } from "../../utils";
+import { saveEditorStateToRaw, isValidEditorContent } from "../../utils";
+import Error from "../error";
 
 export default class CreateAnswer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorState: EditorState.createEmpty()
+      editorState: EditorState.createEmpty(),
+      errorMsg: ""
     };
   }
 
   handleEditorChange = editorState => {
     this.setState({
-      editorState
+      editorState,
+      errorMsg: ""
     });
   };
 
   handleClick = createAnswer => {
     const state = this.state.editorState.getCurrentContent();
-    const { questionId } = this.props;
-    const body = saveEditorStateToRaw(state);
-    createAnswer({
-      variables: {
-        questionId,
-        body
-      }
-    }).then(() => this.setState({ editorState: EditorState.createEmpty() }));
+    const errorMsg = isValidEditorContent(state);
+    this.setState({ errorMsg });
+    if (!errorMsg) {
+      const { questionId } = this.props;
+      const body = saveEditorStateToRaw(state);
+      createAnswer({
+        variables: {
+          questionId,
+          body
+        }
+      }).then(() => this.setState({ editorState: EditorState.createEmpty() }));
+    }
   };
 
   render() {
+    const { editorState, errorMsg } = this.state;
     return (
       <Mutation mutation={CREATE_ANSWER}>
         {(createAnswer, { loading, error }) => (
           <CreateAnswerCard>
+            {errorMsg ||
+              (error && (
+                <Error className="errorContainer" message={errorMsg || error} />
+              ))}
             <RichEditor
-              editorState={this.state.editorState}
+              editorState={editorState}
               onChange={this.handleEditorChange}
               placeholder="Write your answer here..."
+              hasError={errorMsg || error}
+              // editorRef={editor => (this.editorRef = editor)}
             />
             <Button
               loading={loading || error}
@@ -58,4 +72,12 @@ export default class CreateAnswer extends React.Component {
   }
 }
 
-const CreateAnswerCard = styled.div``;
+const CreateAnswerCard = styled.div`
+  margin-top: 2rem;
+  position: relative;
+  .errorContainer {
+    position: absolute;
+    top: -45px;
+    left: 0;
+  }
+`;
