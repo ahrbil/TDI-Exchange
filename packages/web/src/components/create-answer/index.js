@@ -47,10 +47,9 @@ export default class CreateAnswer extends React.Component {
       <Mutation mutation={CREATE_ANSWER}>
         {(createAnswer, { loading, error }) => (
           <CreateAnswerCard>
-            {errorMsg ||
-              (error && (
-                <Error className="errorContainer" message={errorMsg || error} />
-              ))}
+            {(errorMsg || error) && (
+              <Error className="errorContainer" message={errorMsg || error} />
+            )}
             <RichEditor
               editorState={editorState}
               onChange={this.handleEditorChange}
