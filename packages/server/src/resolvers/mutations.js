@@ -1,18 +1,22 @@
-import { AuthenticationError } from "apollo-server-express";
+import { AuthenticationError, UserInputError } from "apollo-server-express";
 
 const Mutation = {
   createQuestion: async (parent, args, context) => {
     if (!context.user) {
       throw new AuthenticationError("Login first!");
     }
+    const header = args.header.trim();
+    if (header.length < 10) {
+      throw new UserInputError("too short");
+    }
     const newQuestion = await context.prisma.createQuestion({
-      header: args.header,
+      header,
       body: args.body,
       askedBy: {
         connect: {
-          id: context.user.id,
-        },
-      },
+          id: context.user.id
+        }
+      }
     });
     return newQuestion;
   },
@@ -23,10 +27,10 @@ const Mutation = {
     const newAnswer = await context.prisma.createAnswer({
       body: args.body,
       answeredBy: { connect: { id: context.user.id } },
-      answeredTo: { connect: { id: args.questionId } },
+      answeredTo: { connect: { id: args.questionId } }
     });
     return newAnswer;
-  },
+  }
 };
 
 export default Mutation;

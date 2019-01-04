@@ -30,3 +30,8 @@ export const isEditorEmpty = state => {
   }
   return false;
 };
+
+export const formatError = error => {
+  const formatedError = error.graphQLErrors[0].message;
+  return formatedError;
+};

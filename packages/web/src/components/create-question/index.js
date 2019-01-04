@@ -6,7 +6,7 @@ import { Mutation } from "react-apollo";
 import RichEditor from "../editor";
 import Button from "../button";
 import { CREATE_QUESTION } from "../../queries";
-import { saveEditorStateToRaw, isEditorEmpty } from "../../utils";
+import { saveEditorStateToRaw, isEditorEmpty, formatError } from "../../utils";
 import { Error, ErrorIcon } from "../error";
 
 class CreateQuestion extends React.Component {
@@ -103,13 +103,15 @@ class CreateQuestion extends React.Component {
         {(createQuestion, { loading, error }) => (
           <div>
             <InputWrapper>
-              {headerError && <Error message={headerError} />}
+              {(headerError || error) && (
+                <Error message={headerError || formatError(error)} />
+              )}
               <QuestionInput
                 placeholder="Your question..."
                 onChange={this.handleTextInputChange}
-                hasError={headerError}
+                hasError={headerError || error}
               />
-              <ErrorIcon hasError={headerError} />
+              <ErrorIcon hasError={headerError || error} />
             </InputWrapper>
             <RichEditor
               editorState={this.state.editorState}
@@ -120,8 +122,8 @@ class CreateQuestion extends React.Component {
             {editorError && <Error message={editorError} />}
             <Button
               onClick={() => this.handleClick(createQuestion)}
-              loading={loading || error}
-              style={{ marginTop: "3rem" }}
+              loading={loading}
+              style={{ marginTop: "3.5rem" }}
             >
               Publish your question
             </Button>
