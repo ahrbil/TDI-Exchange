@@ -7,7 +7,7 @@ import RichEditor from "../editor";
 import { CREATE_ANSWER } from "../../queries";
 import Button from "../button";
 import { saveEditorStateToRaw, isValidEditorContent } from "../../utils";
-import Error from "../error";
+import { Error } from "../error";
 
 export default class CreateAnswer extends React.Component {
   constructor(props) {

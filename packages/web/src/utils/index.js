@@ -18,7 +18,15 @@ export const isValidEditorContent = state => {
     return "can't submit empty answer";
   }
   if (currentContentLength > 0 && currentContentLength < 20) {
-    return "too short";
+    return "too short, minimum length of 20 character";
   }
   return "";
+};
+
+export const isEditorEmpty = state => {
+  const currentContentLength = state.getPlainText().trim().length;
+  if (currentContentLength === 0) {
+    return true;
+  }
+  return false;
 };
