@@ -1,0 +1,241 @@
+/* extracted from antd design */
+.ant-pagination {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ant-pagination ul,
+.ant-pagination ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ant-pagination:after {
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+.ant-pagination-total-text {
+  display: inline-block;
+  vertical-align: middle;
+  height: 32px;
+  line-height: 30px;
+  margin-right: 8px;
+}
+.ant-pagination-item {
+  cursor: pointer;
+  border-radius: 4px;
+  user-select: none;
+  min-width: 32px;
+  height: 32px;
+  line-height: 30px;
+  text-align: center;
+  list-style: none;
+  display: inline-block;
+  vertical-align: middle;
+  border: 2px solid #d9d9d9;
+  background-color: #fff;
+  margin-right: 8px;
+  outline: 0;
+}
+.ant-pagination-item a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.65);
+  transition: none;
+  margin: 0 6px;
+}
+.ant-pagination-item:focus,
+.ant-pagination-item:hover {
+  transition: all 0.3s;
+  border-color: #6495ed;
+}
+.ant-pagination-item:focus a,
+.ant-pagination-item:hover a {
+  color: #6495ed;
+}
+.ant-pagination-item-active {
+  border-color: #6495ed;
+  font-weight: 500;
+}
+.ant-pagination-item-active a {
+  color: #6495ed;
+}
+.ant-pagination-item-active:focus,
+.ant-pagination-item-active:hover {
+  border-color: #6495ed;
+}
+.ant-pagination-item-active:focus a,
+.ant-pagination-item-active:hover a {
+  color: #6495ed;
+}
+.ant-pagination-jump-prev,
+.ant-pagination-jump-next {
+  outline: 0;
+}
+.ant-pagination-jump-prev .ant-pagination-item-container,
+.ant-pagination-jump-next .ant-pagination-item-container {
+  position: relative;
+}
+.ant-pagination-jump-prev
+  .ant-pagination-item-container
+  .ant-pagination-item-link-icon,
+.ant-pagination-jump-next
+  .ant-pagination-item-container
+  .ant-pagination-item-link-icon {
+  display: inline-block;
+  font-size: 12px;
+  font-size: 12px \9;
+  -webkit-transform: scale(1) rotate(0deg);
+  -ms-transform: scale(1) rotate(0deg);
+  transform: scale(1) rotate(0deg);
+  color: #6495ed;
+  letter-spacing: -1px;
+  opacity: 0;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+:root
+  .ant-pagination-jump-prev
+  .ant-pagination-item-container
+  .ant-pagination-item-link-icon,
+:root
+  .ant-pagination-jump-next
+  .ant-pagination-item-container
+  .ant-pagination-item-link-icon {
+  font-size: 12px;
+}
+.ant-pagination-jump-prev
+  .ant-pagination-item-container
+  .ant-pagination-item-link-icon-svg,
+.ant-pagination-jump-next
+  .ant-pagination-item-container
+  .ant-pagination-item-link-icon-svg {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+.ant-pagination-jump-prev
+  .ant-pagination-item-container
+  .ant-pagination-item-ellipsis,
+.ant-pagination-jump-next
+  .ant-pagination-item-container
+  .ant-pagination-item-ellipsis {
+  position: absolute;
+  display: block;
+  letter-spacing: 2px;
+  color: rgba(0, 0, 0, 0.25);
+  text-align: center;
+  opacity: 1;
+  transition: all 0.2s;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+.ant-pagination-jump-prev:focus .ant-pagination-item-link-icon,
+.ant-pagination-jump-next:focus .ant-pagination-item-link-icon,
+.ant-pagination-jump-prev:hover .ant-pagination-item-link-icon,
+.ant-pagination-jump-next:hover .ant-pagination-item-link-icon {
+  opacity: 1;
+}
+.ant-pagination-jump-prev:focus .ant-pagination-item-ellipsis,
+.ant-pagination-jump-next:focus .ant-pagination-item-ellipsis,
+.ant-pagination-jump-prev:hover .ant-pagination-item-ellipsis,
+.ant-pagination-jump-next:hover .ant-pagination-item-ellipsis {
+  opacity: 0;
+}
+.ant-pagination-prev,
+.ant-pagination-jump-prev,
+.ant-pagination-jump-next {
+  margin-right: 8px;
+}
+.ant-pagination-prev,
+.ant-pagination-next,
+.ant-pagination-jump-prev,
+.ant-pagination-jump-next {
+  font-family: Arial;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.65);
+  border-radius: 4px;
+  list-style: none;
+  min-width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  transition: all 0.3s;
+  display: inline-block;
+  vertical-align: middle;
+}
+.ant-pagination-prev,
+.ant-pagination-next {
+  outline: 0;
+}
+.ant-pagination-prev a,
+.ant-pagination-next a {
+  color: rgba(0, 0, 0, 0.65);
+  user-select: none;
+}
+.ant-pagination-prev:hover a,
+.ant-pagination-next:hover a {
+  border-color: #6495ed;
+}
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+  border: 2px solid #d9d9d9;
+  background-color: #fff;
+  border-radius: 4px;
+  outline: none;
+  display: block;
+  transition: all 0.3s;
+  font-size: 12px;
+  height: 100%;
+  text-align: center;
+}
+.ant-pagination-prev:focus .ant-pagination-item-link,
+.ant-pagination-next:focus .ant-pagination-item-link,
+.ant-pagination-prev:hover .ant-pagination-item-link,
+.ant-pagination-next:hover .ant-pagination-item-link {
+  border-color: #6495ed;
+  color: #6495ed;
+}
+.ant-pagination-disabled,
+.ant-pagination-disabled:hover,
+.ant-pagination-disabled:focus {
+  cursor: not-allowed;
+}
+.ant-pagination-disabled a,
+.ant-pagination-disabled:hover a,
+.ant-pagination-disabled:focus a,
+.ant-pagination-disabled .ant-pagination-item-link,
+.ant-pagination-disabled:hover .ant-pagination-item-link,
+.ant-pagination-disabled:focus .ant-pagination-item-link {
+  border-color: #d9d9d9;
+  color: rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+}
+.ant-pagination-slash {
+  margin: 0 10px 0 5px;
+}
+.ant-pagination-options {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 16px;
+}
+.ant-pagination-options-size-changer.ant-select {
+  display: inline-block;
+  width: auto;
+  margin-right: 8px;
+}

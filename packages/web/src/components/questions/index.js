@@ -3,34 +3,45 @@ import styled from "styled-components";
 import { Query } from "react-apollo";
 import { ALL_QUESTIONS } from "../../queries";
 import Question from "../question";
+import CustomPagination from "../pagination";
 
-const Questions = () => (
-  <Query query={ALL_QUESTIONS}>
-    {({ data, loading, error }) => {
-      if (loading) {
-        return <h1>loading</h1>;
-      }
-      if (data && data.allQuestions) {
-        const { allQuestions } = data;
-        return (
-          <QuestionsFeed>
-            {allQuestions.map(question => (
-              <Question key={question.id} question={question} />
-            ))}
-          </QuestionsFeed>
-        );
-      }
-      // return (
-      //   <QuestionsFeed>
-      //     {questions.map(question => (
-      //       <Question key={question.id} question={question} />
-      //     ))}
-      //   </QuestionsFeed>
-      // );
-      return <span>{error}</span>;
-    }}
-  </Query>
-);
+class Questions extends React.Component {
+  state = {
+    currentPage: 1,
+    pageSize: 15
+  };
+  handlePaginationChange = (page, pageSize) => {
+    this.setState({
+      currentPage: page,
+      pageSize
+    });
+  };
+  render() {
+    return (
+      <Query query={ALL_QUESTIONS}>
+        {({ data, loading, error }) => {
+          if (loading) {
+            return <h1>loading</h1>;
+          }
+          if (data && data.allQuestions) {
+            const { allQuestions } = data;
+            return (
+              <QuestionsFeed>
+                {allQuestions.map(question => (
+                  <Question key={question.id} question={question} />
+                ))}
+                <PaginationContainer>
+                  <CustomPagination onChange={this.handlePaginationChange} />
+                </PaginationContainer>
+              </QuestionsFeed>
+            );
+          }
+          return null;
+        }}
+      </Query>
+    );
+  }
+}
 
 export default Questions;
 
@@ -41,4 +52,8 @@ const QuestionsFeed = styled.div`
   flex-direction: column;
   align-self: stretch;
   align-items: stretch;
+`;
+const PaginationContainer = styled.div`
+  align-self: center;
+  margin: 2rem 0;
 `;
