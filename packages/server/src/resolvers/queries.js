@@ -1,10 +1,6 @@
 import { AuthenticationError } from "apollo-server-express";
 
 const Query = {
-  hello: (parent, args, context) => {
-    console.log({ "USER🐱‍🐱‍": context.user });
-    return "hiiiii";
-  },
   me: async (parent, args, context) => {
     if (!context.user) {
       throw new AuthenticationError("Not authenticated");
@@ -20,6 +16,13 @@ const Query = {
     const singleQuestion = await context.prisma.question({ id: args.id });
     return singleQuestion;
   },
+  questionsCount: async (parent, args, context) => {
+    const total = await context.prisma
+      .questionsConnection()
+      .aggregate()
+      .count();
+    return total;
+  }
 };
 
 export default Query;

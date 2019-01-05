@@ -65,3 +65,9 @@ export const CREATE_QUESTION = gql`
     }
   }
 `;
+
+export const QUESTIONS_COUNT = gql`
+  query questionsCount {
+    questionsCount
+  }
+`;
