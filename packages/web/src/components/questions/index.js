@@ -4,21 +4,27 @@ import { Query } from "react-apollo";
 import { ALL_QUESTIONS } from "../../queries";
 import Question from "../question";
 import CustomPagination from "../pagination";
+import { ITEMS_ON_PAGE } from "../../constants";
 
 class Questions extends React.Component {
   state = {
-    currentPage: 1,
-    pageSize: 15
+    currentPage: 1
   };
-  handlePaginationChange = (page, pageSize) => {
+  handlePaginationChange = currentPage => {
     this.setState({
-      currentPage: page,
-      pageSize
+      currentPage
     });
   };
   render() {
+    const { currentPage } = this.state;
     return (
-      <Query query={ALL_QUESTIONS}>
+      <Query
+        query={ALL_QUESTIONS}
+        variables={{
+          skip: currentPage * ITEMS_ON_PAGE - ITEMS_ON_PAGE,
+          orderBy: "createdAt_DESC"
+        }}
+      >
         {({ data, loading, error }) => {
           if (loading) {
             return <h1>loading</h1>;
@@ -31,7 +37,10 @@ class Questions extends React.Component {
                   <Question key={question.id} question={question} />
                 ))}
                 <PaginationContainer>
-                  <CustomPagination onChange={this.handlePaginationChange} />
+                  <CustomPagination
+                    currentPage={currentPage}
+                    onChange={this.handlePaginationChange}
+                  />
                 </PaginationContainer>
               </QuestionsFeed>
             );

@@ -1,4 +1,5 @@
 import { gql } from "apollo-boost";
+import { ITEMS_ON_PAGE } from "../constants";
 
 const QUESTION_FRAGMENT = gql`
   fragment questionFragment on Question {
@@ -23,8 +24,8 @@ export const CURRENT_USER = gql`
 `;
 
 export const ALL_QUESTIONS = gql`
-  query ALL_QUESTIONS {
-    allQuestions {
+  query ALL_QUESTIONS($orderBy: QuestionOrderByInput, $skip: Int, $first: Int = ${ITEMS_ON_PAGE}) {
+    allQuestions(orderBy: $orderBy, skip: $skip, first: $first) {
       ...questionFragment
     }
   }

@@ -6,7 +6,7 @@ import "./style.css";
 import { ITEMS_ON_PAGE } from "../../constants";
 import { QUESTIONS_COUNT } from "../../queries";
 
-const CustomPagination = ({ onChange }) => (
+const CustomPagination = ({ onChange, currentPage }) => (
   <Query query={QUESTIONS_COUNT}>
     {({ data, loading }) => {
       if (loading) {
@@ -17,6 +17,7 @@ const CustomPagination = ({ onChange }) => (
         return (
           <Pagination
             defaultCurrent={1}
+            current={currentPage}
             total={questionsCount}
             pageSize={ITEMS_ON_PAGE}
             onChange={onChange}
