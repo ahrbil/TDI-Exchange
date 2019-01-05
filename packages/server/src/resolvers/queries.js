@@ -9,7 +9,11 @@ const Query = {
     return me;
   },
   allQuestions: async (parent, args, context) => {
-    const allQuestions = await context.prisma.questions();
+    const allQuestions = await context.prisma.questions({
+      skip: args.skip,
+      first: args.first,
+      orderBy: args.orderBy
+    });
     return allQuestions;
   },
   question: async (parent, args, context) => {

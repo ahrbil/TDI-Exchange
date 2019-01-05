@@ -20,8 +20,12 @@ type Question {
 }
 
 type Query {
-  me: User
-  allQuestions: [Question!]!
+  me: User!
+  allQuestions(
+    skip: Int
+    first: Int
+    orderBy: QuestionOrderByInput
+  ): [Question!]!
   question(id: ID!): Question!
   questionsCount: Int!
 }
