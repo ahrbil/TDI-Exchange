@@ -12,20 +12,22 @@ import { AuthConsumer } from "../../context/AuthContext";
 const Header = () => (
   <AuthConsumer>
     {({ currentUser }) => (
-      <StyledHeader>
-        <Container>
-          <Logo />
-          <Search />
-          {currentUser && <Profile user={{ ...currentUser }} />}
-          {!currentUser && (
-            <ButtonWrapper>
-              <Link to="/sign-in">
-                <Button>Sign In</Button>
-              </Link>
-            </ButtonWrapper>
-          )}
-        </Container>
-      </StyledHeader>
+      <HeaderWrapper>
+        <StyledHeader>
+          <Container>
+            <Logo />
+            <Search />
+            {currentUser && <Profile user={{ ...currentUser }} />}
+            {!currentUser && (
+              <ButtonWrapper>
+                <Link to="/sign-in">
+                  <Button>Sign In</Button>
+                </Link>
+              </ButtonWrapper>
+            )}
+          </Container>
+        </StyledHeader>
+      </HeaderWrapper>
     )}
   </AuthConsumer>
 );
@@ -50,4 +52,7 @@ const StyledHeader = styled.header`
     align-items: center;
     padding: 7px 0px;
   }
+`;
+const HeaderWrapper = styled.div`
+  height: 80px;
 `;
