@@ -13,13 +13,16 @@ export const DetailsContainerStyle = styled.div`
   background-color: ${props => props.theme.white};
   ${QuestionHeader} {
     padding: 16px;
-    h3 {
-      margin-right: auto;
-    }
     span {
       color: #4d4d4dc4;
       font-size: 0.8rem;
       font-weight: 500;
+    }
+    > div {
+      margin-right: auto;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
     }
   }
   ${QuestionBody} {

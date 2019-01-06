@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const QuestionHeader = styled.div`
   display: flex;
   align-items: center;
-  > img {
+  img {
     border-radius: 100%;
     margin-right: 8px;
     width: 40px;
     height: 40px;
     background-color: aliceblue;
   }
-  > h3 {
+  h3 {
     font-weight: 500;
     font-size: 1rem;
   }

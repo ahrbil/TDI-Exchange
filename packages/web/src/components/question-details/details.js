@@ -1,7 +1,6 @@
 import React from "react";
 
-import { QuestionHeader, QuestionBody } from "../question/style";
-import { getRelativeTimePosted } from "../../utils";
+import { QuestionBody } from "../question/style";
 import Answer from "../answer";
 import CreateAnswer from "../create-answer";
 import { AuthConsumer } from "../../context/AuthContext";
@@ -16,6 +15,7 @@ import {
   OutLinedBtn
 } from "./style";
 import { ITEMS_ON_PAGE } from "../../constants";
+import QuestionHeader from "./questionHeader";
 
 const createdAt_DESC = "createdAt_DESC";
 const createdAt_ASC = "createdAt_ASC";
@@ -32,11 +32,10 @@ const Details = ({
     {({ currentUser }) => (
       <DetailsContainerStyle>
         {/* question header style */}
-        <QuestionHeader>
-          <img src={question.askedBy.avatar} alt={question.askedBy.userName} />
-          <h3>{question.askedBy.userName}</h3>
-          <span>{`Asked ${getRelativeTimePosted(question.createdAt)}`}</span>
-        </QuestionHeader>
+        <QuestionHeader
+          user={question.askedBy}
+          createdAt={question.createdAt}
+        />
         {/* question header */}
         <QuestionBody>
           <h1>{question.header}</h1>

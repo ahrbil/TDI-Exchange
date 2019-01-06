@@ -14,6 +14,7 @@ import { Facebook2 } from "styled-icons/icomoon/Facebook2";
 import { Google2 } from "styled-icons/icomoon/Google2";
 import { Close } from "styled-icons/material/Close";
 import { Error } from "styled-icons/material/Error";
+import { Award } from "styled-icons/boxicons-regular/Award";
 
 import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
 import { ReactComponent as H3 } from "../svgs/h3.svg";
@@ -56,6 +57,8 @@ const Glyph = ({ iconName }) => {
       return <Close />;
     case "error":
       return <Error />;
+    case "award":
+      return <Award />;
     default:
       break;
   }
