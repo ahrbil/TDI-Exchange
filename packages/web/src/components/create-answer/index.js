@@ -60,7 +60,7 @@ export default class CreateAnswer extends React.Component {
             <Button
               loading={loading || error}
               onClick={() => this.handleClick(createAnswer)}
-              style={{ marginTop: "1rem" }}
+              style={{ marginTop: "2rem" }}
             >
               Publish Your Answer
             </Button>
@@ -75,7 +75,7 @@ const CreateAnswerCard = styled.div`
   position: relative;
   .errorContainer {
     position: absolute;
-    top: -45px;
+    bottom: 35px;
     left: 0;
   }
 `;
