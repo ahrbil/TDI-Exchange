@@ -13,7 +13,7 @@ type Question {
   header: String!
   body: String
   askedBy: User!
-  answers: [Answer!]!
+  answers(orderBy: AnswerOrderByInput, first: Int, skip: Int): [Answer!]!
   totalAnswers: Int!
   createdAt: DateTime!
   updatedAt: DateTime!

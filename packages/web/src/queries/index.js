@@ -33,11 +33,12 @@ export const ALL_QUESTIONS = gql`
 `;
 
 export const QUESTION_WITH_DETAILS = gql`
-  query QUESTION_WITH_DETAILS($id: ID!) {
+  query QUESTION_WITH_DETAILS($id: ID!,$orderByAnswers: AnswerOrderByInput,$skip: Int, $first: Int = ${ITEMS_ON_PAGE +
+    5}) {
     question(id: $id) {
       ...questionFragment
       body
-      answers {
+      answers(orderBy: $orderByAnswers, skip: $skip, first: $first) {
         id
         body
         createdAt

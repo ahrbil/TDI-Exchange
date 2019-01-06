@@ -36,17 +36,29 @@ export const AnswersSection = styled.div`
   > div {
     border-bottom: 1px solid #f2f2f2;
   }
-  > div:last-of-type {
-    border: none;
-  }
 `;
 
 export const ActionBarStyle = styled.div`
   background-color: #f8f8f8;
   margin-top: 1.5rem;
   padding: 9px 16px;
+  display: flex;
+  justify-content: space-between;
   span {
     font-size: 1.2rem;
     font-weight: 600;
+  }
+`;
+
+export const OutLinedBtn = styled.button`
+  padding: 6px 15px;
+  border-bottom: 2px solid
+    ${props =>
+      props.activeDesc || props.activeAsc ? "#2d2bc6" : "transparent"};
+  margin-left: 16px;
+  transition: all 0.2s ease-in;
+  &:hover {
+    cursor: pointer;
+    border-bottom-color: #2d2bc6;
   }
 `;

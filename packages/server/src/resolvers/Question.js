@@ -7,17 +7,19 @@ const Question = {
   askedBy: (parent, args, context) =>
     context.prisma.question({ id: parent.id }).askedBy(),
   answers: (parent, args, context) =>
-    context.prisma.question({ id: parent.id }).answers(),
+    context.prisma
+      .question({ id: parent.id })
+      .answers({ skip: args.skip, first: args.first, orderBy: args.orderBy }),
   totalAnswers: async (parent, args, context) => {
     const total = await context.prisma
       .answersConnection({
-        where: { answeredTo: { id: parent.id } },
+        where: { answeredTo: { id: parent.id } }
       })
       .aggregate()
       .count();
     return total;
   },
   createdAt: parent => parent.createdAt,
-  updatedAt: parent => parent.updatedAt,
+  updatedAt: parent => parent.updatedAt
 };
 export default Question;

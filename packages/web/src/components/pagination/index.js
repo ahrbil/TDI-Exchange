@@ -30,3 +30,5 @@ const CustomPagination = ({ onChange, currentPage }) => (
 );
 
 export default CustomPagination;
+
+export { Pagination };
