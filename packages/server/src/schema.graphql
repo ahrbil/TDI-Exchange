@@ -6,6 +6,7 @@ type User {
   avatar: String
   MyQuestions: [Question!]!
   MyAnswers: [Answer!]!
+  repScore: Int!
 }
 
 type Question {

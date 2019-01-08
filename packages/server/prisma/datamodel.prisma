@@ -8,6 +8,7 @@ type User {
   MyAnswers: [Answer!]!
   createdAt: DateTime!
   updatedAt: DateTime!
+  repScore: Int! @default(value: "0")
 }
 type Question {
   id: ID! @unique
