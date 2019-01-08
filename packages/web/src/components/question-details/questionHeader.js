@@ -15,7 +15,7 @@ const QuestionHeader = ({ user, createdAt, forAnswer }) => {
           <h3>{user.userName}</h3>
           <ReputationContainer toolTipMsg="Reputation Score, contribute to get more">
             <Icon iconName="award" />
-            <ReputationScore>23</ReputationScore>
+            <ReputationScore>{user.repScore}</ReputationScore>
           </ReputationContainer>
         </div>
       </div>
@@ -45,13 +45,13 @@ const ReputationContainer = styled.div`
   /* tootTip arrow */
   &:before {
     content: "";
-    z-index: 1001;
+    z-index: 901;
     border: 10px solid transparent;
   }
   /* toolTip content */
   &:after {
     content: "${props => (props.toolTipMsg ? props.toolTipMsg : "")}";
-    z-index: 1000;
+    z-index: 900;
     font-size: 14px;
     font-weight: 500;
     width: 150px;

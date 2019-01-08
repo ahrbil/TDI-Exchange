@@ -10,6 +10,7 @@ const QUESTION_FRAGMENT = gql`
     askedBy {
       userName
       avatar
+      repScore
     }
   }
 `;
@@ -45,6 +46,7 @@ export const QUESTION_WITH_DETAILS = gql`
         answeredBy {
           userName
           avatar
+          repScore
         }
       }
     }
