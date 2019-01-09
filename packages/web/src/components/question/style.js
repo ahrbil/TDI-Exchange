@@ -21,6 +21,7 @@ export const QuestionBody = styled.div`
   > h1 {
     padding-top: 12px;
     line-height: 1.25;
+    word-break: break-word;
   }
 `;
 export const QuestionFooter = styled.div`
