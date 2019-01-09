@@ -1,4 +1,8 @@
 import { AuthenticationError, UserInputError } from "apollo-server-express";
+import {
+  updateCreateQuestionRepScore,
+  updateCreateAnswerRepScore
+} from "./repScore";
 
 const Mutation = {
   createQuestion: async (parent, args, context) => {
@@ -18,6 +22,7 @@ const Mutation = {
         }
       }
     });
+    updateCreateQuestionRepScore(context.user.id);
     return newQuestion;
   },
   createAnswer: async (parent, args, context) => {
@@ -29,6 +34,7 @@ const Mutation = {
       answeredBy: { connect: { id: context.user.id } },
       answeredTo: { connect: { id: args.questionId } }
     });
+    updateCreateAnswerRepScore(context.user.id, args.questionId);
     return newAnswer;
   }
 };
