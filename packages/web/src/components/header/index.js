@@ -5,9 +5,9 @@ import { Link } from "@reach/router";
 import { Container, ButtonWrapper } from "../style";
 import Logo from "../logo";
 import Profile from "../profile";
-import Search from "../search";
 import Button from "../button";
 import { AuthConsumer } from "../../context/AuthContext";
+import NavItems from "../nav-items";
 
 const Header = () => (
   <AuthConsumer>
@@ -16,12 +16,12 @@ const Header = () => (
         <StyledHeader>
           <Container>
             <Logo />
-            <Search />
+            <NavItems />
             {currentUser && <Profile user={{ ...currentUser }} />}
             {!currentUser && (
               <ButtonWrapper>
                 <Link to="/sign-in">
-                  <Button>Sign In</Button>
+                  <Button small>Sign In</Button>
                 </Link>
               </ButtonWrapper>
             )}
@@ -46,7 +46,7 @@ const StyledHeader = styled.header`
   > div {
     display: grid;
     grid-template-columns: auto auto 1fr auto;
-    grid-template-areas: "logo search . profile";
+    grid-template-areas: "logo nav . profile";
     grid-template-rows: 1fr;
     max-width: 1080px;
     align-items: center;

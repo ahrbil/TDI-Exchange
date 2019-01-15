@@ -15,6 +15,8 @@ import { Google2 } from "styled-icons/icomoon/Google2";
 import { Close } from "styled-icons/material/Close";
 import { Error } from "styled-icons/material/Error";
 import { Award } from "styled-icons/boxicons-regular/Award";
+import { Search } from "styled-icons/octicons/Search";
+import { Clear } from "styled-icons/material/Clear";
 
 import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
 import { ReactComponent as H3 } from "../svgs/h3.svg";
@@ -59,12 +61,16 @@ const Glyph = ({ iconName }) => {
       return <Error />;
     case "award":
       return <Award />;
+    case "search":
+      return <Search />;
+    case "clear":
+      return <Clear />;
     default:
       break;
   }
 };
 
-const SvgWrapper = styled.div`
+export const SvgWrapper = styled.div`
   position: relative;
   display: inline-block;
   width: 100%;
