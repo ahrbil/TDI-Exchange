@@ -21,11 +21,3 @@ export const HomeGrid = styled.div`
   max-width: 100%;
   min-height: 100vh;
 `;
-export const SearchWrapper = styled.div`
-  grid-area: search;
-  position: relative;
-  &:focus-within {
-    grid-area: logo / logo / profile/ profile;
-    z-index: 200;
-  }
-`;
