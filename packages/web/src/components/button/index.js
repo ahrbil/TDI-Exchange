@@ -2,8 +2,14 @@ import React from "react";
 import styled, { css } from "styled-components";
 import RichBtn, { InputFileBtn } from "./editorBtns";
 
-const Button = ({ style, loading, secondary, children, ...rest }) => (
-  <ButtonStyle style={style} disabled={loading} secondary={secondary} {...rest}>
+const Button = ({ style, loading, secondary, children, small, ...rest }) => (
+  <ButtonStyle
+    style={style}
+    disabled={loading}
+    secondary={secondary}
+    {...rest}
+    small={small}
+  >
     {loading ? "Loading" : children}
   </ButtonStyle>
 );
@@ -22,7 +28,7 @@ export const ButtonStyle = styled.button`
   font-size: 15px;
   position: relative;
   text-align: center;
-  padding: 12px 32px;
+  padding: ${props => (props.small ? "9px 20px" : "12px 32px")};
   color: white;
   transition: box-shadow 0.2s ease-out;
   &:hover {
