@@ -12,8 +12,6 @@ const Logo = () => (
 );
 
 const LogoStyle = styled.div`
-  grid-area: logo;
-  /* padding-right: 120px; */
   > a {
     display: flex;
   }

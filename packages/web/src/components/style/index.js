@@ -8,9 +8,6 @@ export const Wrapper = styled.div`
   width: 100%;
   min-height: calc(100vh - 120px);
 `;
-export const ButtonWrapper = styled.div`
-  grid-area: profile;
-`;
 export const HomeGrid = styled.div`
   display: grid;
   grid-template-columns: 3fr minmax(240px, 1fr);

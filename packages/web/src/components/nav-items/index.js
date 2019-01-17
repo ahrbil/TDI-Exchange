@@ -15,10 +15,8 @@ const NavItems = () => (
 export default NavItems;
 
 const NavItemsStyle = styled.nav`
-  grid-area: nav;
   display: flex;
   align-items: center;
-  margin-left: 3rem;
 `;
 const NavItemsContainer = styled.ul`
   display: flex;

@@ -25,7 +25,6 @@ const Profile = ({ user }) => (
 export default Profile;
 
 const ProfileStyle = styled.div`
-  grid-area: profile / profile / profile / profile;
   display: flex;
   align-items: center;
   position: relative;
@@ -90,6 +89,6 @@ const DropDownItem = styled.span`
 Profile.propTypes = {
   user: PropTypes.shape({
     userName: PropTypes.string,
-    avatar: PropTypes.string,
-  }).isRequired,
+    avatar: PropTypes.string
+  }).isRequired
 };

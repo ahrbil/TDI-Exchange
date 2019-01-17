@@ -1,13 +1,19 @@
 import React from "react";
-import styled from "styled-components";
 import { Link } from "@reach/router";
 
-import { Container, ButtonWrapper } from "../style";
 import Logo from "../logo";
 import Profile from "../profile";
 import Button from "../button";
 import { AuthConsumer } from "../../context/AuthContext";
 import NavItems from "../nav-items";
+import {
+  HeaderWrapper,
+  StyledHeader,
+  LogoArea,
+  ProfileArea,
+  NavArea
+} from "./style";
+import { Container } from "../style";
 
 const Header = () => (
   <AuthConsumer>
@@ -15,16 +21,20 @@ const Header = () => (
       <HeaderWrapper>
         <StyledHeader>
           <Container>
-            <Logo />
-            <NavItems />
-            {currentUser && <Profile user={{ ...currentUser }} />}
-            {!currentUser && (
-              <ButtonWrapper>
+            <LogoArea>
+              <Logo />
+            </LogoArea>
+            <NavArea>
+              <NavItems />
+            </NavArea>
+            <ProfileArea>
+              {currentUser && <Profile user={{ ...currentUser }} />}
+              {!currentUser && (
                 <Link to="/sign-in">
                   <Button small>Sign In</Button>
                 </Link>
-              </ButtonWrapper>
-            )}
+              )}
+            </ProfileArea>
           </Container>
         </StyledHeader>
       </HeaderWrapper>
@@ -33,26 +43,3 @@ const Header = () => (
 );
 
 export default Header;
-
-const StyledHeader = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  border: none;
-  box-shadow: 0px 1px 1px #d9d9d9;
-  background-color: white;
-  z-index: 1000;
-  > div {
-    display: grid;
-    grid-template-columns: auto auto 1fr auto;
-    grid-template-areas: "logo nav . profile";
-    grid-template-rows: 1fr;
-    max-width: 1080px;
-    align-items: center;
-    padding: 7px 0px;
-  }
-`;
-const HeaderWrapper = styled.div`
-  height: 80px;
-`;
