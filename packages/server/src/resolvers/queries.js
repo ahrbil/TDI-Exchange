@@ -12,7 +12,8 @@ const Query = {
     const allQuestions = await context.prisma.questions({
       skip: args.skip,
       first: args.first,
-      orderBy: args.orderBy
+      orderBy: args.orderBy,
+      where: args.where
     });
     return allQuestions;
   },

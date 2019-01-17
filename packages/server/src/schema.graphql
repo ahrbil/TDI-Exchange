@@ -26,6 +26,7 @@ type Query {
     skip: Int
     first: Int
     orderBy: QuestionOrderByInput
+    where: QuestionWhereInput
   ): [Question!]!
   question(id: ID!): Question!
   questionsCount: Int!
