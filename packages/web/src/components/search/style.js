@@ -17,6 +17,7 @@ export const SearchStyle = styled.input`
 export const SearchWrapper = styled.div`
   position: relative;
   display: flex;
+  align-items: center;
   background-color: #f7f7f7;
   width: 100%;
   height: 100%;
@@ -31,10 +32,28 @@ export const SearchWrapper = styled.div`
     width: 19px;
     height: 100%;
     position: absolute;
-    left: 8px;
     transition: all 0.2s ease-in;
   }
   &:focus-within {
     color: inherit;
   }
+  .search-icon {
+    left: 8px;
+  }
+  .clear-icon {
+    width: 20px;
+  }
+`;
+export const ClearBtn = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 8px;
+  color: #767676;
+  background-color: lightgrey;
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  cursor: pointer;
 `;
