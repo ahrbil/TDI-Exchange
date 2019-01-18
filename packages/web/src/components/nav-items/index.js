@@ -1,13 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "@reach/router";
 
 import Search from "../search";
 
 const NavItems = () => (
   <NavItemsStyle>
     <NavItemsContainer>
-      <NavItem>home</NavItem>
-      <NavItem className="nav-item-interns">internships</NavItem>
+      <Link to="/">
+        <NavItem>home</NavItem>
+      </Link>
+      <Link to="/internships">
+        <NavItem className="nav-item-interns">internships</NavItem>
+      </Link>
     </NavItemsContainer>
     <Search />
   </NavItemsStyle>

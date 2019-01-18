@@ -10,6 +10,7 @@ import { Link } from "@reach/router";
 
 class Search extends React.Component {
   static contextType = SearchContext;
+  // TODO pagination for results
   state = {
     page: 1
   };
@@ -34,13 +35,15 @@ class Search extends React.Component {
                   </Button>
                 </Link>
               </SearchResultsHeader>
-              <div>
-                {loading && <h1>loading</h1>}
+              <Content>
+                {/* if we don't loading and we dont get any results */}
+                {!allQuestions.length && !loading && <p>nothing was found</p>}
                 {allQuestions &&
                   allQuestions.map(question => (
                     <Question key={question.id} question={question} />
                   ))}
-              </div>
+                {loading && <h1>loading</h1>}
+              </Content>
             </div>
           );
         }}
@@ -62,4 +65,8 @@ const SearchResultsHeader = styled.div`
     font-size: 1.2rem;
     font-weight: 500;
   }
+`;
+
+const Content = styled.div`
+  margin-top: 1rem;
 `;
