@@ -6,6 +6,7 @@ type User {
   avatar: String
   MyQuestions: [Question!]!
   MyAnswers: [Answer!]!
+  MyInternShips: [InternShip!]!
   createdAt: DateTime!
   updatedAt: DateTime!
   repScore: Int! @default(value: "0")
@@ -26,4 +27,16 @@ type Answer {
   answeredTo: Question!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+type InternShip {
+  id: ID! @unique
+  title: String!
+  location: String!
+  postedBy: User!
+  avatar: String
+  tags: [String!]!
+}
+type InternShipTag {
+  id: ID! @unique
+  tag: String!
 }
