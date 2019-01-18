@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchContext = React.createContext();
+export const SearchContext = React.createContext();
 
 export class SearchProvider extends React.Component {
   state = {

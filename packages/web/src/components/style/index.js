@@ -6,7 +6,9 @@ export const Container = styled.div`
 `;
 export const Wrapper = styled.div`
   width: 100%;
+  max-width: 1080px;
   min-height: calc(100vh - 120px);
+  margin: 0 auto;
 `;
 export const HomeGrid = styled.div`
   display: grid;

@@ -25,8 +25,8 @@ export const CURRENT_USER = gql`
 `;
 
 export const ALL_QUESTIONS = gql`
-  query ALL_QUESTIONS($orderBy: QuestionOrderByInput, $skip: Int, $first: Int = ${ITEMS_ON_PAGE}) {
-    allQuestions(orderBy: $orderBy, skip: $skip, first: $first) {
+  query ALL_QUESTIONS($orderBy: QuestionOrderByInput,$where: QuestionWhereInput ,$skip: Int, $first: Int = ${ITEMS_ON_PAGE}) {
+    allQuestions(orderBy: $orderBy,where:$where ,skip: $skip, first: $first) {
       ...questionFragment
     }
   }

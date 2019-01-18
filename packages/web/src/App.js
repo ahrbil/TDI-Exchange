@@ -7,7 +7,7 @@ import { Router } from "@reach/router";
 import "./App.css";
 import theme from "./theme";
 import Header from "./components/header";
-import { Container, Wrapper } from "./components/style";
+import { Wrapper } from "./components/style";
 import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home";
 import Footer from "./components/footer";
@@ -29,17 +29,15 @@ const App = () => (
       <AuthProvider>
         <SearchProvider>
           <Header />
-          <Container>
-            <Wrapper>
-              <Router>
-                <Home path="/" />
-                <QuestionDetails path="/questions/:qid" />
-                <Search path="/search/results" />
-                <SignIn path="/sign-in" />
-                <AuthRoute path="/ask-a-question" render={<CreateQuestion />} />
-              </Router>
-            </Wrapper>
-          </Container>
+          <Wrapper>
+            <Router>
+              <Home path="/" />
+              <QuestionDetails path="/questions/:qid" />
+              <Search path="/search/results" />
+              <SignIn path="/sign-in" />
+              <AuthRoute path="/ask-a-question" render={<CreateQuestion />} />
+            </Router>
+          </Wrapper>
           <Footer />
         </SearchProvider>
       </AuthProvider>
