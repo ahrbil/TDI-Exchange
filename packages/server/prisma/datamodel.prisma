@@ -34,9 +34,9 @@ type InternShip {
   location: String!
   postedBy: User!
   avatar: String
-  tags: [String!]!
+  tags: [Tag!]!
 }
-type InternShipTag {
+type Tag {
   id: ID! @unique
   tag: String!
 }
