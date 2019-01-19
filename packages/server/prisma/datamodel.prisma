@@ -35,6 +35,8 @@ type Internship {
   postedBy: User!
   avatar: String
   tags: [Tag!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 type Tag {
   id: ID! @unique
