@@ -6,7 +6,7 @@ type User {
   avatar: String
   MyQuestions: [Question!]!
   MyAnswers: [Answer!]!
-  MyInternShips: [InternShip!]!
+  MyInternships: [Internship!]!
   createdAt: DateTime!
   updatedAt: DateTime!
   repScore: Int! @default(value: "0")
@@ -28,7 +28,7 @@ type Answer {
   createdAt: DateTime!
   updatedAt: DateTime!
 }
-type InternShip {
+type Internship {
   id: ID! @unique
   title: String!
   location: String!
