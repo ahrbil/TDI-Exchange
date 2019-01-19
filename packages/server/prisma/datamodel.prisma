@@ -38,5 +38,5 @@ type InternShip {
 }
 type Tag {
   id: ID! @unique
-  tag: String!
+  tag: String! @unique
 }
