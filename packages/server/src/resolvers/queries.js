@@ -1,4 +1,5 @@
 import { AuthenticationError } from "apollo-server-express";
+// import {prisma} from '../../generated/prisma-client';
 
 const Query = {
   me: async (parent, args, context) => {
@@ -27,6 +28,10 @@ const Query = {
       .aggregate()
       .count();
     return total;
+  },
+  allInternships: async (parent, args, context) => {
+    const allInternships = await context.prisma.internships();
+    return allInternships;
   }
 };
 
