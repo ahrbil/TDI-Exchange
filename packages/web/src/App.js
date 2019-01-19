@@ -17,6 +17,7 @@ import SignIn from "./pages/SignIn";
 import AuthRoute from "./components/AuthRoute";
 import Search from "./pages/Search";
 import { SearchProvider } from "./context/SearchContext";
+import Internships from "./pages/Internships";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -32,6 +33,7 @@ const App = () => (
           <Wrapper>
             <Router>
               <Home path="/" />
+              <Internships path="/internships" />
               <QuestionDetails path="/questions/:qid" />
               <Search path="/search/results" />
               <SignIn path="/sign-in" />
