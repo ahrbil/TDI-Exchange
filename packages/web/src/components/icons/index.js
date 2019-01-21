@@ -17,6 +17,7 @@ import { Error } from "styled-icons/material/Error";
 import { Award } from "styled-icons/boxicons-regular/Award";
 import { Search } from "styled-icons/octicons/Search";
 import { Clear } from "styled-icons/material/Clear";
+import { Location2 } from "styled-icons/icomoon/Location2";
 
 import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
 import { ReactComponent as H3 } from "../svgs/h3.svg";
@@ -65,6 +66,8 @@ const Glyph = ({ iconName }) => {
       return <Search />;
     case "clear":
       return <Clear />;
+    case "location":
+      return <Location2 />;
     default:
       break;
   }
