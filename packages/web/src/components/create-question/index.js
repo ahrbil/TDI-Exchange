@@ -99,7 +99,7 @@ class CreateQuestion extends React.Component {
   };
 
   render() {
-    const { headerError, editorError } = this.state;
+    const { headerError, editorError, header } = this.state;
     return (
       <Mutation mutation={CREATE_QUESTION}>
         {(createQuestion, { loading, error }) => (
@@ -111,6 +111,7 @@ class CreateQuestion extends React.Component {
               <QuestionInput
                 placeholder="Your question..."
                 onChange={this.handleTextInputChange}
+                value={header}
                 hasError={headerError || error}
               />
               <ErrorIcon hasError={headerError || error} />
