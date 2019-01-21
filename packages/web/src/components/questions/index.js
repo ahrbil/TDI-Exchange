@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Query } from "react-apollo";
+import { Link } from "@reach/router";
+
 import { ALL_QUESTIONS } from "../../queries";
 import Question from "../question";
 import CustomPagination from "../pagination";
 import { ITEMS_ON_PAGE } from "../../constants";
+import Aside from "../aside";
+import Button from "../button";
 
 class Questions extends React.Component {
   state = {
@@ -25,15 +29,11 @@ class Questions extends React.Component {
           orderBy: "createdAt_DESC"
         }}
       >
-        {({ data, loading, error }) => {
-          if (loading) {
-            return <h1>loading</h1>;
-          }
-          if (data && data.allQuestions) {
-            const { allQuestions } = data;
-            return (
+        {({ data, loading, error }) => (
+          <>
+            {data && data.allQuestions && (
               <QuestionsFeed>
-                {allQuestions.map(question => (
+                {data.allQuestions.map(question => (
                   <Question key={question.id} question={question} />
                 ))}
                 <PaginationContainer>
@@ -43,10 +43,15 @@ class Questions extends React.Component {
                   />
                 </PaginationContainer>
               </QuestionsFeed>
-            );
-          }
-          return null;
-        }}
+            )}
+            {loading && <h1>loading</h1>}
+            <Aside>
+              <Link to="/ask-a-question">
+                <Button secondary>Ask A Question</Button>
+              </Link>
+            </Aside>
+          </>
+        )}
       </Query>
     );
   }
@@ -55,7 +60,7 @@ class Questions extends React.Component {
 export default Questions;
 
 const QuestionsFeed = styled.div`
-  grid-area: questions;
+  grid-area: main;
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;

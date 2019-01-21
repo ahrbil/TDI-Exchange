@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Query } from "react-apollo";
+import { Link } from "@reach/router";
+
 import { QUESTION_WITH_DETAILS } from "../../queries";
 import Details from "./details";
-import { ITEMS_ON_PAGE } from "../../constants";
+import { ANSWERS_ON_PAGE } from "../../constants";
+import Aside from "../aside";
+import Button from "../button";
 
-const ANSWERS_ON_PAGE = ITEMS_ON_PAGE + 5;
 class QuestionWithDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -32,22 +35,18 @@ class QuestionWithDetails extends React.Component {
     const { orderByAnswers, currentPage, activeDesc, activeAsc } = this.state;
     const { route } = this.props;
     return (
-      <QuestionDetailsContainer>
-        <Query
-          query={QUESTION_WITH_DETAILS}
-          variables={{
-            id: route.qid,
-            skip: currentPage * ANSWERS_ON_PAGE - ANSWERS_ON_PAGE,
-            orderByAnswers
-          }}
-          fetchPolicy="cache-first"
-        >
-          {({ data, loading, error }) => {
-            if (loading && !data) {
-              return <h1>loading</h1>;
-            }
-            if (data && data.question) {
-              return (
+      <Query
+        query={QUESTION_WITH_DETAILS}
+        variables={{
+          id: route.qid,
+          skip: currentPage * ANSWERS_ON_PAGE - ANSWERS_ON_PAGE,
+          orderByAnswers
+        }}
+      >
+        {({ data, loading, error }) => (
+          <>
+            {data && data.question && (
+              <QuestionDetailsContainer>
                 <Details
                   question={data.question}
                   currentPage={currentPage}
@@ -57,18 +56,23 @@ class QuestionWithDetails extends React.Component {
                   activeDesc={activeDesc}
                   activeAsc={activeAsc}
                 />
-              );
-            }
-            return <h1>loading</h1>;
-          }}
-        </Query>
-      </QuestionDetailsContainer>
+              </QuestionDetailsContainer>
+            )}
+            {loading && <h1>loading</h1>}
+            <Aside>
+              <Link to="/ask-a-question">
+                <Button secondary>Ask A Question</Button>
+              </Link>
+            </Aside>
+          </>
+        )}
+      </Query>
     );
   }
 }
 
 const QuestionDetailsContainer = styled.div`
-  grid-area: questions;
+  grid-area: main;
 `;
 
 export default QuestionWithDetails;

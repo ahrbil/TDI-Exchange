@@ -92,7 +92,9 @@ class CreateQuestion extends React.Component {
           header,
           body
         }
-      }).then(() => this.setState({ editorState: EditorState.createEmpty() }));
+      }).then(() =>
+        this.setState({ header: "", editorState: EditorState.createEmpty() })
+      );
     }
   };
 
