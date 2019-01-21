@@ -49,12 +49,12 @@ Question.propTypes = {
     createdAt: PropTypes.string,
     askedBy: PropTypes.shape({
       userName: PropTypes.string,
-      avatar: PropTypes.string,
-    }),
-  }).isRequired,
+      avatar: PropTypes.string
+    })
+  }).isRequired
 };
 
-const QuestionContainer = styled.div`
+export const QuestionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
