@@ -75,3 +75,19 @@ export const QUESTIONS_COUNT = gql`
     questionsCount
   }
 `;
+
+export const ALL_INTERNSHIPS = gql`
+  query ALL_INTERNSHIPS {
+    allInternships {
+      id
+      title
+      location
+      avatar
+      tags {
+        id
+        tag
+      }
+      createdAt
+    }
+  }
+`;
