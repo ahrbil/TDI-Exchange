@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Query } from "react-apollo";
 
 import { SearchContext } from "../context/SearchContext";
-import { ALL_QUESTIONS } from "../queries";
+import { QUESTIONS_FEED } from "../queries";
 import Question from "../components/question";
 import Button from "../components/button";
 import { Link } from "@reach/router";
@@ -18,13 +18,15 @@ class Search extends React.Component {
     const { query } = this.context;
     return (
       <Query
-        query={ALL_QUESTIONS}
+        query={QUESTIONS_FEED}
         variables={{ where: { header_contains: query } }}
         skip={!query}
       >
         {({ data, loading }) => {
-          const allQuestions =
-            data && data.allQuestions ? data.allQuestions : [];
+          const searchResults =
+            data && data.questionsFeed && data.questionsFeed.items
+              ? data.questionsFeed.items
+              : [];
           return (
             <div>
               <SearchResultsHeader>
@@ -37,9 +39,9 @@ class Search extends React.Component {
               </SearchResultsHeader>
               <Content>
                 {/* if we don't loading and we dont get any results */}
-                {!allQuestions.length && !loading && <p>nothing was found</p>}
-                {allQuestions &&
-                  allQuestions.map(question => (
+                {!searchResults.length && !loading && <p>nothing was found</p>}
+                {searchResults &&
+                  searchResults.map(question => (
                     <Question key={question.id} question={question} />
                   ))}
                 {loading && <h1>loading</h1>}

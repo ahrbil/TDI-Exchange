@@ -77,6 +77,10 @@ Internship.propTypes = {
   title: PropType.string.isRequired,
   location: PropType.string,
   createdAt: PropType.string.isRequired,
-  tags: PropType.arrayOf({ id: PropType.string, tag: PropType.string })
-    .isRequired
+  tags: PropType.arrayOf(
+    PropType.shape({
+      id: PropType.string,
+      tag: PropType.string
+    })
+  ).isRequired
 };

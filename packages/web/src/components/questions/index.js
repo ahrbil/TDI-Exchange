@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { Query } from "react-apollo";
 import { Link } from "@reach/router";
 
-import { ALL_QUESTIONS } from "../../queries";
+import { QUESTIONS_FEED } from "../../queries";
 import Question from "../question";
-import CustomPagination from "../pagination";
+import Pagination from "../pagination";
 import { ITEMS_ON_PAGE } from "../../constants";
 import Aside from "../aside";
 import Button from "../button";
@@ -23,7 +23,7 @@ class Questions extends React.Component {
     const { currentPage } = this.state;
     return (
       <Query
-        query={ALL_QUESTIONS}
+        query={QUESTIONS_FEED}
         variables={{
           skip: currentPage * ITEMS_ON_PAGE - ITEMS_ON_PAGE,
           orderBy: "createdAt_DESC"
@@ -31,14 +31,17 @@ class Questions extends React.Component {
       >
         {({ data, loading, error }) => (
           <>
-            {data && data.allQuestions && (
+            {data && data.questionsFeed && (
               <QuestionsFeed>
-                {data.allQuestions.map(question => (
+                {data.questionsFeed.items.map(question => (
                   <Question key={question.id} question={question} />
                 ))}
                 <PaginationContainer>
-                  <CustomPagination
-                    currentPage={currentPage}
+                  <Pagination
+                    defaultCurrent={1}
+                    current={currentPage}
+                    pageSize={ITEMS_ON_PAGE}
+                    total={data.questionsFeed.count}
                     onChange={this.handlePaginationChange}
                   />
                 </PaginationContainer>

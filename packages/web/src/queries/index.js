@@ -24,10 +24,13 @@ export const CURRENT_USER = gql`
   }
 `;
 
-export const ALL_QUESTIONS = gql`
-  query ALL_QUESTIONS($orderBy: QuestionOrderByInput,$where: QuestionWhereInput ,$skip: Int, $first: Int = ${ITEMS_ON_PAGE}) {
-    allQuestions(orderBy: $orderBy,where:$where ,skip: $skip, first: $first) {
+export const QUESTIONS_FEED = gql`
+  query QUESTIONS_FEED($orderBy: QuestionOrderByInput,$where: QuestionWhereInput ,$skip: Int, $first: Int = ${ITEMS_ON_PAGE}) {
+    questionsFeed(orderBy: $orderBy,where:$where ,skip: $skip, first: $first) {
+      count
+      items {
       ...questionFragment
+      }
     }
   }
   ${QUESTION_FRAGMENT}
@@ -70,24 +73,21 @@ export const CREATE_QUESTION = gql`
   }
 `;
 
-export const QUESTIONS_COUNT = gql`
-  query questionsCount {
-    questionsCount
-  }
-`;
-
-export const ALL_INTERNSHIPS = gql`
-  query ALL_INTERNSHIPS {
-    allInternships {
-      id
-      title
-      location
-      avatar
-      tags {
+export const INTERNSHIPS_FEED = gql`
+  query INTERNSHIPS_FEED ($orderBy: InternshipOrderByInput,$where: InternshipWhereInput ,$skip: Int, $first: Int = ${ITEMS_ON_PAGE}) {
+    internshipsFeed (orderBy: $orderBy,where:$where ,skip: $skip, first: $first){
+      count
+      items {
         id
-        tag
+        title
+        location
+        avatar
+        createdAt
+        tags {
+          id
+          tag
+        }
       }
-      createdAt
     }
   }
 `;

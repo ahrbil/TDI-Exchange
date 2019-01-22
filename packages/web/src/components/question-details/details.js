@@ -6,7 +6,7 @@ import CreateAnswer from "../create-answer";
 import { AuthConsumer } from "../../context/AuthContext";
 import RichRender from "../rich-texte-rendrer";
 import LogInModal from "../login-as-modal";
-import { Pagination } from "../pagination";
+import Pagination from "../pagination";
 import {
   DetailsContainerStyle,
   QuestionDetails,
