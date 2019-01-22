@@ -1,5 +1,5 @@
 import { AuthenticationError } from "apollo-server-express";
-// import {prisma} from '../../generated/prisma-client';
+// import { prisma } from "../../generated/prisma-client";
 
 const Query = {
   me: async (parent, args, context) => {
@@ -9,29 +9,41 @@ const Query = {
     const me = await context.prisma.user({ id: context.user.id });
     return me;
   },
-  allQuestions: async (parent, args, context) => {
-    const allQuestions = await context.prisma.questions({
+  questionsFeed: async (parent, args, context) => {
+    const items = await context.prisma.questions({
       skip: args.skip,
       first: args.first,
       orderBy: args.orderBy,
       where: args.where
     });
-    return allQuestions;
+    const count = await context.prisma
+      .questionsConnection({ where: args.where })
+      .aggregate()
+      .count();
+    return {
+      count,
+      items
+    };
   },
   question: async (parent, args, context) => {
     const singleQuestion = await context.prisma.question({ id: args.id });
     return singleQuestion;
   },
-  questionsCount: async (parent, args, context) => {
-    const total = await context.prisma
-      .questionsConnection()
+  internshipsFeed: async (parent, args, context) => {
+    const items = await context.prisma.internships({
+      skip: args.skip,
+      first: args.first,
+      orderBy: args.orderBy,
+      where: args.where
+    });
+    const count = await context.prisma
+      .internshipsConnection({ where: args.where })
       .aggregate()
       .count();
-    return total;
-  },
-  allInternships: async (parent, args, context) => {
-    const allInternships = await context.prisma.internships();
-    return allInternships;
+    return {
+      count,
+      items
+    };
   }
 };
 
