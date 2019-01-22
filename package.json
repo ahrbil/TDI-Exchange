@@ -1,6 +1,9 @@
 {
   "name": "tdi-exchange",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "eslint": "^5.6.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -15,15 +18,14 @@
     "prettier": "^1.15.3",
     "pretty-quick": "^1.8.0"
   },
-  "scripts": {},
+  "scripts": {
+    "start": "lerna run start --parallel",
+    "new-version": "lerna version --conventional-commits --yes",
+    "diff": "lerna diff"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
   }
 }
