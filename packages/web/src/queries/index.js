@@ -85,9 +85,27 @@ export const INTERNSHIPS_FEED = gql`
         createdAt
         tags {
           id
-          tag
+          name
         }
       }
+    }
+  }
+`;
+
+export const TAGS = gql`
+  query TAGS($where: TagWhereInput, $first: Int) {
+    tags(where: $where, first: $first) {
+      id
+      name
+    }
+  }
+`;
+
+export const CREATE_TAG = gql`
+  mutation createTag($name: String!) {
+    createTag(name: $name) {
+      id
+      name
     }
   }
 `;
