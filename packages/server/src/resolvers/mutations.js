@@ -3,6 +3,7 @@ import {
   updateCreateQuestionRepScore,
   updateCreateAnswerRepScore
 } from "./repScore";
+// import { prisma } from "../../generated/prisma-client";
 
 const Mutation = {
   createQuestion: async (parent, args, context) => {
@@ -36,6 +37,14 @@ const Mutation = {
     });
     updateCreateAnswerRepScore(context.user.id, args.questionId);
     return newAnswer;
+  },
+  createTag: async (parent, args, context) => {
+    const name = args.name.trim().toLowerCase();
+    const exists = await context.prisma.$exists.tag({ name });
+    if (!exists && name.length >= 2) {
+      const newTag = await context.prisma.createTag({ name });
+      return newTag;
+    }
   }
 };
 
