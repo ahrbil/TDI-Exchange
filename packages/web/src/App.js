@@ -1,8 +1,10 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { Router } from "@reach/router";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { HttpLink } from "apollo-link-http";
+import { ApolloClient } from "apollo-client";
 
 import "./App.css";
 import theme from "./theme";
@@ -18,10 +20,14 @@ import AuthRoute from "./components/AuthRoute";
 import Search from "./pages/Search";
 import { SearchProvider } from "./context/SearchContext";
 import Internships from "./pages/Internships";
+import PostInternship from "./pages/postInternship";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
-  credentials: "include"
+  link: new HttpLink({
+    uri: "http://localhost:4000/graphql",
+    credentials: "include"
+  }),
+  cache: new InMemoryCache()
 });
 
 const App = () => (
@@ -38,6 +44,10 @@ const App = () => (
               <Search path="/search/results" />
               <SignIn path="/sign-in" />
               <AuthRoute path="/ask-a-question" render={<CreateQuestion />} />
+              <AuthRoute
+                path="/post-an-internship"
+                render={<PostInternship />}
+              />
             </Router>
           </Wrapper>
           <Footer />
