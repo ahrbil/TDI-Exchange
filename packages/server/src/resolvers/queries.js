@@ -44,6 +44,13 @@ const Query = {
       count,
       items
     };
+  },
+  tags: async (parent, args, context) => {
+    const tags = await context.prisma.tags({
+      where: args.where,
+      first: args.first
+    });
+    return tags;
   }
 };
 
