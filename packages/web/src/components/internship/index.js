@@ -57,9 +57,9 @@ class Internship extends React.Component {
           </p>
           <TagContainer>
             {tags.map(tag => (
-              <Link to={`/internships/tags/${tag.tag}`} key={tag.id}>
+              <Link to={`/internships/tags/${tag.name}`} key={tag.id}>
                 <Tag>
-                  <TagText>{tag.tag}</TagText>
+                  <TagText>{tag.name}</TagText>
                 </Tag>
               </Link>
             ))}
@@ -80,7 +80,7 @@ Internship.propTypes = {
   tags: PropType.arrayOf(
     PropType.shape({
       id: PropType.string,
-      tag: PropType.string
+      name: PropType.string
     })
   ).isRequired
 };
