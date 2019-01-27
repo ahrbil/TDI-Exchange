@@ -51,7 +51,7 @@ class InternshipList extends React.Component {
             )}
             {loading && <h1>loading</h1>}
             <Aside>
-              <Link to="/post-internship">
+              <Link to="/post-an-internship">
                 <Button secondary>Post An Internship</Button>
               </Link>
             </Aside>
