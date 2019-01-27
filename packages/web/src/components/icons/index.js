@@ -7,7 +7,7 @@ import { FormatUnderlined } from "styled-icons/material/FormatUnderlined";
 import { Code } from "styled-icons/material/Code";
 import { FormatListNumbered } from "styled-icons/material/FormatListNumbered";
 import { FormatListBulleted } from "styled-icons/material/FormatListBulleted";
-import { ImageAlt } from "styled-icons/boxicons-regular/ImageAlt";
+import { ImageAlt } from "styled-icons/boxicons-solid/ImageAlt";
 import { SignOutAlt } from "styled-icons/fa-solid/SignOutAlt";
 import { QuestionAnswer } from "styled-icons/material/QuestionAnswer";
 import { Facebook2 } from "styled-icons/icomoon/Facebook2";
