@@ -8,7 +8,7 @@ import Question from "../components/question";
 import Button from "../components/button";
 import { Link } from "@reach/router";
 
-class Search extends React.Component {
+class QuestionSearch extends React.Component {
   static contextType = SearchContext;
   // TODO pagination for results
   state = {
@@ -54,7 +54,7 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+export default QuestionSearch;
 
 const SearchResultsHeader = styled.div`
   display: flex;

@@ -11,16 +11,18 @@ import theme from "./theme";
 import Header from "./components/header";
 import { Wrapper } from "./components/style";
 import { AuthProvider } from "./context/AuthContext";
-import Home from "./pages/Home";
+import {
+  Home,
+  QuestionDetails,
+  SignIn,
+  QuestionSearch,
+  Internships,
+  PostInternship
+} from "./pages";
 import Footer from "./components/footer";
-import QuestionDetails from "./pages/QuestionDetails";
 import CreateQuestion from "./components/create-question";
-import SignIn from "./pages/SignIn";
 import AuthRoute from "./components/AuthRoute";
-import Search from "./pages/Search";
 import { SearchProvider } from "./context/SearchContext";
-import Internships from "./pages/Internships";
-import PostInternship from "./pages/postInternship";
 
 const client = new ApolloClient({
   link: new HttpLink({
@@ -41,7 +43,7 @@ const App = () => (
               <Home path="/" />
               <Internships path="/internships" />
               <QuestionDetails path="/questions/:qid" />
-              <Search path="/search/results" />
+              <QuestionSearch path="/search/results" />
               <SignIn path="/sign-in" />
               <AuthRoute path="/ask-a-question" render={<CreateQuestion />} />
               <AuthRoute
