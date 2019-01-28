@@ -1,0 +1,8 @@
+type Mutation {
+  createInternship(
+    title: String!
+    location: String!
+    upload: Upload
+    tags: [String!]!
+  ): Internship!
+}

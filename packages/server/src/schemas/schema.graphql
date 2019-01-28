@@ -1,4 +1,4 @@
-#import * from "../generated/prisma.graphql"
+#import * from "../../generated/prisma.graphql"
 
 interface Count {
   count: Int!
