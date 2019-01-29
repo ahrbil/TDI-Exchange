@@ -32,6 +32,7 @@ type Internship {
   id: ID! @unique
   title: String!
   location: String!
+  description: String
   postedBy: User!
   avatar: String
   tags: [Tag!]!
