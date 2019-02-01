@@ -59,7 +59,7 @@ a:hover {
   cursor: pointer;
 }
 textarea {
-  resize: none;
+  resize: vertical;
 }
 ::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */
