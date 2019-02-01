@@ -1,8 +1,10 @@
 import { AuthenticationError, UserInputError } from "apollo-server-express";
+
 import {
   updateCreateQuestionRepScore,
   updateCreateAnswerRepScore
 } from "./repScore";
+import { uploadImage } from "../utils";
 // import { prisma } from "../../generated/prisma-client";
 
 const Mutation = {
@@ -45,6 +47,26 @@ const Mutation = {
       const newTag = await context.prisma.createTag({ name });
       return newTag;
     }
+  },
+  createInternship: async (parent, args, context) => {
+    if (!context.user) {
+      throw new AuthenticationError("Login first!");
+    }
+    const { createReadStream, mimetype } = await args.imgFile;
+    const { secure_url } = await uploadImage(createReadStream, mimetype).catch(
+      err => {
+        throw new UserInputError("filed to upload image:", err);
+      }
+    );
+    const newInternship = await context.prisma.createInternship({
+      postedBy: { connect: { id: context.user.id } },
+      avatar: secure_url,
+      location: args.location,
+      tags: { connect: args.tags },
+      title: args.title,
+      description: args.description
+    });
+    return newInternship;
   }
 };
 
