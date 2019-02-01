@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ReactTags from "react-tag-autocomplete";
-import { Query, Mutation } from "react-apollo";
+import { Query } from "react-apollo";
 
 import { TAGS, CREATE_TAG } from "../../queries";
 import "./style.css";
