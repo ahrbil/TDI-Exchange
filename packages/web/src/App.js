@@ -3,8 +3,8 @@ import { ThemeProvider } from "styled-components";
 import { ApolloProvider } from "react-apollo";
 import { Router } from "@reach/router";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { HttpLink } from "apollo-link-http";
 import { ApolloClient } from "apollo-client";
+import { createUploadLink } from "apollo-upload-client";
 
 import "./App.css";
 import theme from "./theme";
@@ -25,7 +25,8 @@ import AuthRoute from "./components/AuthRoute";
 import { SearchProvider } from "./context/SearchContext";
 
 const client = new ApolloClient({
-  link: new HttpLink({
+  // createUploadLink handles the file upload
+  link: createUploadLink({
     uri: "http://localhost:4000/graphql",
     credentials: "include"
   }),
