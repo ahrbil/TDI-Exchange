@@ -62,8 +62,6 @@ export const TagText = styled.span`
 export const Location = styled.h3`
   font-size: 1rem;
   padding: 4px 0px;
-  color: #402faf;
-  text-decoration: underline;
 `;
 export const LocationContainer = styled.div`
   display: flex;
