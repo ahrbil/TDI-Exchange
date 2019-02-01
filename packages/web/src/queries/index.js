@@ -15,6 +15,21 @@ const QUESTION_FRAGMENT = gql`
   }
 `;
 
+const INTERNSHIP_FRAGMENT = gql`
+  fragment internshipFragment on Internship {
+    id
+    title
+    location
+    avatar
+    description
+    createdAt
+    tags {
+      id
+      name
+    }
+  }
+`;
+
 export const CURRENT_USER = gql`
   query CURRENT_USER {
     me {
@@ -78,18 +93,11 @@ export const INTERNSHIPS_FEED = gql`
     internshipsFeed (orderBy: $orderBy,where:$where ,skip: $skip, first: $first){
       count
       items {
-        id
-        title
-        location
-        avatar
-        createdAt
-        tags {
-          id
-          name
-        }
+        ...internshipFragment
       }
     }
   }
+  ${INTERNSHIP_FRAGMENT}
 `;
 
 export const TAGS = gql`
@@ -108,4 +116,25 @@ export const CREATE_TAG = gql`
       name
     }
   }
+`;
+
+export const CREATE_INTERNSHIP = gql`
+  mutation createInternship(
+    $title: String!
+    $location: String!
+    $description: String
+    $imgFile: Upload!
+    $tags: [TagInput!]!
+  ) {
+    createInternship(
+      title: $title
+      location: $location
+      description: $description
+      imgFile: $imgFile
+      tags: $tags
+    ) {
+      ...internshipFragment
+    }
+  }
+  ${INTERNSHIP_FRAGMENT}
 `;
