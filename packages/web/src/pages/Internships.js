@@ -4,10 +4,10 @@ import { HomeGrid } from "../components/style";
 import Aside from "../components/aside";
 import ScrollTop from "../components/scrollTop";
 
-const Internships = () => (
+const Internships = props => (
   <ScrollTop>
     <HomeGrid>
-      <InternshipList />
+      <InternshipList tagParam={props.tag && props.tag} />
       <Aside />
     </HomeGrid>
   </ScrollTop>

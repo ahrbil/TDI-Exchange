@@ -43,6 +43,7 @@ const App = () => (
             <Router>
               <Home path="/" />
               <Internships path="/internships" />
+              <Internships path="/internships/tags/:tag" />
               <QuestionDetails path="/questions/:qid" />
               <QuestionSearch path="/search/results" />
               <SignIn path="/sign-in" />

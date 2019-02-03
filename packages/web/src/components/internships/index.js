@@ -23,12 +23,16 @@ class InternshipList extends React.Component {
 
   render() {
     const { currentPage } = this.state;
+    const where = this.props.tagParam
+      ? { tags_some: { name: this.props.tagParam } }
+      : {};
     return (
       <Query
         query={INTERNSHIPS_FEED}
         variables={{
           skip: currentPage * ITEMS_ON_PAGE - ITEMS_ON_PAGE,
-          orderBy: "createdAt_DESC"
+          orderBy: "createdAt_DESC",
+          where
         }}
       >
         {({ data, loading, error }) => (
