@@ -18,6 +18,30 @@ class TagPicker extends React.Component {
     });
   };
 
+  // passing the index of the tag to delete it
+  // and update the state
+  handleDeleteTag = i => {
+    const { tags } = this.props;
+    tags.splice(i, 1);
+    this.props.onChange("tags", tags);
+  };
+  //passing the new tag to add it to the state
+  handleAddTag = newTag => {
+    const { tags } = this.props;
+    let exists = false;
+    // check if the tag is not exists to avoids duplication
+    for (let i = 0; i < tags.length; i++) {
+      if (tags[i].name === newTag.name) {
+        exists = true;
+        break;
+      }
+    }
+    if (!exists) {
+      const newTags = [...tags, newTag];
+      this.props.onChange("tags", newTags);
+    }
+  };
+
   handleClickToAddTag = async client => {
     const name = this.state.searchValue;
     this.setState({ searchValue: "" });
@@ -53,7 +77,7 @@ class TagPicker extends React.Component {
 
   render() {
     const { searchValue } = this.state;
-    const { handleDeleteTag, handleAddTag, tags } = this.props;
+    const { tags, hasError } = this.props;
     return (
       <Query
         query={TAGS}
@@ -74,12 +98,16 @@ class TagPicker extends React.Component {
               <ReactTags
                 tags={tags}
                 suggestions={suggestions}
-                handleDelete={handleDeleteTag}
-                handleAddition={handleAddTag}
+                handleDelete={this.handleDeleteTag}
+                handleAddition={this.handleAddTag}
                 handleInputChange={value => this.handleInputChange(value)}
                 placeholder="Add tags"
                 minQueryLength={1}
                 delimiters={[]}
+                autofocus={false}
+                classNames={{
+                  root: hasError ? "react-tags-error" : "react-tags"
+                }}
               />
               {loading && (
                 <ReactTagsStyle>
