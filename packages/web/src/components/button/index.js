@@ -2,10 +2,18 @@ import React from "react";
 import styled, { css } from "styled-components";
 import RichBtn, { InputFileBtn } from "./editorBtns";
 
-const Button = ({ style, loading, secondary, children, small, ...rest }) => (
+const Button = ({
+  style,
+  loading,
+  secondary,
+  children,
+  small,
+  disabled,
+  ...rest
+}) => (
   <ButtonStyle
     style={style}
-    disabled={loading}
+    disabled={loading || disabled}
     secondary={secondary}
     {...rest}
     small={small}
