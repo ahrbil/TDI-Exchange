@@ -34,6 +34,9 @@ const server = new ApolloServer({
     maxFiles: 1,
     maxFileSize: 80000
   }
+  // formating graphql errors to just throw errors list
+  // containing error path and error message
+  // formatError: ({ extensions: { exception } }) => exception.errors,
 });
 
 const corsOptions = {

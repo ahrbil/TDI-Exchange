@@ -5,6 +5,8 @@ import {
   updateCreateAnswerRepScore
 } from "./repScore";
 import { uploadImage } from "../utils";
+import validationSchema from "../input-validation";
+import throwListError from "../utils/format-list-error";
 // import { prisma } from "../../generated/prisma-client";
 
 const Mutation = {
@@ -52,10 +54,18 @@ const Mutation = {
     if (!context.user) {
       throw new AuthenticationError("Login first!");
     }
-    const { createReadStream, mimetype } = await args.imgFile;
+    const { imgFile, ...rest } = args;
+    const { createReadStream, mimetype } = await imgFile;
+    try {
+      await validationSchema.validate(rest, { abortEarly: false });
+    } catch (errors) {
+      throwListError(errors);
+    }
     const { secure_url } = await uploadImage(createReadStream, mimetype).catch(
       err => {
-        throw new UserInputError("filed to upload image:", err);
+        throw new UserInputError(
+          "filed to upload image, please try a deferent image"
+        );
       }
     );
     const newInternship = await context.prisma.createInternship({
