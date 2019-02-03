@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { Mutation } from "react-apollo";
 import { Formik, Field, Form } from "formik";
+import { navigate } from "@reach/router";
 
 import TagPicker from "../components/tag-picker";
 import Button from "../components/button";
-import { CREATE_INTERNSHIP } from "../queries";
+import { CREATE_INTERNSHIP, INTERNSHIPS_FEED } from "../queries";
 import InputFiled from "../components/input-field";
 import {
   InputWrapper,
@@ -40,11 +41,31 @@ class PostInternship extends React.Component {
     );
   };
 
+  updateCache = (cache, { data: { createInternship } }) => {
+    try {
+      const data = cache.readQuery({
+        query: INTERNSHIPS_FEED,
+        variables: {
+          first: 15,
+          orderBy: "createdAt_DESC",
+          skip: 0
+        }
+      });
+      data.internshipsFeed.items.push(createInternship);
+      cache.writeQuery({
+        query: INTERNSHIPS_FEED,
+        data
+      });
+    } catch (err) {
+      //console.log(err);
+    }
+  };
+
   render() {
     const { avatarPreviewUrl } = this.state;
     return (
-      <Mutation mutation={CREATE_INTERNSHIP}>
-        {(createInternship, { data, loading }) => (
+      <Mutation mutation={CREATE_INTERNSHIP} update={this.updateCache}>
+        {(createInternship, { loading }) => (
           <div style={{ padding: "0px 16px" }}>
             <H1>Share an internship and help students grow.</H1>
             <Wrapper>
@@ -56,11 +77,48 @@ class PostInternship extends React.Component {
                   tags: [],
                   file: null
                 }}
-                onSubmit={(values, { setSubmitting }) => {
-                  setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                  }, 500);
+                onSubmit={async (
+                  { tags, file, ...values },
+                  { setSubmitting, setErrors, setFieldError }
+                ) => {
+                  const namedTags = tags.map(tag => ({ name: tag.name }));
+                  const imgFile = file;
+                  const variables = { ...values, tags: namedTags, imgFile };
+                  try {
+                    await createInternship({
+                      variables,
+                      optimisticResponse: {
+                        __typename: "Mutation",
+                        createInternship: {
+                          __typename: "Internship",
+                          avatar: avatarPreviewUrl,
+                          createdAt: Date.now(),
+                          description: values.description,
+                          id: `${Date.now()}-${values.title}`,
+                          location: values.location,
+                          tags,
+                          title: values.title
+                        }
+                      }
+                    });
+                  } catch (error) {
+                    if (!!error.graphQLErrors[0].extensions.exception.errors) {
+                      let errors = {};
+                      // map over graphQLErrors and pass the errors to formik
+                      error.graphQLErrors[0].extensions.exception.errors.forEach(
+                        error => {
+                          errors[error.path] = error.message;
+                        }
+                      );
+                      setErrors(errors);
+                    }
+
+                    if (error.graphQLErrors[0].path === "createInternship") {
+                      setFieldError("file", error.graphQLErrors[0].message);
+                    }
+                  }
+                  setSubmitting(false);
+                  await navigate("/internships");
                 }}
                 validateOnBlur={false}
                 validateOnChange={true}
