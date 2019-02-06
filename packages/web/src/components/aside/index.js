@@ -1,7 +1,11 @@
 import React from "react";
 
-import { AsideContainer } from "../style";
+import { AsideContainer, Sticky } from "./style";
 
-const Aside = ({ children }) => <AsideContainer>{children}</AsideContainer>;
+const Aside = ({ children }) => (
+  <AsideContainer>
+    <Sticky>{children}</Sticky>
+  </AsideContainer>
+);
 
 export default Aside;
