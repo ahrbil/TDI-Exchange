@@ -16,6 +16,7 @@ import {
 import AvatarPicker from "../components/avatar-picker";
 import validationSchema from "../components/form-validation-schema";
 import { FILE_SIZE, FILE_TYPES } from "../constants";
+import ScrollTop from "../components/scrollTop";
 
 class PostInternship extends React.Component {
   state = {
@@ -64,133 +65,137 @@ class PostInternship extends React.Component {
   render() {
     const { avatarPreviewUrl } = this.state;
     return (
-      <Mutation mutation={CREATE_INTERNSHIP} update={this.updateCache}>
-        {(createInternship, { loading }) => (
-          <div style={{ padding: "0px 16px" }}>
-            <H1>Share an internship and help students grow.</H1>
-            <Wrapper>
-              <Formik
-                initialValues={{
-                  title: "",
-                  description: "",
-                  location: "",
-                  tags: [],
-                  file: null
-                }}
-                onSubmit={async (
-                  { tags, file, ...values },
-                  { setSubmitting, setErrors, setFieldError }
-                ) => {
-                  const namedTags = tags.map(tag => ({ name: tag.name }));
-                  const imgFile = file;
-                  const variables = { ...values, tags: namedTags, imgFile };
-                  try {
-                    await createInternship({
-                      variables,
-                      optimisticResponse: {
-                        __typename: "Mutation",
-                        createInternship: {
-                          __typename: "Internship",
-                          avatar: avatarPreviewUrl,
-                          createdAt: Date.now(),
-                          description: values.description,
-                          id: `${Date.now()}-${values.title}`,
-                          location: values.location,
-                          tags,
-                          title: values.title
+      <ScrollTop>
+        <Mutation mutation={CREATE_INTERNSHIP} update={this.updateCache}>
+          {(createInternship, { loading }) => (
+            <div style={{ padding: "0px 16px" }}>
+              <H1>Share an internship and help students grow.</H1>
+              <Wrapper>
+                <Formik
+                  initialValues={{
+                    title: "",
+                    description: "",
+                    location: "",
+                    tags: [],
+                    file: null
+                  }}
+                  onSubmit={async (
+                    { tags, file, ...values },
+                    { setSubmitting, setErrors, setFieldError }
+                  ) => {
+                    const namedTags = tags.map(tag => ({ name: tag.name }));
+                    const imgFile = file;
+                    const variables = { ...values, tags: namedTags, imgFile };
+                    try {
+                      await createInternship({
+                        variables,
+                        optimisticResponse: {
+                          __typename: "Mutation",
+                          createInternship: {
+                            __typename: "Internship",
+                            avatar: avatarPreviewUrl,
+                            createdAt: Date.now(),
+                            description: values.description,
+                            id: `${Date.now()}-${values.title}`,
+                            location: values.location,
+                            tags,
+                            title: values.title
+                          }
                         }
+                      });
+                    } catch (error) {
+                      if (
+                        !!error.graphQLErrors[0].extensions.exception.errors
+                      ) {
+                        let errors = {};
+                        // map over graphQLErrors and pass the errors to formik
+                        error.graphQLErrors[0].extensions.exception.errors.forEach(
+                          error => {
+                            errors[error.path] = error.message;
+                          }
+                        );
+                        setErrors(errors);
                       }
-                    });
-                  } catch (error) {
-                    if (!!error.graphQLErrors[0].extensions.exception.errors) {
-                      let errors = {};
-                      // map over graphQLErrors and pass the errors to formik
-                      error.graphQLErrors[0].extensions.exception.errors.forEach(
-                        error => {
-                          errors[error.path] = error.message;
-                        }
-                      );
-                      setErrors(errors);
-                    }
 
-                    if (error.graphQLErrors[0].path === "createInternship") {
-                      setFieldError("file", error.graphQLErrors[0].message);
+                      if (error.graphQLErrors[0].path === "createInternship") {
+                        setFieldError("file", error.graphQLErrors[0].message);
+                      }
                     }
-                  }
-                  setSubmitting(false);
-                  await navigate("/internships");
-                }}
-                validateOnBlur={false}
-                validateOnChange={true}
-                validationSchema={validationSchema}
-                isInitialValid={false}
-              >
-                {({
-                  values,
-                  setFieldValue,
-                  validateField,
-                  isSubmitting,
-                  handleBlur,
-                  isValidating,
-                  errors
-                }) => (
-                  <Form>
-                    <Field
-                      name="file"
-                      title="Avatar"
-                      accept={FILE_SIZE}
-                      maxsize={FILE_TYPES}
-                      component={AvatarPicker}
-                      setFieldValue={setFieldValue}
-                      onBlur={handleBlur}
-                      setAvatarPreviewUrl={this.setAvatarPreviewUrl}
-                      avatarPreviewUrl={avatarPreviewUrl}
-                      releaseAvatarPreviewUrl={this.releaseAvatarPreviewUrl}
-                      validateField={validateField}
-                    />
-                    <Field
-                      name="title"
-                      component={InputFiled}
-                      placeholder="Internship title"
-                    />
-                    <Field
-                      name="description"
-                      component={InputFiled}
-                      placeholder="Internship description"
-                      textarea
-                    />
-                    <Field
-                      name="location"
-                      component={InputFiled}
-                      placeholder="Internship location"
-                      textarea
-                    />
-                    <InputWrapper>
-                      <InputLabel htmlFor="tag">Tags</InputLabel>
-                      <div>
-                        <TagPicker
-                          tags={values.tags}
-                          onChange={setFieldValue}
-                          hasError={!!errors.tags}
-                        />
-                      </div>
-                      {errors.tags && <PError>{errors.tags}</PError>}
-                    </InputWrapper>
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting || isValidating || loading}
-                      loading={isSubmitting || loading}
-                      style={{ alignSelf: "flex-start" }}
-                    >
-                      Publish
-                    </Button>
-                  </Form>
-                )}
-              </Formik>
-            </Wrapper>
-          </div>
-        )}
-      </Mutation>
+                    setSubmitting(false);
+                    await navigate("/internships");
+                  }}
+                  validateOnBlur={false}
+                  validateOnChange={true}
+                  validationSchema={validationSchema}
+                  isInitialValid={false}
+                >
+                  {({
+                    values,
+                    setFieldValue,
+                    validateField,
+                    isSubmitting,
+                    handleBlur,
+                    isValidating,
+                    errors
+                  }) => (
+                    <Form>
+                      <Field
+                        name="file"
+                        title="Avatar"
+                        accept={FILE_SIZE}
+                        maxsize={FILE_TYPES}
+                        component={AvatarPicker}
+                        setFieldValue={setFieldValue}
+                        onBlur={handleBlur}
+                        setAvatarPreviewUrl={this.setAvatarPreviewUrl}
+                        avatarPreviewUrl={avatarPreviewUrl}
+                        releaseAvatarPreviewUrl={this.releaseAvatarPreviewUrl}
+                        validateField={validateField}
+                      />
+                      <Field
+                        name="title"
+                        component={InputFiled}
+                        placeholder="Internship title"
+                      />
+                      <Field
+                        name="description"
+                        component={InputFiled}
+                        placeholder="Internship description"
+                        textarea
+                      />
+                      <Field
+                        name="location"
+                        component={InputFiled}
+                        placeholder="Internship location"
+                        textarea
+                      />
+                      <InputWrapper>
+                        <InputLabel htmlFor="tag">Tags</InputLabel>
+                        <div>
+                          <TagPicker
+                            tags={values.tags}
+                            onChange={setFieldValue}
+                            hasError={!!errors.tags}
+                          />
+                        </div>
+                        {errors.tags && <PError>{errors.tags}</PError>}
+                      </InputWrapper>
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting || isValidating || loading}
+                        loading={isSubmitting || loading}
+                        style={{ alignSelf: "flex-start" }}
+                      >
+                        Publish
+                      </Button>
+                    </Form>
+                  )}
+                </Formik>
+              </Wrapper>
+            </div>
+          )}
+        </Mutation>
+      </ScrollTop>
     );
   }
 }
