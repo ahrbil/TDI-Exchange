@@ -16,7 +16,7 @@ type Question {
   header: String!
   body: String
   askedBy: User!
-  answers: [Answer!]!
+  answers: [Answer!]! @relation(name:"AnswersOfQuestion" onDelete: CASCADE)
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -24,7 +24,7 @@ type Answer {
   id: ID! @unique
   body: String!
   answeredBy: User!
-  answeredTo: Question!
+  answeredTo: Question! @relation(name:"AnswersOfQuestion")
   createdAt: DateTime!
   updatedAt: DateTime!
 }
