@@ -83,4 +83,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 16px;
+  > div svg {
+    height: 35px;
+  }
 `;
