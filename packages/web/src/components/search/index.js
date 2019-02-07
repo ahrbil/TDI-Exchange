@@ -1,18 +1,23 @@
 import React from "react";
 
-import { SearchWrapper, SearchStyle, ClearBtn } from "./style";
+import { SearchWrapper, SearchInputStyle, ClearBtn } from "./style";
 import Icon from "../icons";
 import { navigate } from "@reach/router";
 import { SearchConsumer } from "../../context/SearchContext";
 
 class Search extends React.Component {
-  state = {
-    query: ""
-  };
-  searchInput = React.createRef();
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: ""
+    };
+    this.searchInput = React.createRef();
+  }
 
   handleFocus = () => {
-    this.searchInput.current.focus();
+    if (this.searchInput.current) {
+      this.searchInput.current.focus();
+    }
   };
 
   handleChange = (event, updateQueryFn) => {
@@ -41,6 +46,12 @@ class Search extends React.Component {
     });
   };
 
+  componentDidMount = () => {
+    if (this.props.expanded) {
+      this.handleFocus();
+    }
+  };
+
   render() {
     const { query } = this.state;
     return (
@@ -48,7 +59,7 @@ class Search extends React.Component {
         {({ updateQuery }) => (
           <SearchWrapper onClick={this.handleFocus}>
             <Icon iconName="search" className="search-icon" />
-            <SearchStyle
+            <SearchInputStyle
               ref={this.searchInput}
               placeholder="Search"
               autoComplete="off"

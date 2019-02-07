@@ -19,6 +19,8 @@ import { Search } from "styled-icons/octicons/Search";
 import { Clear } from "styled-icons/material/Clear";
 import { Location2 } from "styled-icons/icomoon/Location2";
 import { Camera } from "styled-icons/fa-solid/Camera";
+import { ArrowLeft } from "styled-icons/fa-solid/ArrowLeft";
+import { Menu } from "styled-icons/boxicons-regular/Menu";
 
 import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
 import { ReactComponent as H3 } from "../svgs/h3.svg";
@@ -71,6 +73,10 @@ const Glyph = ({ iconName }) => {
       return <Location2 />;
     case "camera":
       return <Camera />;
+    case "arrowLeft":
+      return <ArrowLeft />;
+    case "menu":
+      return <Menu />;
     default:
       break;
   }
@@ -80,7 +86,8 @@ export const SvgWrapper = styled.div`
   position: relative;
   display: inline-block;
   width: 100%;
-  height: 21px;
+  height: 100%;
+  min-height: 21px;
   color: inherit;
   svg {
     position: absolute;
