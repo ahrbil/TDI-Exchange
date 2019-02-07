@@ -3,7 +3,6 @@ import Internships from "./Internships";
 import PostInternship from "./PostInternship";
 import QuestionDetails from "./QuestionDetails";
 import QuestionSearch from "./QuestionSearch";
-import InternshipSearch from "./InternshipSearch";
 import SignIn from "./SignIn";
 
 export {
@@ -12,6 +11,5 @@ export {
   PostInternship,
   QuestionDetails,
   QuestionSearch,
-  SignIn,
-  InternshipSearch
+  SignIn
 };
