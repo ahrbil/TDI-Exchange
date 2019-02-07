@@ -6,9 +6,11 @@ import Icon from "../icons";
 
 const Profile = ({ user }) => (
   <ProfileStyle>
-    <h1>{user.userName}</h1>
     <img src={user.avatar} alt={user.userName} />
     <DropDown>
+      <DropDownItem>
+        <h1>{user.userName}</h1>
+      </DropDownItem>
       <Link to="/logout">
         <DropDownItem>
           <Icon
@@ -29,24 +31,25 @@ const ProfileStyle = styled.div`
   align-items: center;
   position: relative;
   cursor: pointer;
-  border-radius: 3.14px;
-  padding: 3px 6px;
-  border-radius: 3.14px;
-  transition: background 0.2s ease-in;
-  &:hover {
+  border-radius: 100%;
+  transition: all 0.2s ease-in;
+  border: 2px solid transparent;
+  &:hover,
+  &:active {
     background-color: #f8f8f8;
+    border-color: ${props => props.theme.color.primary};
     > div {
       visibility: visible;
     }
   }
   h1 {
-    font-size: 19px;
+    font-size: 0.8rem;
     font-weight: 700;
     margin-right: 11px;
   }
   img {
-    width: 42px;
-    height: 42px;
+    width: 31px;
+    height: 31px;
     border-radius: 100%;
   }
 `;
@@ -56,7 +59,7 @@ const DropDown = styled.div`
   visibility: hidden;
   position: absolute;
   right: 5px;
-  top: 55px;
+  top: 45px;
   background-color: white;
   box-shadow: 3px 3px 18px 0px #d3d3d9;
   flex-direction: column;
@@ -73,7 +76,7 @@ const DropDown = styled.div`
 `;
 
 const DropDownItem = styled.span`
-  font-size: 20px;
+  font-size: 1rem;
   padding: 10px 20px;
   font-weight: 600;
   text-transform: capitalize;
