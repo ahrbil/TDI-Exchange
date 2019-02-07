@@ -11,7 +11,7 @@ const Profile = ({ user }) => (
       <DropDownItem>
         <h1>{user.userName}</h1>
       </DropDownItem>
-      <Link to="/logout">
+      <a href="http://localhost:4000/auth/logout">
         <DropDownItem>
           <Icon
             iconName="logout"
@@ -19,7 +19,7 @@ const Profile = ({ user }) => (
           />
           logout
         </DropDownItem>
-      </Link>
+      </a>
     </DropDown>
   </ProfileStyle>
 );
