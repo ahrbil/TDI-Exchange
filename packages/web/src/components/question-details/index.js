@@ -7,7 +7,9 @@ import { QUESTION_WITH_DETAILS } from "../../queries";
 import Details from "./details";
 import { ANSWERS_ON_PAGE } from "../../constants";
 import Aside from "../aside";
+import { AsideItem } from "../aside/style";
 import Button from "../button";
+import Loader, { Wrapper } from "../loader";
 
 class QuestionWithDetails extends React.Component {
   constructor(props) {
@@ -45,7 +47,7 @@ class QuestionWithDetails extends React.Component {
       >
         {({ data, loading, error }) => (
           <>
-            {data && data.question && (
+            {data && data.question && !loading && (
               <QuestionDetailsContainer>
                 <Details
                   question={data.question}
@@ -55,14 +57,21 @@ class QuestionWithDetails extends React.Component {
                   handleOrderByOld={this.handleOrderByOld}
                   activeDesc={activeDesc}
                   activeAsc={activeAsc}
+                  loading={loading}
                 />
               </QuestionDetailsContainer>
             )}
-            {loading && <h1>loading</h1>}
+            {loading && (
+              <Wrapper>
+                <Loader />
+              </Wrapper>
+            )}
             <Aside>
-              <Link to="/ask-a-question">
-                <Button secondary>Ask A Question</Button>
-              </Link>
+              <AsideItem>
+                <Link to="/ask-a-question">
+                  <Button secondary>Ask A Question</Button>
+                </Link>
+              </AsideItem>
             </Aside>
           </>
         )}

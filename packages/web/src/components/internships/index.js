@@ -9,6 +9,9 @@ import Aside from "../aside";
 import Button from "../button";
 import Pagination from "../pagination";
 import { ITEMS_ON_PAGE } from "../../constants";
+import { AsideItem } from "../aside/style";
+import { PaginationCard, PaginationContainer } from "../pagination/style";
+import Loader, { Wrapper } from "../loader";
 
 class InternshipList extends React.Component {
   state = {
@@ -37,27 +40,37 @@ class InternshipList extends React.Component {
       >
         {({ data, loading, error }) => (
           <>
-            {data && data.internshipsFeed && (
+            {data && data.internshipsFeed && !loading && (
               <InternshipListStyle>
                 {data.internshipsFeed.items.map(internship => (
                   <Internship key={internship.id} {...internship} />
                 ))}
-                <PaginationContainer>
-                  <Pagination
-                    defaultCurrent={1}
-                    current={currentPage}
-                    pageSize={ITEMS_ON_PAGE}
-                    total={data.internshipsFeed.count}
-                    onChange={this.handlePaginationChange}
-                  />
-                </PaginationContainer>
+                {data.internshipsFeed.count > ITEMS_ON_PAGE && (
+                  <PaginationCard>
+                    <PaginationContainer>
+                      <Pagination
+                        defaultCurrent={1}
+                        current={currentPage}
+                        pageSize={ITEMS_ON_PAGE}
+                        total={data.internshipsFeed.count}
+                        onChange={this.handlePaginationChange}
+                      />
+                    </PaginationContainer>
+                  </PaginationCard>
+                )}
               </InternshipListStyle>
             )}
-            {loading && <h1>loading</h1>}
+            {loading && (
+              <Wrapper>
+                <Loader />
+              </Wrapper>
+            )}
             <Aside>
-              <Link to="/post-an-internship">
-                <Button secondary>Post An Internship</Button>
-              </Link>
+              <AsideItem>
+                <Link to="/post-an-internship">
+                  <Button secondary>Post An Internship</Button>
+                </Link>
+              </AsideItem>
             </Aside>
           </>
         )}
@@ -75,8 +88,4 @@ const InternshipListStyle = styled.div`
   flex-direction: column;
   align-self: stretch;
   align-items: stretch;
-`;
-const PaginationContainer = styled.div`
-  align-self: center;
-  margin: 2rem 0;
 `;

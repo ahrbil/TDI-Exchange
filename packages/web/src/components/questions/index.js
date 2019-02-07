@@ -9,6 +9,9 @@ import Pagination from "../pagination";
 import { ITEMS_ON_PAGE } from "../../constants";
 import Aside from "../aside";
 import Button from "../button";
+import { AsideItem } from "../aside/style";
+import { PaginationCard, PaginationContainer } from "../pagination/style";
+import Loader, { Wrapper } from "../loader";
 
 class Questions extends React.Component {
   state = {
@@ -31,27 +34,37 @@ class Questions extends React.Component {
       >
         {({ data, loading, error }) => (
           <>
-            {data && data.questionsFeed && (
+            {data && data.questionsFeed && !loading && (
               <QuestionsFeed>
                 {data.questionsFeed.items.map(question => (
                   <Question key={question.id} question={question} />
                 ))}
-                <PaginationContainer>
-                  <Pagination
-                    defaultCurrent={1}
-                    current={currentPage}
-                    pageSize={ITEMS_ON_PAGE}
-                    total={data.questionsFeed.count}
-                    onChange={this.handlePaginationChange}
-                  />
-                </PaginationContainer>
+                {data.questionsFeed.count > ITEMS_ON_PAGE && (
+                  <PaginationCard>
+                    <PaginationContainer>
+                      <Pagination
+                        defaultCurrent={1}
+                        current={currentPage}
+                        pageSize={ITEMS_ON_PAGE}
+                        total={data.questionsFeed.count}
+                        onChange={this.handlePaginationChange}
+                      />
+                    </PaginationContainer>
+                  </PaginationCard>
+                )}
               </QuestionsFeed>
             )}
-            {loading && <h1>loading</h1>}
+            {loading && (
+              <Wrapper>
+                <Loader />
+              </Wrapper>
+            )}
             <Aside>
-              <Link to="/ask-a-question">
-                <Button secondary>Ask A Question</Button>
-              </Link>
+              <AsideItem>
+                <Link to="/ask-a-question">
+                  <Button secondary>Ask A Question</Button>
+                </Link>
+              </AsideItem>
             </Aside>
           </>
         )}
@@ -69,8 +82,4 @@ const QuestionsFeed = styled.div`
   flex-direction: column;
   align-self: stretch;
   align-items: stretch;
-`;
-const PaginationContainer = styled.div`
-  align-self: center;
-  margin: 2rem 0;
 `;

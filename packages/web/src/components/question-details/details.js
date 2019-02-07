@@ -16,6 +16,7 @@ import {
 } from "./style";
 import { ITEMS_ON_PAGE } from "../../constants";
 import QuestionHeader from "./questionHeader";
+import Loader, { Wrapper } from "../loader";
 
 const createdAt_DESC = "createdAt_DESC";
 const createdAt_ASC = "createdAt_ASC";
@@ -26,7 +27,8 @@ const Details = ({
   handlePaginationChange,
   handleOrderBy,
   activeDesc,
-  activeAsc
+  activeAsc,
+  loading
 }) => (
   <AuthConsumer>
     {({ currentUser }) => (
@@ -65,20 +67,28 @@ const Details = ({
           </div>
         </ActionBarStyle>
         {/* answer section */}
-        <AnswersSection>
-          {question.answers.map(answer => (
-            <Answer key={answer.id} answer={answer} />
-          ))}
-        </AnswersSection>
+        {loading ? (
+          <Wrapper>
+            <Loader />
+          </Wrapper>
+        ) : (
+          <AnswersSection>
+            {question.answers.map(answer => (
+              <Answer key={answer.id} answer={answer} />
+            ))}
+          </AnswersSection>
+        )}
         {/* pagination */}
-        <Pagination
-          defaultCurrent={1}
-          total={question.totalAnswers}
-          current={currentPage}
-          pageSize={ITEMS_ON_PAGE + 5}
-          onChange={handlePaginationChange}
-          style={{ alignSelf: "center", margin: "2rem 0 0.5rem 0" }}
-        />
+        {question.totalAnswers > ITEMS_ON_PAGE && !loading && (
+          <Pagination
+            defaultCurrent={1}
+            total={question.totalAnswers}
+            current={currentPage}
+            pageSize={ITEMS_ON_PAGE + 5}
+            onChange={handlePaginationChange}
+            style={{ alignSelf: "center", margin: "2rem 0 0.5rem 0" }}
+          />
+        )}
         {currentUser && (
           <ActionBarStyle>
             <span>Contribute to this question</span>
