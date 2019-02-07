@@ -1,6 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
+
 import RichBtn, { InputFileBtn } from "./editorBtns";
+import Loader, { Wrapper } from "../loader";
 
 const Button = ({
   style,
@@ -15,10 +17,10 @@ const Button = ({
     style={style}
     disabled={loading || disabled}
     secondary={secondary}
-    {...rest}
     small={small}
+    {...rest}
   >
-    {loading ? "Loading" : children}
+    {loading ? <Loader inline={loading} /> : children}
   </ButtonStyle>
 );
 

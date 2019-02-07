@@ -20,7 +20,9 @@ class LogInModal extends React.Component {
     return (
       <LogInModalContainer>
         <div>Sign in to post an answer</div>
-        <Button onClick={this.openModal}>Sign In</Button>
+        <Button onClick={this.openModal} small>
+          Sign In
+        </Button>
         <Modal title="Sign In" isOpen={isOpen} closeModal={this.closeModal}>
           <LogInBtns />
         </Modal>
