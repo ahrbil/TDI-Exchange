@@ -5,6 +5,8 @@ import { Query } from "react-apollo";
 
 import { TAGS, CREATE_TAG } from "../../queries";
 import "./style.css";
+import Loader from "../loader";
+import Icon from "../icons";
 
 class TagPicker extends React.Component {
   state = {
@@ -112,7 +114,9 @@ class TagPicker extends React.Component {
               {loading && (
                 <ReactTagsStyle>
                   <div className="react-tags">
-                    <span className="loader">🔄</span>
+                    <span className="loader">
+                      <Loader inline color="#1d49e3" />
+                    </span>
                   </div>
                 </ReactTagsStyle>
               )}
@@ -122,7 +126,16 @@ class TagPicker extends React.Component {
                     <div className="react-tags__suggestions">
                       <ul>
                         <li onClick={() => this.handleClickToAddTag(client)}>
-                          🆕{searchValue}
+                          <Icon
+                            style={{
+                              color: "#1d49e3",
+                              display: "inline",
+                              padding: "0px 10px",
+                              marginRight: "10px"
+                            }}
+                            iconName="add"
+                          />
+                          <span>{searchValue}</span>
                         </li>
                       </ul>
                     </div>

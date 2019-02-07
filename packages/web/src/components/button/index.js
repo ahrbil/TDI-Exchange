@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import RichBtn, { InputFileBtn } from "./editorBtns";
-import Loader, { Wrapper } from "../loader";
+import Loader from "../loader";
 
 const Button = ({
   style,

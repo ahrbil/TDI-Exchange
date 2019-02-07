@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { HalfCircleSpinner } from "react-epic-spinners";
 import PropTypes from "prop-types";
 
-const Loader = ({ inline }) => (
-  <Container inline={inline}>
+const Loader = ({ inline, color }) => (
+  <Container inline={inline} className="loader-con">
     <HalfCircleSpinner
-      color={inline ? "#fff" : "#1d49e3"}
+      color={color || (inline ? "#fff" : "#1d49e3")}
       size={inline ? "20" : "35"}
     />
   </Container>
@@ -15,11 +15,13 @@ const Loader = ({ inline }) => (
 export default Loader;
 
 Loader.defaultProps = {
-  inline: false
+  inline: false,
+  color: ""
 };
 
 Loader.propTypes = {
-  inline: PropTypes.bool
+  inline: PropTypes.bool,
+  color: PropTypes.string
 };
 
 const Container = styled.div`

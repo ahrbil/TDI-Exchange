@@ -21,6 +21,7 @@ import { Location2 } from "styled-icons/icomoon/Location2";
 import { Camera } from "styled-icons/fa-solid/Camera";
 import { ArrowLeft } from "styled-icons/fa-solid/ArrowLeft";
 import { Menu } from "styled-icons/boxicons-regular/Menu";
+import { Add } from "styled-icons/material/Add";
 
 import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
 import { ReactComponent as H3 } from "../svgs/h3.svg";
@@ -77,6 +78,8 @@ const Glyph = ({ iconName }) => {
       return <ArrowLeft />;
     case "menu":
       return <Menu />;
+    case "add":
+      return <Add />;
     default:
       break;
   }

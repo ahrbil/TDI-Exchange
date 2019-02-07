@@ -171,8 +171,12 @@
 
 .loader {
   position: absolute;
-  right: 3px;
-  top: -32px;
+  right: 10px;
+  top: -30px;
   pointer-events: none;
   cursor: unset;
+}
+.loader-con {
+  width: 20px;
+  height: 20px;
 }
