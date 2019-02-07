@@ -28,6 +28,7 @@
     "react-adopt": "^0.6.0",
     "react-apollo": "^2.3.2",
     "react-dom": "^16.6.3",
+    "react-epic-spinners": "^0.2.1",
     "react-scripts": "^2.1.1",
     "react-tag-autocomplete": "^5.8.0",
     "styled-components": "^4.1.2",
