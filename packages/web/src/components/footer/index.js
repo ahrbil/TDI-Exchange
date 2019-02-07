@@ -19,6 +19,7 @@ const FooterContainer = styled.div`
   width: 100%;
   height: 40px;
   border-top: 2px solid #d9d8d8;
+  margin-top: 2rem;
   background-color: ${props => props.theme.hv_white};
   display: flex;
   justify-content: center;

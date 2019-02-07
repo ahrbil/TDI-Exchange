@@ -6,8 +6,8 @@ export const QuestionHeader = styled.div`
   img {
     border-radius: 100%;
     margin-right: 8px;
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     background-color: aliceblue;
   }
   h3 {
@@ -20,8 +20,8 @@ export const QuestionBody = styled.div`
   font-size: 0.7rem;
   > h1 {
     padding-top: 12px;
-    line-height: 1.25;
-    word-break: break-word;
+    line-height: 1.65;
+    word-break: break-all;
   }
 `;
 export const QuestionFooter = styled.div`

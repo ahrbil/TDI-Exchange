@@ -73,9 +73,10 @@ export default class CreateAnswer extends React.Component {
 
 const CreateAnswerCard = styled.div`
   position: relative;
+  padding: 16px;
   .errorContainer {
     position: absolute;
-    bottom: 35px;
-    left: 0;
+    bottom: 55px;
+    left: 20px;
   }
 `;

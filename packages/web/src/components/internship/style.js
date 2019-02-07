@@ -30,7 +30,12 @@ export const InternshipContent = styled.div`
   h1 {
     font-size: 1.1rem;
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.65;
+    word-break: break-all;
+  }
+  p {
+    word-break: break-all;
+    line-height: 1.65;
   }
 `;
 export const TagContainer = styled.div`
@@ -62,6 +67,7 @@ export const TagText = styled.span`
 export const Location = styled.h3`
   font-size: 1rem;
   padding: 4px 0px;
+  word-break: break-all;
 `;
 export const LocationContainer = styled.div`
   display: flex;
