@@ -37,6 +37,7 @@ class InternshipList extends React.Component {
           orderBy: "createdAt_DESC",
           where
         }}
+        fetchPolicy="cache-and-network"
       >
         {({ data, loading, error }) => (
           <>

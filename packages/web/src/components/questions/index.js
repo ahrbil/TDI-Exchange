@@ -31,6 +31,7 @@ class Questions extends React.Component {
           skip: currentPage * ITEMS_ON_PAGE - ITEMS_ON_PAGE,
           orderBy: "createdAt_DESC"
         }}
+        fetchPolicy="cache-and-network"
       >
         {({ data, loading, error }) => (
           <>

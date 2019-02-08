@@ -89,6 +89,7 @@ class TagPicker extends React.Component {
         }}
         skip={!searchValue || searchValue.length < 1}
         errorPolicy="ignore"
+        fetchPolicy="cache-and-network"
       >
         {({ data, loading, client }) => {
           let suggestions = [];

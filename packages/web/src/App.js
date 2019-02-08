@@ -4,7 +4,7 @@ import { ApolloProvider } from "react-apollo";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
 import { createUploadLink } from "apollo-upload-client";
-import { persistCache } from "apollo-cache-persist";
+import { CachePersistor } from "apollo-cache-persist";
 
 import "./App.css";
 import theme from "./theme";
@@ -16,41 +16,41 @@ import Footer from "./components/footer";
 import { SearchProvider } from "./context/SearchContext";
 import Loader, { Wrapper as LoaderWrapper } from "./components/loader";
 
+const cache = new InMemoryCache();
+const persistCache = new CachePersistor({
+  cache,
+  storage: window.localStorage,
+  key: "tdi",
+  maxSize: false,
+  debug: true
+});
+const apolloClient = new ApolloClient({
+  cache,
+  // createUploadLink handles the file upload
+  link: createUploadLink({
+    uri: "http://localhost:4000/graphql",
+    credentials: "include"
+  })
+});
 class App extends React.Component {
   state = {
-    loaded: false,
-    apolloClient: null
+    loaded: false
   };
 
   componentDidMount = async () => {
-    const cache = new InMemoryCache();
-    const apolloClient = new ApolloClient({
-      cache,
-      // createUploadLink handles the file upload
-      link: createUploadLink({
-        uri: "http://localhost:4000/graphql",
-        credentials: "include"
-      })
-    });
-
     try {
-      // wait to persist cache from local storage
-      await persistCache({
-        cache,
-        storage: window.localStorage
-      });
+      persistCache.restore().then(() => this.setState({ loaded: true }));
     } catch (error) {
       console.error("Error restoring the cache");
     }
     // update the state with the client and set loaded to true
     this.setState({
-      loaded: true,
-      apolloClient
+      loaded: true
     });
   };
 
   render() {
-    const { apolloClient, loaded } = this.state;
+    const { loaded } = this.state;
     if (!loaded) {
       return (
         <LoaderWrapper>

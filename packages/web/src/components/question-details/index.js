@@ -44,10 +44,11 @@ class QuestionWithDetails extends React.Component {
           skip: currentPage * ANSWERS_ON_PAGE - ANSWERS_ON_PAGE,
           orderByAnswers
         }}
+        fetchPolicy="cache-and-network"
       >
         {({ data, loading, error }) => (
           <>
-            {data && data.question && !loading && (
+            {data && data.question && (
               <QuestionDetailsContainer>
                 <Details
                   question={data.question}
