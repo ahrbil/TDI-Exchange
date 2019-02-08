@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { Link } from "@reach/router";
 
 import Icon from "../icons";
 
@@ -11,7 +12,7 @@ const Profile = ({ user }) => (
       <DropDownItem>
         <h1>{user.userName}</h1>
       </DropDownItem>
-      <a href="http://localhost:4000/auth/logout">
+      <Link to="logout">
         <DropDownItem>
           <Icon
             iconName="logout"
@@ -19,7 +20,7 @@ const Profile = ({ user }) => (
           />
           logout
         </DropDownItem>
-      </a>
+      </Link>
     </DropDown>
   </ProfileStyle>
 );

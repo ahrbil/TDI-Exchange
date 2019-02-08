@@ -25,6 +25,7 @@ const Internships = React.lazy(() => import("./pages/Internships"));
 const PostInternship = React.lazy(() => import("./pages/PostInternship"));
 const CreateQuestion = React.lazy(() => import("./components/create-question"));
 const AuthRoute = React.lazy(() => import("./components/AuthRoute"));
+const Logout = React.lazy(() => import("./pages/Logout"));
 
 // error boundary lets us catch any error if a page failed to load
 // we can show a the error or a message
@@ -39,6 +40,7 @@ const Routes = () => (
         <QuestionDetails path="/questions/:qid" />
         <QuestionSearch path="/search/results" />
         <SignIn path="/sign-in" />
+        <Logout path="/logout" />
         <AuthRoute path="/ask-a-question" render={<CreateQuestion />} />
         <AuthRoute path="/post-an-internship" render={<PostInternship />} />
       </Router>

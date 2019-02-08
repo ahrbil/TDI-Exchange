@@ -138,3 +138,9 @@ export const CREATE_INTERNSHIP = gql`
   }
   ${INTERNSHIP_FRAGMENT}
 `;
+
+export const LOGOUT = gql`
+  mutation LOGOUT {
+    logout
+  }
+`;

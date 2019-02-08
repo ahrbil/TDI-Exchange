@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 
 import { CURRENT_USER } from "../queries";
 
-const AuthContext = React.createContext();
+export const AuthContext = React.createContext();
 
 export class AuthProvider extends React.PureComponent {
   render() {
     const { children } = this.props;
     return (
-      <Query query={CURRENT_USER} fetchPolicy="no-cache">
+      <Query query={CURRENT_USER} fetchPolicy="network-only">
         {({ data }) => (
           <AuthContext.Provider
             value={{ currentUser: data && data.me ? data.me : null }}

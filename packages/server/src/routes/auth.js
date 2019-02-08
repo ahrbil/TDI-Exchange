@@ -27,8 +27,4 @@ authRoute.get(
     res.redirect("http://localhost:3000");
   }
 );
-authRoute.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect(`${process.env.FRONT_END_URL}/`);
-});
 export default authRoute;

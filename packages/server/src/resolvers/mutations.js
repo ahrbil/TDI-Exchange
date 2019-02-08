@@ -77,6 +77,13 @@ const Mutation = {
       description: args.description
     });
     return newInternship;
+  },
+  logout: (parent, args, context) => {
+    if (context.user) {
+      context.req.logout();
+      return true;
+    }
+    return false;
   }
 };
 

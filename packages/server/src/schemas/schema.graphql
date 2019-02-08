@@ -56,4 +56,5 @@ type Mutation {
   createQuestion(header: String!, body: String): Question!
   createAnswer(questionId: ID!, body: String!): Answer!
   createTag(name: String!): Tag!
+  logout: Boolean
 }
