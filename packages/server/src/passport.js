@@ -22,7 +22,7 @@ const initPassport = () => {
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
         callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-        profileFields: ["id", "displayName", "photos", "email"],
+        profileFields: ["id", "displayName", "photos", "email"]
       },
       async (accessToken, refreshToken, profile, done) => {
         // callback function
@@ -37,11 +37,17 @@ const initPassport = () => {
             facebookId: profile.id,
             userName: profile.displayName,
             avatar: profile.photos[0].value,
+            email:
+              profile.emails &&
+              profile.emails.length > 0 &&
+              profile.emails[0].value
+                ? profile.emails[0].value
+                : null
           });
           done(null, newUser);
         }
-      },
-    ),
+      }
+    )
   );
 
   passport.use(
@@ -49,7 +55,7 @@ const initPassport = () => {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: process.env.GOOGLE_CALLBACK_URL,
+        callbackURL: process.env.GOOGLE_CALLBACK_URL
       },
       async (accessToken, refreshToken, profile, done) => {
         const currentUser = await prisma.user({ googleId: profile.id });
@@ -60,11 +66,17 @@ const initPassport = () => {
             googleId: profile.id,
             userName: profile.displayName,
             avatar: profile.photos[0].value,
+            email:
+              profile.emails &&
+              profile.emails.length > 0 &&
+              profile.emails[0].value
+                ? profile.emails[0].value
+                : null
           });
           done(null, newUser);
         }
-      },
-    ),
+      }
+    )
   );
 };
 
