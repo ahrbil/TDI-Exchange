@@ -3,6 +3,7 @@ type User {
   facebookId: String @unique
   googleId: String @unique
   userName: String
+  email: String @unique
   avatar: String
   MyQuestions: [Question!]!
   MyAnswers: [Answer!]!
