@@ -31,6 +31,7 @@ export const ButtonStyle = styled.button`
   align-items: center;
   justify-content: center;
   border-radius: 3.14px;
+  font-family: inherit;
   font-weight: 600;
   white-space: nowrap;
   word-break: keep-all;
