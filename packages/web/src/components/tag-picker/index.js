@@ -59,7 +59,7 @@ class TagPicker extends React.Component {
         }
       },
       update: (cache, { data: { createTag } }) => {
-        this.props.handleAddTag(createTag);
+        this.handleAddTag(createTag);
         const { tags } = cache.readQuery({
           query: TAGS,
           variables: {
