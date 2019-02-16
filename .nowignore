@@ -1,0 +1,7 @@
+node_modules
+prisma
+.vscode
+build
+.env
+.eslintrc.json
+now-secrets.json

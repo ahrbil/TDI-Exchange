@@ -1,0 +1,59 @@
+{
+  "version": 2,
+  "name": "tdi-exchange",
+  "alias": ["tdi-exchange"],
+  "regions": ["gru"],
+  "builds": [
+    {
+      "src": "packages/server/dist/index.js",
+      "use": "@now/node-server@canary"
+    },
+    {
+      "src": "packages/web/package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" }
+    }
+  ],
+  "routes": [
+    { "src": "/api", "dest": "packages/server/dist/index.js" },
+    { "src": "/auth/(.*)", "dest": "packages/server/dist/index.js" },
+    {
+      "src": "/static/(.*)",
+      "headers": { "cache-control": "s-maxage=31536000,immutable" },
+      "dest": "/packages/web/static/$1"
+    },
+    { "src": "/favicon.ico", "dest": "/packages/web/favicon.ico" },
+    { "src": "/assets/(.*)", "dest": "/packages/web/assets/$1" },
+    {
+      "src": "/asset-manifest.json",
+      "dest": "/packages/web/asset-manifest.json"
+    },
+    { "src": "/manifest.json", "dest": "/packages/web/manifest.json" },
+    {
+      "src": "/precache-manifest.(.*)",
+      "dest": "/packages/web/precache-manifest.$1"
+    },
+    {
+      "src": "/service-worker.js",
+      "headers": { "cache-control": "s-maxage=0" },
+      "dest": "/packages/web/service-worker.js"
+    },
+    {
+      "src": "/(.*)",
+      "headers": { "cache-control": "s-maxage=0" },
+      "dest": "/packages/web/index.html"
+    }
+  ],
+  "env": {
+    "FACEBOOK_CLIENT_ID": "@facebook_client_id",
+    "FACEBOOK_CLIENT_SECRET": "@facebook_client_secret",
+    "FACEBOOK_CALLBACK_URL": "@facebook_callback_url",
+    "GOOGLE_CLIENT_ID": "@google_client_id",
+    "GOOGLE_CLIENT_SECRET": "@google_client_secret",
+    "GOOGLE_CALLBACK_URL": "@google_callback_url",
+    "SESSION_SECRET": "@session_secret",
+    "PRISMA_ENDPOINT": "@prisma_endpoint",
+    "PRISMA_SECRET": "@prisma_secret",
+    "CLOUDINARY_URL": "@cloudinary_url"
+  }
+}
