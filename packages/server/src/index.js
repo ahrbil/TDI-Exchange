@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 
@@ -7,8 +8,7 @@ import middleWare from "./middlewares";
 import authRoute from "./routes/auth";
 import initPassport from "./passport";
 import typeDefs from "./typeDefs";
-
-require("dotenv").config();
+import { IS_PROD, PORT } from "./constants";
 
 initPassport();
 
@@ -20,11 +20,8 @@ app.use("/auth", authRoute);
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  playground: {
-    settings: {
-      "request.credentials": "include"
-    }
-  },
+  introspection: true,
+  playground: { endpoint: "/api" },
   context: ({ req }) => ({
     req,
     prisma,
@@ -40,12 +37,13 @@ const server = new ApolloServer({
 });
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: IS_PROD ? "https://tdi-exchange.now.sh" : "http://localhost:3000",
   credentials: true
 };
 
-server.applyMiddleware({ app, cors: corsOptions });
+server.applyMiddleware({ app, cors: corsOptions, path: "/api" });
 
-app.listen({ port: 4000 }, () =>
-  console.log(`🚀  Server ready at http://localhost:4000${server.graphqlPath}`)
-);
+const port = PORT;
+app.listen({ port }, () => {
+  console.log(`🚀 Server ready at ${server.graphqlPath}`);
+});
