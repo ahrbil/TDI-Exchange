@@ -1,6 +1,6 @@
 {
   "name": "TDi-Exchange",
-  "short_name": "TDi",
+  "short_name": "TDi-Exchange",
   "icons": [
     {
       "src": "/assets/android-chrome-192x192.png",
@@ -13,6 +13,7 @@
       "type": "image/png"
     }
   ],
+  "start_url": "/",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "display": "standalone"
