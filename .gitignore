@@ -62,3 +62,5 @@ dist
 .sh
 # for vscode 
 .vscode
+# for now envs
+now-secrets.json
