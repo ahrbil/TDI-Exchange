@@ -15,6 +15,7 @@ import Routes from "./routes";
 import Footer from "./components/footer";
 import { SearchProvider } from "./context/SearchContext";
 import Loader, { Wrapper as LoaderWrapper } from "./components/loader";
+import { GQL_URI } from "./constants";
 
 const cache = new InMemoryCache();
 const persistCache = new CachePersistor({
@@ -22,13 +23,13 @@ const persistCache = new CachePersistor({
   storage: window.localStorage,
   key: "tdi",
   maxSize: false,
-  debug: true
+  debug: false
 });
 const apolloClient = new ApolloClient({
   cache,
   // createUploadLink handles the file upload
   link: createUploadLink({
-    uri: "http://localhost:4000/graphql",
+    uri: GQL_URI,
     credentials: "include"
   })
 });
