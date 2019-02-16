@@ -5,13 +5,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "start": "cd dist && node index.js",
+    "build": "babel src --out-dir dist --copy-files",
+    "now-build": "yarn run build",
+    "dev": "nodemon --exec babel-node src/index.js",
     "deploy_db": "cd prisma && prisma deploy --env-file ../.env"
   },
   "keywords": [],
   "author": "ahrbil",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "@graphql-modules/epoxy": "^0.3.0",
     "@graphql-modules/sonar": "^0.3.0",
     "apollo-server-express": "^2.3.3",
@@ -30,7 +34,7 @@
     "passport-facebook": "^2.1.1",
     "passport-google-oauth": "^1.0.0",
     "passport-google-oauth20": "^1.0.0",
-    "prisma-client-lib": "1.21.1",
+    "prisma-client-lib": "1.26.4",
     "yup": "^0.26.10"
   },
   "devDependencies": {
@@ -38,6 +42,8 @@
     "@babel/core": "^7.2.0",
     "@babel/node": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
-    "nodemon": "^1.18.7"
+    "babel-plugin-inline-dotenv": "^1.2.1",
+    "nodemon": "^1.18.7",
+    "now-env": "^3.1.0"
   }
 }
