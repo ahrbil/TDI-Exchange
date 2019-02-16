@@ -1,7 +1,10 @@
 import { Router } from "express";
 import passport from "passport";
 
+import { IS_PROD } from "../constants";
+
 const authRoute = Router();
+const redirectUrl = IS_PROD ? "/" : "http://localhost:3000";
 
 authRoute.get(
   "/facebook",
@@ -13,7 +16,7 @@ authRoute.get(
   "/facebook/callback",
   passport.authenticate("facebook"),
   (req, res) => {
-    res.redirect("/graphql");
+    res.redirect(`${redirectUrl}`);
   }
 );
 authRoute.get(
@@ -24,7 +27,7 @@ authRoute.get(
   "/google/callback",
   passport.authenticate("google"),
   (req, res) => {
-    res.redirect("http://localhost:3000");
+    res.redirect(`${redirectUrl}`);
   }
 );
 export default authRoute;
