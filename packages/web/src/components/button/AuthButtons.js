@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { ButtonStyle } from ".";
+import { HOST_URL } from "../../constants";
 
 const AuthBtns = ({ type, children }) => (
-  <a href={`http://localhost:4000/auth/${type}`}>
+  <a href={`${HOST_URL}/auth/${type}`}>
     <AuthBtnsStyle type={type}>{children}</AuthBtnsStyle>
   </a>
 );
