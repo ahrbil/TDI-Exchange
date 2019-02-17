@@ -46,22 +46,37 @@ export const ActionBarStyle = styled.div`
   margin-top: 1.5rem;
   padding: 9px 16px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   span {
     font-size: 1.2rem;
     font-weight: 600;
   }
+  > div {
+    display: flex;
+  }
 `;
 
 export const OutLinedBtn = styled.button`
-  padding: 6px 15px;
-  border-bottom: 2px solid
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  padding: 4px;
+  border: 1px solid
     ${props =>
       props.activeDesc || props.activeAsc ? "#2d2bc6" : "transparent"};
-  margin-left: 16px;
+  border-radius: 4.71px
+  margin-left: 6px;
   transition: all 0.2s ease-in;
   &:hover {
     cursor: pointer;
-    border-bottom-color: #2d2bc6;
+    border-color: #2d2bc6;
+  }
+  > div {
+    width: 21px;
+    transition: all 0.2s ease-in;
+    color: ${props =>
+      props.activeDesc || props.activeAsc ? "#2d2bc6" : "inherit"};
   }
 `;
