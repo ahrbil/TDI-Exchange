@@ -31,10 +31,10 @@ export const InternshipContent = styled.div`
     font-size: 1.1rem;
     font-weight: 700;
     line-height: 1.65;
-    word-break: break-all;
+    word-break: break-word;
   }
   p {
-    word-break: break-all;
+    word-break: break-word;
     line-height: 1.65;
   }
 `;
@@ -67,7 +67,7 @@ export const TagText = styled.span`
 export const Location = styled.h3`
   font-size: 1rem;
   padding: 4px 0px;
-  word-break: break-all;
+  word-break: break-word;
 `;
 export const LocationContainer = styled.div`
   display: flex;

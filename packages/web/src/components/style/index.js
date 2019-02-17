@@ -21,7 +21,6 @@ export const HomeGrid = styled.div`
   grid-template-columns: 1fr;
   grid-template-areas: "main" "aside";
   grid-gap: 32px;
-  padding: 0 1rem;
   width: 100%;
   min-width: 100%;
   max-width: 100%;

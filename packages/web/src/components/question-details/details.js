@@ -17,6 +17,7 @@ import {
 import { ITEMS_ON_PAGE } from "../../constants";
 import QuestionHeader from "./questionHeader";
 import Loader, { Wrapper } from "../loader";
+import Icon from "../icons";
 
 const createdAt_DESC = "createdAt_DESC";
 const createdAt_ASC = "createdAt_ASC";
@@ -56,13 +57,13 @@ const Details = ({
               onClick={() => handleOrderBy(createdAt_DESC)}
               activeDesc={activeDesc}
             >
-              Newest
+              <Icon iconName="arrowUp" />
             </OutLinedBtn>
             <OutLinedBtn
               onClick={() => handleOrderBy(createdAt_ASC)}
               activeAsc={activeAsc}
             >
-              Oldest
+              <Icon iconName="arrowDown" />
             </OutLinedBtn>
           </div>
         </ActionBarStyle>
