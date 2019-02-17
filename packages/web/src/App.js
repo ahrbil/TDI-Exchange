@@ -1,10 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { ApolloProvider } from "react-apollo";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloClient } from "apollo-client";
-import { createUploadLink } from "apollo-upload-client";
-import { CachePersistor } from "apollo-cache-persist";
 
 import "./App.css";
 import theme from "./theme";
@@ -15,24 +11,8 @@ import Routes from "./routes";
 import Footer from "./components/footer";
 import { SearchProvider } from "./context/SearchContext";
 import Loader, { Wrapper as LoaderWrapper } from "./components/loader";
-import { GQL_URI } from "./constants";
+import { persistCache, apolloClient } from "./apolloClient";
 
-const cache = new InMemoryCache();
-const persistCache = new CachePersistor({
-  cache,
-  storage: window.localStorage,
-  key: "tdi",
-  maxSize: false,
-  debug: false
-});
-const apolloClient = new ApolloClient({
-  cache,
-  // createUploadLink handles the file upload
-  link: createUploadLink({
-    uri: GQL_URI,
-    credentials: "include"
-  })
-});
 class App extends React.Component {
   state = {
     loaded: false
