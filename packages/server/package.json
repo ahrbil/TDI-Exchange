@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node dist/index.js",
-    "build": "NODE_ENV=production babel src --out-dir dist --copy-files",
+    "build": "rm -rf dist/ && NODE_ENV=production babel src --out-dir dist --copy-files",
     "now-build": "yarn run build",
     "dev": "nodemon --exec babel-node src/index.js",
     "deploy_db": "cd prisma && prisma deploy --env-file ../.env"
