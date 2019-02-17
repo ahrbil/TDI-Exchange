@@ -5,7 +5,7 @@ import { convertToRaw } from "draft-js";
 dayjs.extend(relativeTime);
 
 export const getRelativeTimePosted = timeCreated =>
-  dayjs().to(dayjs(timeCreated));
+  dayjs().to(dayjs(timeCreated), true);
 
 export const saveEditorStateToRaw = state => {
   const stateToRaw = JSON.stringify(convertToRaw(state));
