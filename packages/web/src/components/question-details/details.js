@@ -85,7 +85,7 @@ const Details = ({
             defaultCurrent={1}
             total={question.totalAnswers}
             current={currentPage}
-            pageSize={ITEMS_ON_PAGE + 5}
+            pageSize={ITEMS_ON_PAGE}
             onChange={handlePaginationChange}
             style={{ alignSelf: "center", margin: "2rem 0 0.5rem 0" }}
           />
