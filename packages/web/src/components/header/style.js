@@ -70,6 +70,12 @@ export const SearchToggler = styled.button`
   }
 `;
 
+export const SearchToggleArrow = styled(SearchToggler)`
+  @media (min-width: ${MEDIA_AT_A}) {
+    display: block;
+  }
+`;
+
 export const MenuToggler = styled(SearchToggler)`
   padding: 0.2rem;
   margin-right: 0.5rem;

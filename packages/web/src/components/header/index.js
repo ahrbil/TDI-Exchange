@@ -14,7 +14,8 @@ import {
   NavArea,
   SearchArea,
   SearchToggler,
-  MenuToggler
+  MenuToggler,
+  SearchToggleArrow
 } from "./style";
 import { Container } from "../style";
 import Search from "../search";
@@ -38,14 +39,6 @@ class Header extends React.Component {
     this.setState(({ isNavOpen }) => ({ isNavOpen: !isNavOpen }));
   };
 
-  componentDidMount = () => {
-    window.addEventListener("resize", this.closeSearchMode);
-  };
-
-  componentWillUnmount = () => {
-    window.removeEventListener("resize", this.closeSearchMode);
-  };
-
   render() {
     const { expanded, isNavOpen } = this.state;
     return (
@@ -56,9 +49,9 @@ class Header extends React.Component {
               <Container>
                 {expanded && (
                   <SearchArea expanded={expanded}>
-                    <SearchToggler onClick={this.closeSearchMode}>
+                    <SearchToggleArrow onClick={this.closeSearchMode}>
                       <Icon iconName="arrowLeft" />
-                    </SearchToggler>
+                    </SearchToggleArrow>
                     <Search expanded={expanded} />
                   </SearchArea>
                 )}
