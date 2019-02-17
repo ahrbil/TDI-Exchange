@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { Mutation } from "react-apollo";
 import { EditorState } from "draft-js";
+import { navigate } from "@reach/router";
 
 import RichEditor from "../editor";
-import { CREATE_ANSWER } from "../../queries";
+import { CREATE_ANSWER, QUESTION_WITH_DETAILS } from "../../queries";
 import Button from "../button";
 import { saveEditorStateToRaw, isValidEditorContent } from "../../utils";
 import { Error } from "../error";
@@ -37,14 +38,23 @@ export default class CreateAnswer extends React.Component {
           questionId,
           body
         }
-      }).then(() => this.setState({ editorState: EditorState.createEmpty() }));
+      }).then(() => {
+        this.setState({ editorState: EditorState.createEmpty() });
+        navigate(`/questions/${questionId}`);
+      });
     }
   };
 
   render() {
     const { editorState, errorMsg } = this.state;
+    const { questionId } = this.props;
     return (
-      <Mutation mutation={CREATE_ANSWER}>
+      <Mutation
+        mutation={CREATE_ANSWER}
+        refetchQueries={[
+          { query: QUESTION_WITH_DETAILS, variables: { id: questionId } }
+        ]}
+      >
         {(createAnswer, { loading, error }) => (
           <CreateAnswerCard>
             {(errorMsg || error) && (
