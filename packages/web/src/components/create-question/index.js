@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { EditorState } from "draft-js";
 import { Mutation } from "react-apollo";
+import { navigate } from "@reach/router";
 
 import RichEditor from "../editor";
 import Button from "../button";
@@ -92,9 +93,10 @@ class CreateQuestion extends React.Component {
           header,
           body
         }
-      }).then(() =>
-        this.setState({ header: "", editorState: EditorState.createEmpty() })
-      );
+      }).then(({ data }) => {
+        this.setState({ header: "", editorState: EditorState.createEmpty() });
+        navigate(`/questions/${data.createQuestion.id}`);
+      });
     }
   };
 
