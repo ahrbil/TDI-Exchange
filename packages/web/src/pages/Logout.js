@@ -4,11 +4,13 @@ import { navigate } from "@reach/router";
 
 import { AuthContext } from "../context/AuthContext";
 import { LOGOUT } from "../queries";
+import { persistCache } from "../apolloClient";
 
 const logoutAndClear = async apolloClient => {
   await apolloClient.mutate({ mutation: LOGOUT });
+  await persistCache.purge();
   await apolloClient.clearStore();
-  await navigate("/");
+  window.location.replace("/");
 };
 
 const LogoutAndClear = props => {
