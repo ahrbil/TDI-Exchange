@@ -1,29 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-
-import { FormatBold } from "styled-icons/material/FormatBold";
-import { FormatItalic } from "styled-icons/material/FormatItalic";
-import { FormatUnderlined } from "styled-icons/material/FormatUnderlined";
-import { Code } from "styled-icons/material/Code";
-import { FormatListNumbered } from "styled-icons/material/FormatListNumbered";
-import { FormatListBulleted } from "styled-icons/material/FormatListBulleted";
-import { ImageAlt } from "styled-icons/boxicons-solid/ImageAlt";
-import { SignOutAlt } from "styled-icons/fa-solid/SignOutAlt";
-import { QuestionAnswer } from "styled-icons/material/QuestionAnswer";
-import { Facebook2 } from "styled-icons/icomoon/Facebook2";
-import { Google2 } from "styled-icons/icomoon/Google2";
-import { Close } from "styled-icons/material/Close";
-import { Error } from "styled-icons/material/Error";
-import { Award } from "styled-icons/boxicons-regular/Award";
-import { Search } from "styled-icons/octicons/Search";
-import { Clear } from "styled-icons/material/Clear";
-import { Location2 } from "styled-icons/icomoon/Location2";
-import { Camera } from "styled-icons/fa-solid/Camera";
-import { ArrowLeft } from "styled-icons/fa-solid/ArrowLeft";
-import { Menu } from "styled-icons/boxicons-regular/Menu";
-import { Add } from "styled-icons/material/Add";
-import { KeyboardArrowUp } from "styled-icons/material/KeyboardArrowUp";
-import { KeyboardArrowDown } from "styled-icons/material/KeyboardArrowDown";
+import {
+  FormatBold,
+  FormatItalic,
+  FormatUnderlined,
+  Code,
+  FormatListNumbered,
+  FormatListBulleted,
+  QuestionAnswer,
+  Close,
+  Error,
+  Clear,
+  Add,
+  KeyboardArrowUp,
+  KeyboardArrowDown
+} from "styled-icons/material";
+import { ImageAlt } from "styled-icons/boxicons-solid";
+import { SignOutAlt, Camera, ArrowLeft } from "styled-icons/fa-solid";
+import { Facebook2, Google2, Location2 } from "styled-icons/icomoon";
+import { Award, Menu } from "styled-icons/boxicons-regular";
+import { Search } from "styled-icons/octicons";
 
 import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
 import { ReactComponent as H3 } from "../svgs/h3.svg";
