@@ -17,6 +17,7 @@ import AvatarPicker from "../components/avatar-picker";
 import validationSchema from "../components/form-validation-schema";
 import { FILE_SIZE, FILE_TYPES } from "../constants";
 import ScrollTop from "../components/scrollTop";
+import NProgress from "../components/nprogress";
 
 class PostInternship extends React.Component {
   state = {
@@ -61,7 +62,6 @@ class PostInternship extends React.Component {
       //console.log(err);
     }
   };
-
   render() {
     const { avatarPreviewUrl } = this.state;
     return (
@@ -83,6 +83,7 @@ class PostInternship extends React.Component {
                     { tags, file, ...values },
                     { setSubmitting, setErrors, setFieldError }
                   ) => {
+                    NProgress.inc();
                     const namedTags = tags.map(tag => ({ name: tag.name }));
                     const imgFile = file;
                     const variables = { ...values, tags: namedTags, imgFile };
@@ -104,6 +105,7 @@ class PostInternship extends React.Component {
                         }
                       });
                     } catch (error) {
+                      NProgress.done();
                       if (
                         !!error.graphQLErrors[0].extensions.exception.errors
                       ) {
@@ -122,6 +124,7 @@ class PostInternship extends React.Component {
                       }
                     }
                     setSubmitting(false);
+                    NProgress.done();
                     await navigate("/internships");
                   }}
                   validateOnBlur={false}
