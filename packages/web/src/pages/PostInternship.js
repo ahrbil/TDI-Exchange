@@ -119,7 +119,9 @@ class PostInternship extends React.Component {
                         setErrors(errors);
                       }
 
-                      if (error.graphQLErrors[0].path === "createInternship") {
+                      if (
+                        error.graphQLErrors[0].path[0] === "createInternship"
+                      ) {
                         setFieldError("file", error.graphQLErrors[0].message);
                       }
                     }
@@ -142,55 +144,57 @@ class PostInternship extends React.Component {
                     errors
                   }) => (
                     <Form>
-                      <Field
-                        name="file"
-                        title="Avatar"
-                        accept={FILE_SIZE}
-                        maxsize={FILE_TYPES}
-                        component={AvatarPicker}
-                        setFieldValue={setFieldValue}
-                        onBlur={handleBlur}
-                        setAvatarPreviewUrl={this.setAvatarPreviewUrl}
-                        avatarPreviewUrl={avatarPreviewUrl}
-                        releaseAvatarPreviewUrl={this.releaseAvatarPreviewUrl}
-                        validateField={validateField}
-                      />
-                      <Field
-                        name="title"
-                        component={InputFiled}
-                        placeholder="Internship title"
-                      />
-                      <Field
-                        name="description"
-                        component={InputFiled}
-                        placeholder="Internship description"
-                        textarea
-                      />
-                      <Field
-                        name="location"
-                        component={InputFiled}
-                        placeholder="Internship location"
-                        textarea
-                      />
-                      <InputWrapper>
-                        <InputLabel htmlFor="tag">Tags</InputLabel>
-                        <div>
-                          <TagPicker
-                            tags={values.tags}
-                            onChange={setFieldValue}
-                            hasError={!!errors.tags}
-                          />
-                        </div>
-                        {errors.tags && <PError>{errors.tags}</PError>}
-                      </InputWrapper>
-                      <Button
-                        type="submit"
-                        disabled={isSubmitting || isValidating || loading}
-                        loading={isSubmitting || loading}
-                        style={{ alignSelf: "flex-start" }}
-                      >
-                        Publish
-                      </Button>
+                      <fieldset disabled={isSubmitting || loading}>
+                        <Field
+                          name="file"
+                          title="Avatar"
+                          accept={FILE_SIZE}
+                          maxsize={FILE_TYPES}
+                          component={AvatarPicker}
+                          setFieldValue={setFieldValue}
+                          onBlur={handleBlur}
+                          setAvatarPreviewUrl={this.setAvatarPreviewUrl}
+                          avatarPreviewUrl={avatarPreviewUrl}
+                          releaseAvatarPreviewUrl={this.releaseAvatarPreviewUrl}
+                          validateField={validateField}
+                        />
+                        <Field
+                          name="title"
+                          component={InputFiled}
+                          placeholder="Internship title"
+                        />
+                        <Field
+                          name="description"
+                          component={InputFiled}
+                          placeholder="Internship description"
+                          textarea
+                        />
+                        <Field
+                          name="location"
+                          component={InputFiled}
+                          placeholder="Internship location"
+                          textarea
+                        />
+                        <InputWrapper>
+                          <InputLabel htmlFor="tag">Tags</InputLabel>
+                          <div>
+                            <TagPicker
+                              tags={values.tags}
+                              onChange={setFieldValue}
+                              hasError={!!errors.tags}
+                            />
+                          </div>
+                          {errors.tags && <PError>{errors.tags}</PError>}
+                        </InputWrapper>
+                        <Button
+                          type="submit"
+                          disabled={isSubmitting || isValidating || loading}
+                          loading={isSubmitting || loading}
+                          style={{ alignSelf: "flex-start" }}
+                        >
+                          Publish
+                        </Button>
+                      </fieldset>
                     </Form>
                   )}
                 </Formik>
