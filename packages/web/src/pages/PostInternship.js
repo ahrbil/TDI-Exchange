@@ -217,4 +217,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 2rem 0;
+  fieldset {
+    min-width: 0;
+  }
 `;
