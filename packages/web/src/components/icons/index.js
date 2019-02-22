@@ -24,6 +24,7 @@ import { Menu } from "styled-icons/boxicons-regular/Menu";
 import { Add } from "styled-icons/material/Add";
 import { KeyboardArrowUp } from "styled-icons/material/KeyboardArrowUp";
 import { KeyboardArrowDown } from "styled-icons/material/KeyboardArrowDown";
+import { GithubSquare, TwitterSquare } from "styled-icons/fa-brands";
 
 import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
 import { ReactComponent as H3 } from "../svgs/h3.svg";
@@ -86,6 +87,10 @@ const Glyph = ({ iconName }) => {
       return <KeyboardArrowUp />;
     case "arrowDown":
       return <KeyboardArrowDown />;
+    case "github":
+      return <GithubSquare />;
+    case "twitter":
+      return <TwitterSquare />;
     default:
       break;
   }

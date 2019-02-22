@@ -1,33 +1,59 @@
 import React from "react";
-import styled from "styled-components";
+import { Link } from "@reach/router";
+
+import Icon from "../icons";
+import Logo from "../logo";
+import {
+  FooterContainer,
+  SocialIcons,
+  FooterGrid,
+  BrandArea,
+  PrivacyArea,
+  CreatorArea
+} from "./style";
 
 const Footer = () => (
   <FooterContainer>
-    <div>
-      <span>made with ❤ by </span>
-      <a
-        href="https://www.linkedin.com/in/ahrbil"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        ahrbil
-      </a>
-    </div>
+    <FooterGrid>
+      <BrandArea>
+        <Logo />
+        <SocialIcons>
+          <a
+            href="https://github.com/ahrbil/TDI-Exchange"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon iconName="github" />
+          </a>
+          <a
+            href="hhttps://twitter.com/_ahrbil"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon iconName="twitter" />
+          </a>
+        </SocialIcons>
+      </BrandArea>
+      <PrivacyArea>
+        <Link to="/privacy">
+          <span>Privacy Policy</span>
+        </Link>
+        <Link to="/terms">
+          <span>Terms of Service</span>
+        </Link>
+      </PrivacyArea>
+      <CreatorArea>
+        <span>made with ❤ by </span>
+        <a
+          href="https://www.linkedin.com/in/ahrbil"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ahrbil
+        </a>
+      </CreatorArea>
+    </FooterGrid>
   </FooterContainer>
 );
-const FooterContainer = styled.div`
-  width: 100%;
-  height: 40px;
-  border-top: 2px solid #d9d8d8;
-  margin-top: 2rem;
-  background-color: ${props => props.theme.hv_white};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  a {
-    text-decoration: underline;
-    padding: 3px;
-  }
-`;
 
 export default Footer;
