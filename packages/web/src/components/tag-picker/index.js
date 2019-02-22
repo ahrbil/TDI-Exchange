@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import ReactTags from "react-tag-autocomplete";
-import { Query } from "react-apollo";
+import { ApolloConsumer } from "react-apollo";
+import debounce from "lodash.debounce";
 
 import { TAGS, CREATE_TAG } from "../../queries";
 import "./style.css";
@@ -10,15 +11,30 @@ import Icon from "../icons";
 
 class TagPicker extends React.Component {
   state = {
-    searchValue: ""
+    searchValue: "",
+    suggestions: [],
+    loading: false
   };
 
-  handleInputChange = async searchValue => {
-    const currentSearchValue = searchValue.trim().toLowerCase();
+  handleInputChange = debounce(async (value, client) => {
     this.setState({
-      searchValue: currentSearchValue
+      loading: true
     });
-  };
+    const searchValue = value.trim().toLowerCase();
+    const res = await client.query({
+      query: TAGS,
+      variables: {
+        first: 6,
+        where: { name_starts_with: searchValue }
+      }
+    });
+    const suggestions = res.data.tags;
+    this.setState({
+      suggestions,
+      loading: false,
+      searchValue
+    });
+  }, 350);
 
   // passing the index of the tag to delete it
   // and update the state
@@ -78,75 +94,61 @@ class TagPicker extends React.Component {
   };
 
   render() {
-    const { searchValue } = this.state;
+    const { searchValue, suggestions, loading } = this.state;
     const { tags, hasError } = this.props;
     return (
-      <Query
-        query={TAGS}
-        variables={{
-          first: 6,
-          where: { name_starts_with: searchValue }
-        }}
-        skip={!searchValue || searchValue.length < 1}
-        errorPolicy="ignore"
-        fetchPolicy="cache-and-network"
-      >
-        {({ data, loading, client }) => {
-          let suggestions = [];
-          if (data && data.tags) {
-            suggestions = data.tags;
-          }
-          return (
-            <>
-              <ReactTags
-                tags={tags}
-                suggestions={suggestions}
-                handleDelete={this.handleDeleteTag}
-                handleAddition={this.handleAddTag}
-                handleInputChange={value => this.handleInputChange(value)}
-                placeholder="Add tags"
-                minQueryLength={1}
-                delimiters={[]}
-                autofocus={false}
-                classNames={{
-                  root: hasError ? "react-tags-error" : "react-tags"
-                }}
-              />
-              {loading && (
-                <ReactTagsStyle>
-                  <div className="react-tags">
-                    <span className="loader">
-                      <Loader inline color="#1d49e3" />
-                    </span>
+      <ApolloConsumer>
+        {client => (
+          <>
+            <ReactTags
+              tags={tags}
+              suggestions={suggestions}
+              handleDelete={this.handleDeleteTag}
+              handleAddition={this.handleAddTag}
+              handleInputChange={value => this.handleInputChange(value, client)}
+              placeholder="Add tags"
+              minQueryLength={1}
+              delimiters={[]}
+              allowBackspace={false}
+              autofocus={false}
+              classNames={{
+                root: hasError ? "react-tags-error" : "react-tags"
+              }}
+            />
+            {loading && (
+              <ReactTagsStyle>
+                <div className="react-tags">
+                  <span className="loader">
+                    <Loader inline color="#1d49e3" />
+                  </span>
+                </div>
+              </ReactTagsStyle>
+            )}
+            {!loading && !suggestions.length && searchValue.length > 2 && (
+              <ReactTagsStyle>
+                <div className="react-tags">
+                  <div className="react-tags__suggestions">
+                    <ul>
+                      <li onClick={() => this.handleClickToAddTag(client)}>
+                        <Icon
+                          style={{
+                            color: "#1d49e3",
+                            display: "inline",
+                            padding: "0px 10px",
+                            marginRight: "10px"
+                          }}
+                          iconName="add"
+                        />
+                        <span>{searchValue}</span>
+                      </li>
+                    </ul>
                   </div>
-                </ReactTagsStyle>
-              )}
-              {!loading && !suggestions.length && searchValue.length > 2 && (
-                <ReactTagsStyle>
-                  <div className="react-tags">
-                    <div className="react-tags__suggestions">
-                      <ul>
-                        <li onClick={() => this.handleClickToAddTag(client)}>
-                          <Icon
-                            style={{
-                              color: "#1d49e3",
-                              display: "inline",
-                              padding: "0px 10px",
-                              marginRight: "10px"
-                            }}
-                            iconName="add"
-                          />
-                          <span>{searchValue}</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </ReactTagsStyle>
-              )}
-            </>
-          );
-        }}
-      </Query>
+                </div>
+              </ReactTagsStyle>
+            )}
+          </>
+        )}
+      </ApolloConsumer>
     );
   }
 }

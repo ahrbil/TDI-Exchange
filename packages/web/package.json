@@ -23,6 +23,7 @@
     "draft-js-richbuttons-plugin": "^2.2.0",
     "formik": "^1.4.3",
     "graphql": "^14.0.2",
+    "lodash.debounce": "^4.0.8",
     "nprogress": "^0.2.0",
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",
