@@ -20,6 +20,7 @@ import { SignOutAlt, Camera, ArrowLeft } from "styled-icons/fa-solid";
 import { Facebook2, Google2, Location2 } from "styled-icons/icomoon";
 import { Award, Menu } from "styled-icons/boxicons-regular";
 import { Search } from "styled-icons/octicons";
+import { GithubSquare, TwitterSquare } from "styled-icons/fa-brands";
 
 import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
 import { ReactComponent as H3 } from "../svgs/h3.svg";
@@ -82,6 +83,10 @@ const Glyph = ({ iconName }) => {
       return <KeyboardArrowUp />;
     case "arrowDown":
       return <KeyboardArrowDown />;
+    case "github":
+      return <GithubSquare />;
+    case "twitter":
+      return <TwitterSquare />;
     default:
       break;
   }

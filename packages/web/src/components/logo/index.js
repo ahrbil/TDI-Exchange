@@ -16,7 +16,7 @@ const LogoStyle = styled.div`
     display: flex;
   }
   svg {
-    height: 41px;
+    height: 21px;
     width: auto;
   }
 `;

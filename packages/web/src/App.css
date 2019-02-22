@@ -154,6 +154,7 @@ textarea {
   text-decoration: none;
   font-size: inherit;
   word-wrap: break-word;
+  word-break: break-all;
   line-height: inherit;
 }
 .markdown a:hover {

@@ -17,6 +17,7 @@ import AvatarPicker from "../components/avatar-picker";
 import validationSchema from "../components/form-validation-schema";
 import { FILE_SIZE, FILE_TYPES } from "../constants";
 import ScrollTop from "../components/scrollTop";
+import NProgress from "../components/nprogress";
 
 class PostInternship extends React.Component {
   state = {
@@ -61,7 +62,6 @@ class PostInternship extends React.Component {
       //console.log(err);
     }
   };
-
   render() {
     const { avatarPreviewUrl } = this.state;
     return (
@@ -83,6 +83,7 @@ class PostInternship extends React.Component {
                     { tags, file, ...values },
                     { setSubmitting, setErrors, setFieldError }
                   ) => {
+                    NProgress.inc();
                     const namedTags = tags.map(tag => ({ name: tag.name }));
                     const imgFile = file;
                     const variables = { ...values, tags: namedTags, imgFile };
@@ -104,6 +105,7 @@ class PostInternship extends React.Component {
                         }
                       });
                     } catch (error) {
+                      NProgress.done();
                       if (
                         !!error.graphQLErrors[0].extensions.exception.errors
                       ) {
@@ -117,11 +119,14 @@ class PostInternship extends React.Component {
                         setErrors(errors);
                       }
 
-                      if (error.graphQLErrors[0].path === "createInternship") {
+                      if (
+                        error.graphQLErrors[0].path[0] === "createInternship"
+                      ) {
                         setFieldError("file", error.graphQLErrors[0].message);
                       }
                     }
                     setSubmitting(false);
+                    NProgress.done();
                     await navigate("/internships");
                   }}
                   validateOnBlur={false}
@@ -139,55 +144,57 @@ class PostInternship extends React.Component {
                     errors
                   }) => (
                     <Form>
-                      <Field
-                        name="file"
-                        title="Avatar"
-                        accept={FILE_SIZE}
-                        maxsize={FILE_TYPES}
-                        component={AvatarPicker}
-                        setFieldValue={setFieldValue}
-                        onBlur={handleBlur}
-                        setAvatarPreviewUrl={this.setAvatarPreviewUrl}
-                        avatarPreviewUrl={avatarPreviewUrl}
-                        releaseAvatarPreviewUrl={this.releaseAvatarPreviewUrl}
-                        validateField={validateField}
-                      />
-                      <Field
-                        name="title"
-                        component={InputFiled}
-                        placeholder="Internship title"
-                      />
-                      <Field
-                        name="description"
-                        component={InputFiled}
-                        placeholder="Internship description"
-                        textarea
-                      />
-                      <Field
-                        name="location"
-                        component={InputFiled}
-                        placeholder="Internship location"
-                        textarea
-                      />
-                      <InputWrapper>
-                        <InputLabel htmlFor="tag">Tags</InputLabel>
-                        <div>
-                          <TagPicker
-                            tags={values.tags}
-                            onChange={setFieldValue}
-                            hasError={!!errors.tags}
-                          />
-                        </div>
-                        {errors.tags && <PError>{errors.tags}</PError>}
-                      </InputWrapper>
-                      <Button
-                        type="submit"
-                        disabled={isSubmitting || isValidating || loading}
-                        loading={isSubmitting || loading}
-                        style={{ alignSelf: "flex-start" }}
-                      >
-                        Publish
-                      </Button>
+                      <fieldset disabled={isSubmitting || loading}>
+                        <Field
+                          name="file"
+                          title="Avatar"
+                          accept={FILE_SIZE}
+                          maxsize={FILE_TYPES}
+                          component={AvatarPicker}
+                          setFieldValue={setFieldValue}
+                          onBlur={handleBlur}
+                          setAvatarPreviewUrl={this.setAvatarPreviewUrl}
+                          avatarPreviewUrl={avatarPreviewUrl}
+                          releaseAvatarPreviewUrl={this.releaseAvatarPreviewUrl}
+                          validateField={validateField}
+                        />
+                        <Field
+                          name="title"
+                          component={InputFiled}
+                          placeholder="Internship title"
+                        />
+                        <Field
+                          name="description"
+                          component={InputFiled}
+                          placeholder="Internship description"
+                          textarea
+                        />
+                        <Field
+                          name="location"
+                          component={InputFiled}
+                          placeholder="Internship location"
+                          textarea
+                        />
+                        <InputWrapper>
+                          <InputLabel htmlFor="tag">Tags</InputLabel>
+                          <div>
+                            <TagPicker
+                              tags={values.tags}
+                              onChange={setFieldValue}
+                              hasError={!!errors.tags}
+                            />
+                          </div>
+                          {errors.tags && <PError>{errors.tags}</PError>}
+                        </InputWrapper>
+                        <Button
+                          type="submit"
+                          disabled={isSubmitting || isValidating || loading}
+                          loading={isSubmitting || loading}
+                          style={{ alignSelf: "flex-start" }}
+                        >
+                          Publish
+                        </Button>
+                      </fieldset>
                     </Form>
                   )}
                 </Formik>
@@ -210,4 +217,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 2rem 0;
+  fieldset {
+    min-width: 0;
+  }
 `;
