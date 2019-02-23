@@ -1,4 +1,5 @@
 import React from "react";
+import debounce from "lodash.debounce";
 
 import { SearchWrapper, SearchInputStyle, ClearBtn } from "./style";
 import Icon from "../icons";
@@ -20,26 +21,20 @@ class Search extends React.Component {
     }
   };
 
-  handleChange = (event, updateQueryFn) => {
+  handleChange = debounce((event, updateQueryFn) => {
     const location = window.location.pathname;
     const isInSearch = location.includes("/search/results");
-
-    this.setState(
-      {
-        query: event.target.value
-      },
-      () => {
-        const { query } = this.state;
-        updateQueryFn(query);
-        if (query && !isInSearch) {
-          navigate(`/search/results`);
-          setTimeout(this.handleFocus, 0);
-        }
-      }
-    );
-  };
+    const query = event.target.value;
+    this.setState({ query });
+    updateQueryFn(query);
+    if (query && !isInSearch) {
+      navigate(`/search/results`);
+      this.clearTimeOutId = setTimeout(this.handleFocus, 0);
+    }
+  }, 400);
 
   handleClear = updateQueryFn => {
+    this.searchInput.current.value = "";
     this.setState({ query: "" }, () => {
       const { query } = this.state;
       updateQueryFn(query);
@@ -50,6 +45,10 @@ class Search extends React.Component {
     if (this.props.expanded) {
       this.handleFocus();
     }
+  };
+
+  componentWillUnmount = () => {
+    clearTimeout(this.clearTimeOutId);
   };
 
   render() {
@@ -64,8 +63,10 @@ class Search extends React.Component {
               placeholder="Search"
               autoComplete="off"
               spellCheck="false"
-              onChange={e => this.handleChange(e, updateQuery)}
-              value={query}
+              onChange={e => {
+                e.persist();
+                this.handleChange(e, updateQuery);
+              }}
             />
             {query && (
               <ClearBtn onClick={() => this.handleClear(updateQuery)}>
