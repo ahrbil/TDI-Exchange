@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { Link } from "@reach/router";
 import { ReactComponent as TDIsvg } from "../svgs/tdi.svg";
 
-const Logo = () => (
-  <LogoStyle>
+const Logo = props => (
+  <LogoStyle {...props}>
     <Link to="/">
       <TDIsvg />
     </Link>
