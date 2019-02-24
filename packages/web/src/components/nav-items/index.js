@@ -13,7 +13,8 @@ import {
   SideNavStyle,
   SideNavContainer,
   NavListItems,
-  Wrapper
+  Wrapper,
+  FooterIcons
 } from "./style";
 
 const itemsList = [
@@ -41,7 +42,7 @@ const NavItems = ({ isNavOpen, openNav }) => (
         <Blanket onClick={openNav} />
         <SideNavContainer>
           <Wrapper>
-            <Logo />
+            <Logo onClick={openNav} />
             <MenuToggler onClick={openNav}>
               <Icon iconName="clear" />
             </MenuToggler>
@@ -53,6 +54,22 @@ const NavItems = ({ isNavOpen, openNav }) => (
               </Link>
             ))}
           </NavListItems>
+          <FooterIcons>
+            <a
+              href="https://github.com/ahrbil/TDI-Exchange"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon iconName="github" />
+            </a>
+            <a
+              href="hhttps://twitter.com/_ahrbil"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon iconName="twitter" />
+            </a>
+          </FooterIcons>
         </SideNavContainer>
       </SideNavStyle>
     )}

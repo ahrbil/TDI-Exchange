@@ -31,7 +31,7 @@ export const NavItem = styled.li`
     background-color: #f5f8ff;
   }
   @media (max-width: ${MEDIA_AT_A}) {
-    padding: 10px 16px;
+    padding: 10px 16px 10px 32px;
     margin-bottom: 16px;
   }
 `;
@@ -51,15 +51,16 @@ export const SideNavStyle = styled.div`
   right: 0;
   bottom: 0;
   z-index: 1100;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  display: block;
   @media (min-width: ${MEDIA_AT_A}) {
     display: none;
   }
 `;
 
 export const SideNavContainer = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   max-width: 400px;
   height: 100vh;
   background-color: white;
@@ -72,7 +73,7 @@ export const SideNavContainer = styled.nav`
 export const NavListItems = styled(NavItemsContainer)`
   width: 100%;
   height: 100%;
-  padding: 16px;
+  padding: 16px 16px 16px 0px;
   font-size: 1rem;
   flex-direction: column;
   align-items: stretch;
@@ -84,6 +85,15 @@ export const Wrapper = styled.div`
   align-items: center;
   padding: 16px;
   > div svg {
-    height: 35px;
+    height: 21px;
+  }
+`;
+
+export const FooterIcons = styled.div`
+  padding: 16px;
+  display: flex;
+  a div {
+    width: 21px;
+    margin-right: 7px;
   }
 `;
