@@ -24,6 +24,7 @@
     ],
     "no-unused-vars": "warn",
     "react/jsx-filename-extension": 0,
-    "jsx-a11y/accessible-emoji": "warn"
+    "jsx-a11y/accessible-emoji": "warn",
+    "import/prefer-default-export": 0
   }
 }

@@ -24,7 +24,13 @@ const Button = ({
   </ButtonStyle>
 );
 
-export const ButtonStyle = styled.button`
+const TextButton = ({ style, children, small, ...rest }) => (
+  <TextButtonStyle style={style} small={small} {...rest}>
+    {children}
+  </TextButtonStyle>
+);
+
+const ButtonStyle = styled.button`
   display: flex;
   flex: none;
   align-self: center;
@@ -65,5 +71,16 @@ export const ButtonStyle = styled.button`
         `}
 `;
 
+const TextButtonStyle = styled(ButtonStyle)`
+  background: none;
+  color: ${props => props.theme.color.primary};
+  transition: background-color 0.2s ease-out;
+
+  &:hover {
+    box-shadow: none;
+    background-color: hsla(219, 40%, 73%, 0.2);
+  }
+`;
+
 export default Button;
-export { RichBtn, InputFileBtn };
+export { RichBtn, InputFileBtn, TextButton, ButtonStyle };
