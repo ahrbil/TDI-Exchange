@@ -12,6 +12,7 @@ import Button from "../button";
 import { AsideItem } from "../aside/style";
 import { PaginationCard, PaginationContainer } from "../pagination/style";
 import Loader, { Wrapper } from "../loader";
+import AsideLatestInternships from "../../views/aside/aside-internships";
 
 class Questions extends React.Component {
   state = {
@@ -65,6 +66,9 @@ class Questions extends React.Component {
                 <Link to="/ask-a-question">
                   <Button secondary>Ask A Question</Button>
                 </Link>
+              </AsideItem>
+              <AsideItem>
+                <AsideLatestInternships />
               </AsideItem>
             </Aside>
           </>

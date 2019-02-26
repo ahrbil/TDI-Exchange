@@ -12,6 +12,7 @@ import { ITEMS_ON_PAGE } from "../../constants";
 import { AsideItem } from "../aside/style";
 import { PaginationCard, PaginationContainer } from "../pagination/style";
 import Loader, { Wrapper } from "../loader";
+import AsideLatestQuestions from "../../views/aside/aside-questions";
 
 class InternshipList extends React.Component {
   state = {
@@ -71,6 +72,9 @@ class InternshipList extends React.Component {
                 <Link to="/post-an-internship">
                   <Button secondary>Post An Internship</Button>
                 </Link>
+              </AsideItem>
+              <AsideItem>
+                <AsideLatestQuestions />
               </AsideItem>
             </Aside>
           </>
