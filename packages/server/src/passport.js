@@ -3,6 +3,7 @@ import FacebookStrategy from "passport-facebook";
 import GoogleStrategy from "passport-google-oauth20";
 
 import prisma from "./prisma";
+import { getUserEmail } from "./utils";
 
 const initPassport = () => {
   passport.serializeUser((user, done) => {
@@ -27,25 +28,43 @@ const initPassport = () => {
       async (accessToken, refreshToken, profile, done) => {
         // callback function
         // here you save the new user to database or retrieve it if exists
+        // also if the user email existed before this means they signed with deferent provider so we combine their accounts
         // when done with founding or creating user return it to done() func
         // done(null, user)
         const currentUser = await prisma.user({ facebookId: profile.id });
+        const userEmailFromProvider = getUserEmail(profile);
         if (currentUser) {
           done(null, currentUser);
-        } else {
-          const newUser = await prisma.createUser({
-            facebookId: profile.id,
-            userName: profile.displayName,
-            avatar: profile.photos[0].value,
-            email:
-              profile.emails &&
-              profile.emails.length > 0 &&
-              profile.emails[0].value
-                ? profile.emails[0].value
-                : null
-          });
-          done(null, newUser);
+          return currentUser;
         }
+        if (!currentUser && userEmailFromProvider) {
+          const upsertedUser = await prisma.upsertUser({
+            where: {
+              email: userEmailFromProvider
+            },
+            update: {
+              facebookId: profile.id
+            },
+            create: {
+              facebookId: profile.id,
+              userName: profile.displayName,
+              avatar: profile.photos[0].value,
+              email: userEmailFromProvider
+            }
+          });
+          done(null, upsertedUser);
+          return upsertedUser;
+        }
+        // in case user don't have email in their facebook account
+        // add user without email
+        const newUser = await prisma.createUser({
+          facebookId: profile.id,
+          userName: profile.displayName,
+          avatar: profile.photos[0].value,
+          email: userEmailFromProvider
+        });
+        done(null, newUser);
+        return newUser;
       }
     )
   );
@@ -59,21 +78,28 @@ const initPassport = () => {
       },
       async (accessToken, refreshToken, profile, done) => {
         const currentUser = await prisma.user({ googleId: profile.id });
+        const userEmailFromProvider = getUserEmail(profile);
         if (currentUser) {
           done(null, currentUser);
-        } else {
-          const newUser = await prisma.createUser({
-            googleId: profile.id,
-            userName: profile.displayName,
-            avatar: profile.photos[0].value,
-            email:
-              profile.emails &&
-              profile.emails.length > 0 &&
-              profile.emails[0].value
-                ? profile.emails[0].value
-                : null
+          return currentUser;
+        }
+        if (!currentUser && userEmailFromProvider) {
+          const upsertedUser = await prisma.upsertUser({
+            where: {
+              email: userEmailFromProvider
+            },
+            update: {
+              googleId: profile.id
+            },
+            create: {
+              googleId: profile.id,
+              userName: profile.displayName,
+              avatar: profile.photos[0].value,
+              email: userEmailFromProvider
+            }
           });
-          done(null, newUser);
+          done(null, upsertedUser);
+          return upsertedUser;
         }
       }
     )
