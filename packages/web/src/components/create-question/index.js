@@ -44,9 +44,9 @@ class CreateQuestion extends React.Component {
       });
       return true;
     }
-    if (header.length < 10 && header.length > 0) {
+    if (header.length < 3 && header.length > 0) {
       this.setState({
-        headerError: "too short, minimum length of 10 character"
+        headerError: "too short, minimum length of 3 character"
       });
       return true;
     }
@@ -55,9 +55,9 @@ class CreateQuestion extends React.Component {
 
   checkBodyError = state => {
     const currentContentLength = state.getPlainText().trim().length;
-    if (currentContentLength > 0 && currentContentLength < 20) {
+    if (currentContentLength > 0 && currentContentLength < 10) {
       this.setState({
-        editorError: "too short, minimum length of 20 character"
+        editorError: "too short, minimum length of 10 character"
       });
       return true;
     }

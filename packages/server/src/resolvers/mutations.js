@@ -15,7 +15,7 @@ const Mutation = {
       throw new AuthenticationError("Login first!");
     }
     const header = args.header.trim();
-    if (header.length < 10) {
+    if (header.length < 3) {
       throw new UserInputError("too short");
     }
     const newQuestion = await context.prisma.createQuestion({

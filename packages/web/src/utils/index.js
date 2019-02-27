@@ -17,8 +17,8 @@ export const isValidEditorContent = state => {
   if (currentContentLength === 0) {
     return "can't submit empty answer";
   }
-  if (currentContentLength > 0 && currentContentLength < 20) {
-    return "too short, minimum length of 20 character";
+  if (currentContentLength > 0 && currentContentLength < 3) {
+    return "too short, minimum length of 3 character";
   }
   return "";
 };
