@@ -9,7 +9,6 @@ import { ANSWERS_ON_PAGE } from "../../constants";
 import Aside from "../aside";
 import { AsideItem } from "../aside/style";
 import Button from "../button";
-import Loader, { Wrapper } from "../loader";
 
 class QuestionWithDetails extends React.Component {
   constructor(props) {
@@ -61,11 +60,6 @@ class QuestionWithDetails extends React.Component {
                   loading={loading}
                 />
               </QuestionDetailsContainer>
-            )}
-            {loading && (
-              <Wrapper>
-                <Loader />
-              </Wrapper>
             )}
             <Aside>
               <AsideItem>
