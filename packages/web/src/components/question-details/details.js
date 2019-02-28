@@ -16,7 +16,7 @@ import {
 } from "./style";
 import { ITEMS_ON_PAGE } from "../../constants";
 import QuestionHeader from "./questionHeader";
-import Loader, { Wrapper } from "../loader";
+import { AnswerContentLoader } from "../loader";
 import Icon from "../icons";
 
 const createdAt_DESC = "createdAt_DESC";
@@ -69,9 +69,7 @@ const Details = ({
         </ActionBarStyle>
         {/* answer section */}
         {loading ? (
-          <Wrapper>
-            <Loader />
-          </Wrapper>
+          <AnswerContentLoader />
         ) : (
           <AnswersSection>
             {question.answers.map(answer => (
