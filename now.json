@@ -24,6 +24,7 @@
     },
     { "src": "/favicon.ico", "dest": "/packages/web/favicon.ico" },
     { "src": "/assets/(.*)", "dest": "/packages/web/assets/$1" },
+    { "src": "/fonts/(.*)", "dest": "/packages/web/fonts/$1" },
     {
       "src": "/asset-manifest.json",
       "dest": "/packages/web/asset-manifest.json"
