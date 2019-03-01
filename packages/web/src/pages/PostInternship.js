@@ -81,7 +81,7 @@ class PostInternship extends React.Component {
                   }}
                   onSubmit={async (
                     { tags, file, ...values },
-                    { setSubmitting, setErrors, setFieldError }
+                    { setSubmitting, setErrors, setFieldError, isValid }
                   ) => {
                     NProgress.inc();
                     const namedTags = tags.map(tag => ({ name: tag.name }));
@@ -127,7 +127,10 @@ class PostInternship extends React.Component {
                     }
                     setSubmitting(false);
                     NProgress.done();
-                    await navigate("/internships");
+                    // if there is error don't navigate
+                    if (isValid) {
+                      await navigate("/internships");
+                    }
                   }}
                   validateOnBlur={false}
                   validateOnChange={true}
