@@ -18,6 +18,7 @@ type Question {
   header: String!
   body: String
   askedBy: User!
+  isOwner: Boolean!
   answers(orderBy: AnswerOrderByInput, first: Int, skip: Int): [Answer!]!
   totalAnswers: Int!
   createdAt: DateTime!

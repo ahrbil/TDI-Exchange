@@ -1,4 +1,4 @@
-// import { prisma } from "../../generated/prisma-client";
+// import { prisma } from "../generated/prisma-client";
 
 const Question = {
   id: parent => parent.id,
@@ -20,6 +20,12 @@ const Question = {
     return total;
   },
   createdAt: parent => parent.createdAt,
-  updatedAt: parent => parent.updatedAt
+  updatedAt: parent => parent.updatedAt,
+  isOwner: async (parent, args, context) => {
+    const askedBy = await context.prisma.question({ id: parent.id }).askedBy();
+    const currentUser = context.user;
+    if (askedBy.id === currentUser.id) return true;
+    return false;
+  }
 };
 export default Question;
