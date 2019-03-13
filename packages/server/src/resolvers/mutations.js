@@ -1,4 +1,8 @@
-import { AuthenticationError, UserInputError } from "apollo-server-express";
+import {
+  AuthenticationError,
+  UserInputError,
+  ForbiddenError
+} from "apollo-server-express";
 
 import {
   updateCreateQuestionRepScore,
@@ -7,7 +11,7 @@ import {
 import { uploadImage } from "../utils";
 import validationSchema from "../input-validation";
 import throwListError from "../utils/format-list-error";
-// import { prisma } from "../../generated/prisma-client";
+// import { prisma } from "../generated/prisma-client";
 
 const Mutation = {
   createQuestion: async (parent, args, context) => {
@@ -84,6 +88,29 @@ const Mutation = {
       return true;
     }
     return false;
+  },
+  // update question
+  updateQuestion: async (parent, args, context) => {
+    const { questionId, body } = args;
+    const header = args.header.trim();
+    if (!context.user) {
+      throw new AuthenticationError("Login first!");
+    }
+    if (header.length < 3) {
+      throw new UserInputError("too short");
+    }
+    const askedBy = await context.prisma.question({ id: questionId }).askedBy();
+    const currentUser = context.user;
+    if (askedBy.id === currentUser.id) {
+      const updatedQuestion = await context.prisma.updateQuestion({
+        where: { id: questionId },
+        data: { header, body }
+      });
+      return updatedQuestion;
+    }
+    throw new ForbiddenError(
+      "You don't have the right permission to update this question"
+    );
   }
 };
 
