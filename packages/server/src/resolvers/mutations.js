@@ -1,8 +1,4 @@
-import {
-  AuthenticationError,
-  UserInputError,
-  ForbiddenError
-} from "apollo-server-express";
+import { UserInputError, ForbiddenError } from "apollo-server-express";
 
 import {
   updateCreateQuestionRepScore,
@@ -11,13 +7,12 @@ import {
 import { uploadImage } from "../utils";
 import validationSchema from "../input-validation";
 import throwListError from "../utils/format-list-error";
+import isLoggedIn from "../utils/is-logged-in";
 // import { prisma } from "../generated/prisma-client";
 
 const Mutation = {
   createQuestion: async (parent, args, context) => {
-    if (!context.user) {
-      throw new AuthenticationError("Login first!");
-    }
+    isLoggedIn(context);
     const header = args.header.trim();
     if (header.length < 3) {
       throw new UserInputError("too short");
@@ -35,9 +30,7 @@ const Mutation = {
     return newQuestion;
   },
   createAnswer: async (parent, args, context) => {
-    if (!context.user) {
-      throw new AuthenticationError("Login first!");
-    }
+    isLoggedIn(context);
     const newAnswer = await context.prisma.createAnswer({
       body: args.body,
       answeredBy: { connect: { id: context.user.id } },
@@ -55,9 +48,7 @@ const Mutation = {
     }
   },
   createInternship: async (parent, args, context) => {
-    if (!context.user) {
-      throw new AuthenticationError("Login first!");
-    }
+    isLoggedIn(context);
     const { imgFile, ...rest } = args;
     const { createReadStream, mimetype } = await imgFile;
     try {
@@ -93,9 +84,7 @@ const Mutation = {
   updateQuestion: async (parent, args, context) => {
     const { questionId, body } = args;
     const header = args.header.trim();
-    if (!context.user) {
-      throw new AuthenticationError("Login first!");
-    }
+    isLoggedIn(context);
     if (header.length < 3) {
       throw new UserInputError("too short");
     }

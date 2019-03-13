@@ -1,11 +1,10 @@
-import { AuthenticationError } from "apollo-server-express";
+import isLoggedIn from "../utils/is-logged-in";
+
 // import { prisma } from "../../generated/prisma-client";
 
 const Query = {
   me: async (parent, args, context) => {
-    if (!context.user) {
-      throw new AuthenticationError("Not authenticated");
-    }
+    isLoggedIn(context);
     const me = await context.prisma.user({ id: context.user.id });
     return me;
   },
