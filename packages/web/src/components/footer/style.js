@@ -77,6 +77,7 @@ export const CreatorArea = styled.div`
   grid-area: creator;
   justify-self: center;
   font-size: 0.8rem;
+  padding: 1rem 0;
   a {
     text-decoration: underline;
     padding: 3px;

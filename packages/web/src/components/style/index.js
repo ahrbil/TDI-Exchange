@@ -12,9 +12,6 @@ export const Wrapper = styled.div`
   min-height: calc(100vh - 120px);
   margin: 0 auto;
   padding: 0px 16px;
-  @media (min-width: ${MEDIA_AT_A}) {
-    padding: 0px;
-  }
 `;
 export const HomeGrid = styled.div`
   display: grid;
