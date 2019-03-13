@@ -17,7 +17,6 @@ import ToolBar from "./toolBar";
 
 import "draft-js/dist/Draft.css";
 import "prismjs/themes/prism.css";
-import Icon from "../icons";
 
 const languages = {
   select: "Select A Language",
@@ -133,9 +132,6 @@ class RichEditor extends React.Component {
             ref={editorRef}
           />
         </EditorArea>
-        <ErrorIcon hasError={hasError}>
-          <Icon className="initScale" iconName="error" />
-        </ErrorIcon>
       </E>
     );
   }
@@ -159,21 +155,4 @@ const E = styled.div`
         ${props =>
           props.hasError ? props.theme.error.primary : props.theme.br_toolbar};
     `};
-`;
-
-const ErrorIcon = styled.div`
-  .initScale {
-    transition: all 0.2s ease-in;
-    transform: scale(0);
-    ${props =>
-      props.hasError &&
-      css`
-        transform: scale(1);
-      `}
-  }
-  width: 32px;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  color: ${({ theme }) => theme.error.primary};
 `;
