@@ -13,13 +13,15 @@ import {
   Clear,
   Add,
   KeyboardArrowUp,
-  KeyboardArrowDown
+  KeyboardArrowDown,
+  Edit,
+  Delete
 } from "styled-icons/material";
 import { ImageAlt } from "styled-icons/boxicons-solid";
 import { SignOutAlt, Camera, ArrowLeft } from "styled-icons/fa-solid";
 import { Facebook2, Google2, Location2 } from "styled-icons/icomoon";
 import { Award, Menu } from "styled-icons/boxicons-regular";
-import { Search } from "styled-icons/octicons";
+import { Search, Gear } from "styled-icons/octicons";
 import { GithubSquare, TwitterSquare } from "styled-icons/fa-brands";
 
 import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
@@ -87,6 +89,12 @@ const Glyph = ({ iconName }) => {
       return <GithubSquare />;
     case "twitter":
       return <TwitterSquare />;
+    case "edit":
+      return <Edit />;
+    case "delete":
+      return <Delete />;
+    case "gear":
+      return <Gear />;
     default:
       break;
   }
@@ -96,7 +104,6 @@ export const SvgWrapper = styled.div`
   position: relative;
   display: inline-block;
   width: 100%;
-  height: 100%;
   min-height: 21px;
   color: inherit;
   svg {
