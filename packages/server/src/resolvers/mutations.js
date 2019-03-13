@@ -1,10 +1,11 @@
-import { UserInputError, ForbiddenError } from "apollo-server-express";
+import { UserInputError } from "apollo-server-express";
 
 import {
   updateCreateQuestionRepScore,
-  updateCreateAnswerRepScore
+  updateCreateAnswerRepScore,
+  updateDeleteQuestionRepScore
 } from "./repScore";
-import { uploadImage } from "../utils";
+import { uploadImage, isHavePermission } from "../utils";
 import validationSchema from "../input-validation";
 import throwListError from "../utils/format-list-error";
 import isLoggedIn from "../utils/is-logged-in";
@@ -88,18 +89,33 @@ const Mutation = {
     if (header.length < 3) {
       throw new UserInputError("too short");
     }
-    const askedBy = await context.prisma.question({ id: questionId }).askedBy();
-    const currentUser = context.user;
-    if (askedBy.id === currentUser.id) {
+    const canMakeAction = await isHavePermission(
+      "question",
+      context,
+      questionId
+    );
+    if (canMakeAction) {
       const updatedQuestion = await context.prisma.updateQuestion({
         where: { id: questionId },
         data: { header, body }
       });
       return updatedQuestion;
     }
-    throw new ForbiddenError(
-      "You don't have the right permission to update this question"
+  },
+  // delete question
+  deleteQuestion: async (parent, args, context) => {
+    isLoggedIn(context);
+    const canMakeAction = await isHavePermission(
+      "question",
+      context,
+      args.questionId
     );
+    if (canMakeAction) {
+      await context.prisma.deleteQuestion({ id: args.questionId });
+      await updateDeleteQuestionRepScore(context.user.id);
+      return true;
+    }
+    return false;
   }
 };
 
