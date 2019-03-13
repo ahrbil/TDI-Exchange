@@ -14,7 +14,6 @@ const AsideLatestQuestions = () => (
       first: 6,
       orderBy: "createdAt_DESC"
     }}
-    fetchPolicy="cache-and-network"
   >
     {({ data, loading }) => (
       <Wrapper>

@@ -15,7 +15,6 @@ const AsideLatestInternships = () => (
       first: 4,
       orderBy: "createdAt_DESC"
     }}
-    fetchPolicy="cache-and-network"
   >
     {({ data, loading }) => (
       <Wrapper>
