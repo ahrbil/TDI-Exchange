@@ -48,7 +48,7 @@ export const ActionBarStyle = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  span {
+  h3 {
     font-size: 1.2rem;
     font-weight: 600;
   }
@@ -66,16 +66,17 @@ export const OutLinedBtn = styled.button`
   border: 1px solid
     ${props =>
       props.activeDesc || props.activeAsc ? "#2d2bc6" : "transparent"};
-  border-radius: 4.71px
+  border-radius: 4.71px;
   margin-left: 6px;
-  transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in 0s;
+  cursor: pointer;
   &:hover {
-    cursor: pointer;
+    color: #2d2bc6;
     border-color: #2d2bc6;
   }
-  > div {
+  div {
     width: 21px;
-    transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in 0s;
     color: ${props =>
       props.activeDesc || props.activeAsc ? "#2d2bc6" : "inherit"};
   }

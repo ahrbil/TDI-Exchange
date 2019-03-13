@@ -10,57 +10,50 @@ import Aside from "../aside";
 import { AsideItem } from "../aside/style";
 import Button from "../button";
 
-class QuestionWithDetails extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentPage: 1,
-      orderByAnswers: "createdAt_DESC",
-      activeDesc: true,
-      activeAsc: false
-    };
-  }
-  handlePaginationChange = currentPage => {
-    this.setState({
-      currentPage
-    });
+const QuestionWithDetails = ({ route }) => {
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [orderByAnswers, setOrderByAnswers] = React.useState("createdAt_DESC");
+  const [activeDesc, setActiveDesc] = React.useState(true);
+  const [activeAsc, setActiveAsc] = React.useState(false);
+
+  const handlePaginationChange = currentPg => {
+    setCurrentPage(currentPg);
   };
-  handleOrderBy = orderByAnswers => {
-    this.setState({
-      orderByAnswers,
-      activeDesc: orderByAnswers === "createdAt_DESC",
-      activeAsc: orderByAnswers === "createdAt_ASC"
-    });
+
+  const handleOrderBy = orderAnswers => {
+    setOrderByAnswers(orderAnswers);
+    setActiveDesc(orderAnswers === "createdAt_DESC");
+    setActiveAsc(orderAnswers === "createdAt_ASC");
   };
-  render() {
-    const { orderByAnswers, currentPage, activeDesc, activeAsc } = this.state;
-    const { route } = this.props;
-    return (
-      <Query
-        query={QUESTION_WITH_DETAILS}
-        variables={{
-          id: route.qid,
-          skip: currentPage * ANSWERS_ON_PAGE - ANSWERS_ON_PAGE,
-          orderByAnswers
-        }}
-        fetchPolicy="cache-and-network"
-      >
-        {({ data, loading, error }) => (
-          <>
-            {data && data.question && (
-              <QuestionDetailsContainer>
-                <Details
-                  question={data.question}
-                  currentPage={currentPage}
-                  handlePaginationChange={this.handlePaginationChange}
-                  handleOrderBy={this.handleOrderBy}
-                  handleOrderByOld={this.handleOrderByOld}
-                  activeDesc={activeDesc}
-                  activeAsc={activeAsc}
-                  loading={loading}
-                />
-              </QuestionDetailsContainer>
-            )}
+
+  return (
+    <Query
+      query={QUESTION_WITH_DETAILS}
+      variables={{
+        id: route.qid,
+        skip: currentPage * ANSWERS_ON_PAGE - ANSWERS_ON_PAGE,
+        orderByAnswers
+      }}
+    >
+      {({ data, loading, error }) => (
+        <>
+          {data && data.question && (
+            <QuestionDetailsContainer>
+              <Details
+                question={data.question}
+                currentPage={currentPage}
+                handlePaginationChange={handlePaginationChange}
+                handleOrderBy={handleOrderBy}
+                activeDesc={activeDesc}
+                activeAsc={activeAsc}
+                loading={loading}
+                isEditing={isEditing}
+                setIsEditing={setIsEditing}
+              />
+            </QuestionDetailsContainer>
+          )}
+          {!isEditing && (
             <Aside>
               <AsideItem>
                 <Link to="/ask-a-question">
@@ -68,12 +61,12 @@ class QuestionWithDetails extends React.Component {
                 </Link>
               </AsideItem>
             </Aside>
-          </>
-        )}
-      </Query>
-    );
-  }
-}
+          )}
+        </>
+      )}
+    </Query>
+  );
+};
 
 const QuestionDetailsContainer = styled.div`
   grid-area: main;
