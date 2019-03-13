@@ -5,6 +5,8 @@ const QUESTION_FRAGMENT = gql`
   fragment questionFragment on Question {
     id
     header
+    body
+    isOwner
     totalAnswers
     createdAt
     askedBy {
@@ -56,7 +58,6 @@ export const QUESTION_WITH_DETAILS = gql`
     5}) {
     question(id: $id) {
       ...questionFragment
-      body
       answers(orderBy: $orderByAnswers, skip: $skip, first: $first) {
         id
         body
@@ -142,5 +143,13 @@ export const CREATE_INTERNSHIP = gql`
 export const LOGOUT = gql`
   mutation LOGOUT {
     logout
+  }
+`;
+
+export const UPDATE_QUESTION = gql`
+  mutation UPDATE_QUESTION($questionId: ID!, $header: String!, $body: String) {
+    updateQuestion(questionId: $questionId, header: $header, body: $body) {
+      id
+    }
   }
 `;
