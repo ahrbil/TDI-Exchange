@@ -153,3 +153,9 @@ export const UPDATE_QUESTION = gql`
     }
   }
 `;
+
+export const DELETE_QUESTION = gql`
+  mutation DELETE_QUESTION($questionId: ID!) {
+    deleteQuestion(questionId: $questionId)
+  }
+`;
