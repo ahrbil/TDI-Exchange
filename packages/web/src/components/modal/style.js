@@ -20,6 +20,7 @@ export const ModalTitle = styled.div`
   font-weight: 800;
   font-size: 1.5rem;
   line-height: 28px;
+  padding-right: 35px;
 `;
 export const ModalBackground = styled.div`
   background: rgba(0, 0, 0, 0.75);
