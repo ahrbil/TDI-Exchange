@@ -6,7 +6,11 @@ import { navigate } from "@reach/router";
 
 import RichEditor from "../editor";
 import Button, { TextButton } from "../button";
-import { CREATE_QUESTION, UPDATE_QUESTION } from "../../queries";
+import {
+  CREATE_QUESTION,
+  UPDATE_QUESTION,
+  QUESTION_WITH_DETAILS
+} from "../../queries";
 import { saveEditorStateToRaw, isEditorEmpty, formatError } from "../../utils";
 import { Error } from "../error";
 
@@ -95,7 +99,12 @@ class CreateQuestion extends React.Component {
         ...(isEditing && { questionId })
       };
       //call createOrUpdateQuestion mutation with variables
-      createOrUpdateQuestion({ variables })
+      createOrUpdateQuestion({
+        variables,
+        refetchQueries: isEditing
+          ? [{ query: QUESTION_WITH_DETAILS, variables: { id: questionId } }]
+          : []
+      })
         .then(({ data }) => {
           this.setState({ header: "", editorState: EditorState.createEmpty() });
           isEditing && this.props.setIsEditing(false);
