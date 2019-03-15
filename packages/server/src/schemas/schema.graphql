@@ -25,6 +25,16 @@ type Question {
   updatedAt: DateTime!
 }
 
+type Answer {
+  id: ID!
+  body: String!
+  answeredBy: User!
+  answeredTo: Question!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isOwner: Boolean!
+}
+
 type Internships implements Count {
   count: Int!
   items: [Internship!]!
