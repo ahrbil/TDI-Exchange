@@ -9,6 +9,7 @@ import { ANSWERS_ON_PAGE } from "../../constants";
 import Aside from "../aside";
 import { AsideItem } from "../aside/style";
 import Button from "../button";
+import Loader, { Wrapper as LoaderWrapper } from "../loader";
 
 const QuestionWithDetails = ({ route }) => {
   const [isEditing, setIsEditing] = React.useState(false);
@@ -38,6 +39,11 @@ const QuestionWithDetails = ({ route }) => {
     >
       {({ data, loading, error }) => (
         <>
+          {loading && (
+            <LoaderWrapper>
+              <Loader />
+            </LoaderWrapper>
+          )}
           {data && data.question && (
             <QuestionDetailsContainer>
               <Details
