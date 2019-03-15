@@ -7,6 +7,16 @@ const Answer = {
     context.prisma.answer({ id: parent.id }).answeredTo(),
   createdAt: parent => parent.createdAt,
   updatedAt: parent => parent.updatedAt,
+  isOwner: async (parent, args, context) => {
+    if (context.user) {
+      const answeredBy = await context.prisma
+        .answer({ id: parent.id })
+        .answeredBy();
+      const currentUser = context.user;
+      return answeredBy.id === currentUser.id;
+    }
+    return false;
+  }
 };
 
 export default Answer;
