@@ -22,9 +22,13 @@ const Question = {
   createdAt: parent => parent.createdAt,
   updatedAt: parent => parent.updatedAt,
   isOwner: async (parent, args, context) => {
-    const askedBy = await context.prisma.question({ id: parent.id }).askedBy();
-    const currentUser = context.user;
-    if (askedBy.id === currentUser.id) return true;
+    if (context.user) {
+      const askedBy = await context.prisma
+        .question({ id: parent.id })
+        .askedBy();
+      const currentUser = context.user;
+      return askedBy.id === currentUser.id;
+    }
     return false;
   }
 };
