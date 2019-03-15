@@ -18,7 +18,7 @@ const DropDown = ({ children, overlay }) => {
     return () => {
       clearTimeout(timeOutID);
     };
-  }, []);
+  }, [expend]);
 
   return (
     <DropDownWrapper
