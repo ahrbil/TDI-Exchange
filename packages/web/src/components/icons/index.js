@@ -28,6 +28,7 @@ import { ReactComponent as CodeBlock } from "../svgs/bcode.svg";
 import { ReactComponent as H3 } from "../svgs/h3.svg";
 import { ReactComponent as H2 } from "../svgs/h2.svg";
 import { ReactComponent as H1 } from "../svgs/h1.svg";
+import { ReactComponent as SquareDots } from "../svgs/square-dots.svg";
 
 const Glyph = ({ iconName }) => {
   switch (iconName) {
@@ -95,6 +96,8 @@ const Glyph = ({ iconName }) => {
       return <Delete />;
     case "gear":
       return <Gear />;
+    case "squareDots":
+      return <SquareDots />;
     default:
       break;
   }
