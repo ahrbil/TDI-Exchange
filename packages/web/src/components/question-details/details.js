@@ -40,9 +40,13 @@ const QuestionMutation = ({ render }) => (
   </Mutation>
 );
 
+const CurrentUser = ({ render }) => (
+  <AuthConsumer>{({ currentUser }) => render({ currentUser })}</AuthConsumer>
+);
+
 const Composed = adopt({
   mutation: QuestionMutation,
-  currentUser: <AuthConsumer />
+  authUser: CurrentUser
 });
 
 const Details = ({
@@ -88,7 +92,10 @@ const Details = ({
 
   return (
     <Composed>
-      {({ mutation: { deleteQuestion, result }, currentUser }) => {
+      {({
+        mutation: { deleteQuestion, result },
+        authUser: { currentUser }
+      }) => {
         const deleting = result.loading;
         return isEditing ? (
           <EditQuestion
