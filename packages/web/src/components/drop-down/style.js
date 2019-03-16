@@ -7,7 +7,8 @@ export const DropDownWrapper = styled.div`
 `;
 export const DropDownContent = styled.ul`
   position: absolute;
-  right: 0;
+  top: 25px;
+  right: 10px;
   border: 1px solid #f8f8f8;
   padding: 8px 0px;
   background-color: white;
