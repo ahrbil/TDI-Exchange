@@ -18,9 +18,9 @@ const havePermissionQuestion = async (context, id) => {
   throwForbiddenError();
 };
 const havePermissionAnswer = async (context, id) => {
-  const askedBy = await context.prisma.answer({ id }).askedBy();
+  const answeredBy = await context.prisma.answer({ id }).answeredBy();
   const currentUser = context.user;
-  if (askedBy.id === currentUser.id) {
+  if (answeredBy.id === currentUser.id) {
     return true;
   }
   throwForbiddenError();
