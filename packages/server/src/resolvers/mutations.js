@@ -116,6 +116,18 @@ const Mutation = {
       return true;
     }
     return false;
+  },
+  // update answer
+  updateAnswer: async (parent, { answerId, body }, context) => {
+    isLoggedIn(context);
+    const canMakeAction = await isHavePermission("answer", context, answerId);
+    if (canMakeAction) {
+      const updatedAnswer = await context.prisma.updateAnswer({
+        where: { id: answerId },
+        data: { body }
+      });
+      return updatedAnswer;
+    }
   }
 };
 
