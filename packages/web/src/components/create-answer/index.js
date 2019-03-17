@@ -5,9 +5,17 @@ import { EditorState } from "draft-js";
 import { navigate } from "@reach/router";
 
 import RichEditor from "../editor";
-import { CREATE_ANSWER, QUESTION_WITH_DETAILS } from "../../queries";
-import Button from "../button";
-import { saveEditorStateToRaw, isValidEditorContent } from "../../utils";
+import {
+  CREATE_ANSWER,
+  QUESTION_WITH_DETAILS,
+  UPDATE_ANSWER
+} from "../../queries";
+import Button, { TextButton } from "../button";
+import {
+  saveEditorStateToRaw,
+  isValidEditorContent,
+  getEditorStateFromRaw
+} from "../../utils";
 import { Error } from "../error";
 
 export default class CreateAnswer extends React.Component {
@@ -26,36 +34,48 @@ export default class CreateAnswer extends React.Component {
     });
   };
 
-  handleClick = createAnswer => {
+  handleClick = createOrUpdateAnswer => {
     const state = this.state.editorState.getCurrentContent();
     const errorMsg = isValidEditorContent(state);
     this.setState({ errorMsg });
     if (!errorMsg) {
-      const { questionId } = this.props;
+      const { questionId, isEdit, answerId, toggleEdit } = this.props;
       const body = saveEditorStateToRaw(state);
-      createAnswer({
-        variables: {
-          questionId,
-          body
-        }
+      const variables = {
+        body,
+        ...(isEdit ? { answerId } : { questionId })
+      };
+      createOrUpdateAnswer({
+        variables
       }).then(() => {
         this.setState({ editorState: EditorState.createEmpty() });
-        navigate(`/questions/${questionId}`);
+        // only toggle edit mode if we updating a question
+        isEdit && toggleEdit();
+      });
+    }
+  };
+
+  componentDidMount = () => {
+    const { rawContent, isEdit } = this.props;
+    if (isEdit) {
+      this.setState({
+        editorState: getEditorStateFromRaw(rawContent)
       });
     }
   };
 
   render() {
     const { editorState, errorMsg } = this.state;
-    const { questionId } = this.props;
+    const { questionId, isEdit, toggleEdit } = this.props;
+    const mutation = isEdit ? UPDATE_ANSWER : CREATE_ANSWER;
     return (
       <Mutation
-        mutation={CREATE_ANSWER}
+        mutation={mutation}
         refetchQueries={[
           { query: QUESTION_WITH_DETAILS, variables: { id: questionId } }
         ]}
       >
-        {(createAnswer, { loading, error }) => (
+        {(createOrUpdateAnswer, { loading, error }) => (
           <CreateAnswerCard>
             {(errorMsg || error) && (
               <Error className="errorContainer" message={errorMsg || error} />
@@ -67,13 +87,17 @@ export default class CreateAnswer extends React.Component {
               hasError={errorMsg || error}
               // editorRef={editor => (this.editorRef = editor)}
             />
-            <Button
-              loading={loading || error}
-              onClick={() => this.handleClick(createAnswer)}
-              style={{ marginTop: "2rem" }}
-            >
-              Publish Your Answer
-            </Button>
+            <BtnsWrapper>
+              <Button
+                loading={loading || error}
+                onClick={() => this.handleClick(createOrUpdateAnswer)}
+              >
+                {isEdit ? "Save" : "Publish Your Answer"}
+              </Button>
+              {isEdit && !loading && (
+                <TextButton onClick={toggleEdit}>Cancel</TextButton>
+              )}
+            </BtnsWrapper>
           </CreateAnswerCard>
         )}
       </Mutation>
@@ -89,4 +113,10 @@ const CreateAnswerCard = styled.div`
     bottom: 55px;
     left: 20px;
   }
+`;
+const BtnsWrapper = styled.div`
+  display: flex;
+  margin-top: 2rem;
+  > button {
+    margin-right: 0.5rem;
 `;
