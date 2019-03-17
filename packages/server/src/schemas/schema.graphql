@@ -71,4 +71,5 @@ type Mutation {
   updateQuestion(questionId: ID!, header: String!, body: String): Question!
   deleteQuestion(questionId: ID!): Boolean!
   updateAnswer(answerId: ID!, body: String!): Answer!
+  deleteAnswer(answerId: ID!): Boolean!
 }
