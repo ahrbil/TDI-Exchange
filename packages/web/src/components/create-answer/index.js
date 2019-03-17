@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Mutation } from "react-apollo";
 import { EditorState } from "draft-js";
-import { navigate } from "@reach/router";
 
 import RichEditor from "../editor";
 import {
