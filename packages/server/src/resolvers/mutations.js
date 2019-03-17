@@ -128,6 +128,18 @@ const Mutation = {
       });
       return updatedAnswer;
     }
+  },
+  // delete answer
+  deleteAnswer: async (parent, { answerId }, context) => {
+    isLoggedIn(context);
+    const canMakeAction = await isHavePermission("answer", context, answerId);
+    if (canMakeAction) {
+      await context.prisma.deleteAnswer({
+        id: answerId
+      });
+      return true;
+    }
+    return false;
   }
 };
 
