@@ -176,7 +176,12 @@ const Details = ({
             ) : (
               <AnswersSection>
                 {question.answers.map(answer => (
-                  <Answer key={answer.id} answer={answer} />
+                  <Answer
+                    key={answer.id}
+                    answer={answer}
+                    questionId={question.id}
+                    currentUser={currentUser}
+                  />
                 ))}
               </AnswersSection>
             )}
