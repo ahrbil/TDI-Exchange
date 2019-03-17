@@ -168,3 +168,9 @@ export const UPDATE_ANSWER = gql`
     }
   }
 `;
+
+export const DELETE_ANSWER = gql`
+  mutation DELETE_ANSWER($answerId: ID!) {
+    deleteAnswer(answerId: $answerId)
+  }
+`;
