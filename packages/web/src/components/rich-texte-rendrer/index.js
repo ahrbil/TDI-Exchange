@@ -1,32 +1,19 @@
 import React from "react";
-import { EditorState, convertFromRaw } from "draft-js";
 
 import RichEditor from "../editor";
+import { getEditorStateFromRaw } from "../../utils";
 
-class RichRender extends React.Component {
-  constructor(props) {
-    super(props);
-    const bodyFromJson = JSON.parse(this.props.body);
-    const fromRaw = convertFromRaw(bodyFromJson);
+const RichRender = ({ body }) => {
+  const editorContent = getEditorStateFromRaw(body);
+  const [editorState, setEditorState] = React.useState(editorContent);
 
-    this.state = {
-      editorState: EditorState.createWithContent(fromRaw)
-    };
-  }
-
-  handleChange = editorState => {
-    this.setState({ editorState });
+  const handleChange = state => {
+    setEditorState(state);
   };
 
-  render() {
-    return (
-      <RichEditor
-        editorState={this.state.editorState}
-        onChange={this.handleChange}
-        readOnly
-      />
-    );
-  }
-}
+  return (
+    <RichEditor editorState={editorState} onChange={handleChange} readOnly />
+  );
+};
 
 export default RichRender;
