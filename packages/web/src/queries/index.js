@@ -61,6 +61,7 @@ export const QUESTION_WITH_DETAILS = gql`
       answers(orderBy: $orderByAnswers, skip: $skip, first: $first) {
         id
         body
+        isOwner
         createdAt
         answeredBy {
           userName
@@ -157,5 +158,13 @@ export const UPDATE_QUESTION = gql`
 export const DELETE_QUESTION = gql`
   mutation DELETE_QUESTION($questionId: ID!) {
     deleteQuestion(questionId: $questionId)
+  }
+`;
+
+export const UPDATE_ANSWER = gql`
+  mutation UPDATE_ANSWER($answerId: ID!, $body: String!) {
+    updateAnswer(answerId: $answerId, body: $body) {
+      id
+    }
   }
 `;
