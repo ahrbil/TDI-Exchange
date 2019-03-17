@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { convertToRaw } from "draft-js";
+import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 
 dayjs.extend(relativeTime);
 
@@ -10,6 +10,12 @@ export const getRelativeTimePosted = timeCreated =>
 export const saveEditorStateToRaw = state => {
   const stateToRaw = JSON.stringify(convertToRaw(state));
   return stateToRaw;
+};
+
+export const getEditorStateFromRaw = raw => {
+  const rawFromJson = JSON.parse(raw);
+  const fromRaw = convertFromRaw(rawFromJson);
+  return EditorState.createWithContent(fromRaw);
 };
 
 export const isValidEditorContent = state => {
