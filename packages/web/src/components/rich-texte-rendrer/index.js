@@ -10,6 +10,10 @@ const RichRender = ({ body }) => {
   const handleChange = state => {
     setEditorState(state);
   };
+  // update editorSate if body changes
+  React.useEffect(() => {
+    handleChange(getEditorStateFromRaw(body));
+  }, [body]);
 
   return (
     <RichEditor editorState={editorState} onChange={handleChange} readOnly />
