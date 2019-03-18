@@ -3,7 +3,8 @@ import { UserInputError } from "apollo-server-express";
 import {
   updateCreateQuestionRepScore,
   updateCreateAnswerRepScore,
-  updateDeleteQuestionRepScore
+  updateDeleteQuestionRepScore,
+  deleteAnswerRepScore
 } from "./repScore";
 import { uploadImage, isHavePermission } from "../utils";
 import validationSchema from "../input-validation";
@@ -137,6 +138,7 @@ const Mutation = {
       await context.prisma.deleteAnswer({
         id: answerId
       });
+      await deleteAnswerRepScore(context.user.id, answerId);
       return true;
     }
     return false;

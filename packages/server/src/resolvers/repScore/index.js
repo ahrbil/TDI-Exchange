@@ -1,6 +1,7 @@
 import updateCreateQuestionRepScore from "./create-question";
 import updateCreateAnswerRepScore from "./create-answer";
 import updateDeleteQuestionRepScore from "./delete-question";
+import deleteAnswerRepScore from "./delete-answer";
 // update the user score
 // this function will be called on every crud operator
 // posting a question = 1 rep => delete = -1 rep
@@ -11,5 +12,6 @@ import updateDeleteQuestionRepScore from "./delete-question";
 export {
   updateCreateQuestionRepScore,
   updateCreateAnswerRepScore,
-  updateDeleteQuestionRepScore
+  updateDeleteQuestionRepScore,
+  deleteAnswerRepScore
 };
