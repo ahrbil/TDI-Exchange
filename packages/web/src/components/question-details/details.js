@@ -58,7 +58,9 @@ const Details = ({
   activeAsc,
   loading,
   isEditing,
-  setIsEditing
+  setIsEditing,
+  skip,
+  orderByAnswers
 }) => {
   const { isOwner } = question;
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -181,6 +183,8 @@ const Details = ({
                     answer={answer}
                     questionId={question.id}
                     currentUser={currentUser}
+                    skip={skip}
+                    orderByAnswers={orderByAnswers}
                   />
                 ))}
               </AnswersSection>
@@ -202,7 +206,13 @@ const Details = ({
               </ActionBarStyle>
             )}
             {/* create answer input */}
-            {currentUser && <CreateAnswer questionId={question.id} />}
+            {currentUser && (
+              <CreateAnswer
+                questionId={question.id}
+                skip={skip}
+                orderByAnswers={orderByAnswers}
+              />
+            )}
             {!currentUser && (
               <ActionBarStyle>
                 <LogInModal />

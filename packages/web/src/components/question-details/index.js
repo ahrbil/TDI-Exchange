@@ -17,6 +17,7 @@ const QuestionWithDetails = ({ route }) => {
   const [orderByAnswers, setOrderByAnswers] = React.useState("createdAt_DESC");
   const [activeDesc, setActiveDesc] = React.useState(true);
   const [activeAsc, setActiveAsc] = React.useState(false);
+  const skip = currentPage * ANSWERS_ON_PAGE - ANSWERS_ON_PAGE;
 
   const handlePaginationChange = currentPg => {
     setCurrentPage(currentPg);
@@ -33,7 +34,7 @@ const QuestionWithDetails = ({ route }) => {
       query={QUESTION_WITH_DETAILS}
       variables={{
         id: route.qid,
-        skip: currentPage * ANSWERS_ON_PAGE - ANSWERS_ON_PAGE,
+        skip,
         orderByAnswers
       }}
     >
@@ -56,6 +57,8 @@ const QuestionWithDetails = ({ route }) => {
                 loading={loading}
                 isEditing={isEditing}
                 setIsEditing={setIsEditing}
+                skip={skip}
+                orderByAnswers={orderByAnswers}
               />
             </QuestionDetailsContainer>
           )}

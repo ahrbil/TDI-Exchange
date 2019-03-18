@@ -13,7 +13,7 @@ import { DELETE_ANSWER, QUESTION_WITH_DETAILS } from "../../queries";
 import Button, { TextButton } from "../button";
 import Modal from "../modal";
 
-const Answer = ({ answer, questionId, currentUser }) => {
+const Answer = ({ answer, questionId, currentUser, skip, orderByAnswers }) => {
   const [isEdit, setIsEdit] = React.useState(false);
   const [modalOpen, setModalOpen] = React.useState(false);
   const toggleEdit = () => {
@@ -39,7 +39,14 @@ const Answer = ({ answer, questionId, currentUser }) => {
       mutation={DELETE_ANSWER}
       variables={{ answerId: answer.id }}
       refetchQueries={[
-        { query: QUESTION_WITH_DETAILS, variables: { id: questionId } }
+        {
+          query: QUESTION_WITH_DETAILS,
+          variables: {
+            id: questionId,
+            skip,
+            orderByAnswers
+          }
+        }
       ]}
       onCompleted={() => setModalOpen(false)}
     >
@@ -79,8 +86,10 @@ const Answer = ({ answer, questionId, currentUser }) => {
                     onClick={async () => {
                       try {
                         await deleteAnswer();
+                        // close the modal after deleting tha answer
+                        setModalOpen(false);
                       } catch (error) {
-                        console.log(error);
+                        // console.log(error);
                       }
                     }}
                     loading={loading}

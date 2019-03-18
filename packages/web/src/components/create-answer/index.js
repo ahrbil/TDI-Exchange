@@ -65,13 +65,20 @@ export default class CreateAnswer extends React.Component {
 
   render() {
     const { editorState, errorMsg } = this.state;
-    const { questionId, isEdit, toggleEdit } = this.props;
+    const { questionId, isEdit, toggleEdit, orderByAnswers, skip } = this.props;
     const mutation = isEdit ? UPDATE_ANSWER : CREATE_ANSWER;
     return (
       <Mutation
         mutation={mutation}
         refetchQueries={[
-          { query: QUESTION_WITH_DETAILS, variables: { id: questionId } }
+          {
+            query: QUESTION_WITH_DETAILS,
+            variables: {
+              id: questionId,
+              skip,
+              orderByAnswers
+            }
+          }
         ]}
       >
         {(createOrUpdateAnswer, { loading, error }) => (
