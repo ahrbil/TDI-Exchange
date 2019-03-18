@@ -135,10 +135,10 @@ const Mutation = {
     isLoggedIn(context);
     const canMakeAction = await isHavePermission("answer", context, answerId);
     if (canMakeAction) {
+      await deleteAnswerRepScore(context.user.id, answerId);
       await context.prisma.deleteAnswer({
         id: answerId
       });
-      await deleteAnswerRepScore(context.user.id, answerId);
       return true;
     }
     return false;
