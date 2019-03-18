@@ -13,8 +13,12 @@ const initPassport = () => {
   passport.deserializeUser(async (id, done) => {
     // search in database for that user in the cookie by their id
     // and return that user
-    const user = await prisma.user({ id });
-    done(null, user);
+    try {
+      const user = await prisma.user({ id });
+      done(null, user);
+    } catch (err) {
+      // done(err);
+    }
   });
 
   passport.use(
