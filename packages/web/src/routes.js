@@ -38,6 +38,7 @@ const Routes = () => (
     <Suspense fallback={<FallbackLoader />}>
       <Router>
         <Home path="/" />
+        <Home path="/page/:index" />
         <Internships path="/internships" />
         <Internships path="/internships/tags/:tag" />
         <QuestionDetails path="/questions/:qid" />

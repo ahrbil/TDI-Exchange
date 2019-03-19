@@ -3,10 +3,10 @@ import { HomeGrid } from "../components/style";
 import Questions from "../components/questions";
 import ScrollTop from "../components/scrollTop";
 
-const Home = () => (
+const Home = props => (
   <ScrollTop>
     <HomeGrid>
-      <Questions />
+      <Questions {...props} />
     </HomeGrid>
   </ScrollTop>
 );
