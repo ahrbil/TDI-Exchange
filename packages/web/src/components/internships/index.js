@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import { Query } from "react-apollo";
 
@@ -39,45 +39,49 @@ class InternshipList extends React.Component {
           where
         }}
       >
-        {({ data, loading, error }) => (
-          <>
-            {data && data.internshipsFeed && !loading && (
-              <InternshipListStyle>
-                {data.internshipsFeed.items.map(internship => (
-                  <Internship key={internship.id} {...internship} />
-                ))}
-                {data.internshipsFeed.count > ITEMS_ON_PAGE && (
-                  <PaginationCard>
-                    <PaginationContainer>
-                      <Pagination
-                        defaultCurrent={1}
-                        current={currentPage}
-                        pageSize={ITEMS_ON_PAGE}
-                        total={data.internshipsFeed.count}
-                        onChange={this.handlePaginationChange}
-                      />
-                    </PaginationContainer>
-                  </PaginationCard>
-                )}
-              </InternshipListStyle>
-            )}
-            {loading && (
-              <Wrapper>
-                <Loader />
-              </Wrapper>
-            )}
-            <Aside>
-              <AsideItem>
-                <Link to="/post-an-internship">
-                  <Button secondary>Post An Internship</Button>
-                </Link>
-              </AsideItem>
-              <AsideItem>
-                <AsideLatestQuestions />
-              </AsideItem>
-            </Aside>
-          </>
-        )}
+        {({ data, loading, error }) => {
+          const { items, count } =
+            !loading && data && data.internshipsFeed && data.internshipsFeed;
+          return (
+            <Fragment>
+              {items && !loading && (
+                <InternshipListStyle>
+                  {items.map(internship => (
+                    <Internship key={internship.id} {...internship} />
+                  ))}
+                  {count && count > ITEMS_ON_PAGE && (
+                    <PaginationCard>
+                      <PaginationContainer>
+                        <Pagination
+                          defaultCurrent={1}
+                          current={currentPage}
+                          pageSize={ITEMS_ON_PAGE}
+                          total={count}
+                          onChange={this.handlePaginationChange}
+                        />
+                      </PaginationContainer>
+                    </PaginationCard>
+                  )}
+                </InternshipListStyle>
+              )}
+              {loading && (
+                <Wrapper>
+                  <Loader />
+                </Wrapper>
+              )}
+              <Aside>
+                <AsideItem>
+                  <Link to="/post-an-internship">
+                    <Button secondary>Post An Internship</Button>
+                  </Link>
+                </AsideItem>
+                <AsideItem>
+                  <AsideLatestQuestions />
+                </AsideItem>
+              </Aside>
+            </Fragment>
+          );
+        }}
       </Query>
     );
   }
