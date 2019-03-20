@@ -7,10 +7,9 @@ import QuestionHeader from "../question-details/questionHeader";
 import Icon from "../icons";
 import DropDown, { DropDownItem } from "../drop-down";
 import { Text, DropDownWrapper } from "../drop-down/style";
-import { OutLinedBtn } from "../question-details/style";
 import CreateAnswer from "../create-answer";
 import { DELETE_ANSWER, QUESTION_WITH_DETAILS } from "../../queries";
-import Button, { TextButton } from "../button";
+import Button, { TextButton, IconButton } from "../button";
 import Modal from "../modal";
 
 const Answer = ({ answer, questionId, currentUser, skip, orderByAnswers }) => {
@@ -72,9 +71,9 @@ const Answer = ({ answer, questionId, currentUser, skip, orderByAnswers }) => {
           {currentUser && answer.isOwner && (
             <Fragment>
               <DropDown overlay={<Menu openModal={setModalOpen} />}>
-                <OutLinedBtn className="dropIcon">
+                <IconButton className="dropIcon">
                   <Icon iconName="squareDots" />
-                </OutLinedBtn>
+                </IconButton>
               </DropDown>
               <Modal
                 title="Are you sure you want to delete this answer?"
@@ -121,9 +120,6 @@ const AnswerStyle = styled.div`
     display: flex;
     justify-content: flex-end;
     padding-right: 12px;
-  }
-  ${OutLinedBtn} {
-    border: none;
   }
   &:hover,
   &:active,
