@@ -11,22 +11,15 @@ import { AsideItem } from "../aside/style";
 import Button from "../button";
 import Loader, { Wrapper as LoaderWrapper } from "../loader";
 
+const orderByAnswers = "createdAt_ASC";
+
 const QuestionWithDetails = ({ route }) => {
   const [isEditing, setIsEditing] = React.useState(false);
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [orderByAnswers, setOrderByAnswers] = React.useState("createdAt_DESC");
-  const [activeDesc, setActiveDesc] = React.useState(true);
-  const [activeAsc, setActiveAsc] = React.useState(false);
   const skip = currentPage * ANSWERS_ON_PAGE - ANSWERS_ON_PAGE;
 
   const handlePaginationChange = currentPg => {
     setCurrentPage(currentPg);
-  };
-
-  const handleOrderBy = orderAnswers => {
-    setOrderByAnswers(orderAnswers);
-    setActiveDesc(orderAnswers === "createdAt_DESC");
-    setActiveAsc(orderAnswers === "createdAt_ASC");
   };
 
   return (
@@ -51,9 +44,6 @@ const QuestionWithDetails = ({ route }) => {
                 question={data.question}
                 currentPage={currentPage}
                 handlePaginationChange={handlePaginationChange}
-                handleOrderBy={handleOrderBy}
-                activeDesc={activeDesc}
-                activeAsc={activeAsc}
                 loading={loading}
                 isEditing={isEditing}
                 setIsEditing={setIsEditing}

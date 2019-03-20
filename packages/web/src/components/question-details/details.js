@@ -16,8 +16,7 @@ import {
   DetailsContainerStyle,
   QuestionDetails,
   AnswersSection,
-  ActionBarStyle,
-  OutLinedBtn
+  ActionBarStyle
 } from "./style";
 import { ITEMS_ON_PAGE } from "../../constants";
 import QuestionHeader from "./questionHeader";
@@ -26,13 +25,10 @@ import Icon from "../icons";
 import EditQuestion from "./edit-answer";
 import { DELETE_QUESTION } from "../../queries";
 import Modal from "../modal";
-import Button, { TextButton } from "../button";
+import Button, { TextButton, IconButton } from "../button";
 import DropDown, { DropDownItem } from "../drop-down";
 import { Text } from "../drop-down/style";
 // import { formatError } from "../../utils";
-
-const createdAtDESC = "createdAt_DESC";
-const createdAtASC = "createdAt_ASC";
 
 const QuestionMutation = ({ render }) => (
   <Mutation mutation={DELETE_QUESTION}>
@@ -53,9 +49,6 @@ const Details = ({
   question,
   currentPage,
   handlePaginationChange,
-  handleOrderBy,
-  activeDesc,
-  activeAsc,
   loading,
   isEditing,
   setIsEditing,
@@ -128,24 +121,12 @@ const Details = ({
             <ActionBarStyle>
               <h3>{`${question.totalAnswers} Answers`}</h3>
               <div>
-                <OutLinedBtn
-                  onClick={() => handleOrderBy(createdAtDESC)}
-                  activeDesc={activeDesc}
-                >
-                  <Icon iconName="arrowUp" />
-                </OutLinedBtn>
-                <OutLinedBtn
-                  onClick={() => handleOrderBy(createdAtASC)}
-                  activeAsc={activeAsc}
-                >
-                  <Icon iconName="arrowDown" />
-                </OutLinedBtn>
                 {currentUser && isOwner && (
                   <Fragment>
                     <DropDown overlay={<Menu />}>
-                      <OutLinedBtn>
+                      <IconButton>
                         <Icon iconName="gear" />
-                      </OutLinedBtn>
+                      </IconButton>
                     </DropDown>
                     <Modal
                       title="Are you sure you want to delete this question?"
@@ -241,12 +222,10 @@ Details.propTypes = {
   }).isRequired,
   currentPage: PropTypes.number.isRequired,
   handlePaginationChange: PropTypes.func.isRequired,
-  handleOrderBy: PropTypes.func.isRequired,
-  activeDesc: PropTypes.bool.isRequired,
-  activeAsc: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   isEditing: PropTypes.bool.isRequired,
-  setIsEditing: PropTypes.func.isRequired
+  setIsEditing: PropTypes.func.isRequired,
+  skip: PropTypes.number.isRequired
 };
 
 const ModalBtns = styled.div`
