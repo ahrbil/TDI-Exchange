@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import { Link } from "@reach/router";
 
@@ -15,30 +15,34 @@ const AsideLatestQuestions = () => (
       orderBy: "createdAt_DESC"
     }}
   >
-    {({ data, loading }) => (
-      <Wrapper>
-        <AsideTitle>Latest Questions</AsideTitle>
-        {loading && (
-          <LoaderWrapper>
-            <Loader />
-          </LoaderWrapper>
-        )}
-        {!loading && (
-          <>
-            {data.questionsFeed.items.map(item => (
-              <Container key={item.id}>
-                <Link to={`/questions/${item.id}`}>
-                  <p>{item.header}</p>
-                </Link>
-              </Container>
-            ))}
-            <Link to="/">
-              <TextButton small>View All</TextButton>
-            </Link>
-          </>
-        )}
-      </Wrapper>
-    )}
+    {({ data, loading }) => {
+      const { items } =
+        !loading && data && data.questionsFeed && data.questionsFeed;
+      return (
+        <Wrapper>
+          <AsideTitle>Latest Questions</AsideTitle>
+          {loading && (
+            <LoaderWrapper>
+              <Loader />
+            </LoaderWrapper>
+          )}
+          {!loading && items && (
+            <Fragment>
+              {items.map(item => (
+                <Container key={item.id}>
+                  <Link to={`/questions/${item.id}`}>
+                    <p>{item.header}</p>
+                  </Link>
+                </Container>
+              ))}
+              <Link to="/">
+                <TextButton small>View All</TextButton>
+              </Link>
+            </Fragment>
+          )}
+        </Wrapper>
+      );
+    }}
   </Query>
 );
 
