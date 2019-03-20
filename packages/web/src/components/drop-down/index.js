@@ -24,7 +24,7 @@ const DropDown = ({ children, overlay }) => {
     <DropDownWrapper
       onFocus={toggle}
       onBlur={() => {
-        timeOutID = setTimeout(toggle, 100);
+        timeOutID = setTimeout(toggle, 200);
       }}
     >
       <Header active={expend}>{children}</Header>
