@@ -30,6 +30,10 @@ const TextButton = ({ style, children, small, ...rest }) => (
   </TextButtonStyle>
 );
 
+const IconButton = ({ children, ...rest }) => (
+  <IconButtonStyle {...rest}>{children}</IconButtonStyle>
+);
+
 const ButtonStyle = styled.button`
   display: flex;
   flex: none;
@@ -82,5 +86,18 @@ const TextButtonStyle = styled(ButtonStyle)`
   }
 `;
 
+const IconButtonStyle = styled(TextButtonStyle)`
+  padding: 4px;
+  transition: color 0.2s ease-in 0s;
+  color: inherit;
+  &:hover {
+    color: ${props => props.theme.color.primary};
+    background: none;
+  }
+  div {
+    width: 21px;
+  }
+`;
+
 export default Button;
-export { RichBtn, InputFileBtn, TextButton, ButtonStyle };
+export { RichBtn, InputFileBtn, TextButton, ButtonStyle, IconButton };
