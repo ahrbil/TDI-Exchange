@@ -13,3 +13,4 @@ export const IS_PROD = process.env.NODE_ENV === "production";
 export const HOST_URL = IS_PROD
   ? "https://tdi-exchange.now.sh"
   : "http://localhost:4000";
+export const APP_DOMAIN = "tdi-exchange.now.sh";
