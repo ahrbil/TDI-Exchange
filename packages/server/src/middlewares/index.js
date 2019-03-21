@@ -1,6 +1,5 @@
 import passport from "passport";
 import { Router } from "express";
-import cookieParser from "cookie-parser";
 import cookieSession from "cookie-session";
 import { IS_PROD } from "../constants";
 
