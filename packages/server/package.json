@@ -16,11 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
-    "@graphql-modules/epoxy": "^0.3.0",
-    "@graphql-modules/sonar": "^0.3.0",
     "apollo-server-express": "^2.3.3",
     "cloudinary": "^1.13.2",
-    "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-beta.3",
     "cors": "^2.8.5",
     "dotenv": "^6.1.0",
@@ -32,7 +29,6 @@
     "merge-graphql-schemas": "^1.5.8",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
-    "passport-google-oauth": "^1.0.0",
     "passport-google-oauth20": "^1.0.0",
     "prisma-client-lib": "1.28.5",
     "yup": "^0.26.10"
