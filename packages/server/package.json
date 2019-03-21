@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node dist/index.js",
-    "build": "rm -rf dist/ && cross-env NODE_ENV=production babel src --out-dir dist --copy-files",
+    "build": "rimraf dist/ && cross-env NODE_ENV=production babel src --out-dir dist --copy-files",
     "now-build": "yarn run build",
     "dev": "nodemon --exec babel-node src/index.js",
     "deploy_db": "cd prisma && prisma deploy --env-file ../.env"
@@ -41,6 +41,7 @@
     "babel-plugin-inline-dotenv": "^1.2.1",
     "cross-env": "^5.2.0",
     "nodemon": "^1.18.7",
-    "now-env": "^3.1.0"
+    "now-env": "^3.1.0",
+    "rimraf": "^2.6.3"
   }
 }
