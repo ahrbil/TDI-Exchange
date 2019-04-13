@@ -8,8 +8,9 @@
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "build": "rimraf dist/ && cross-env NODE_ENV=production babel src --out-dir dist --copy-files",
     "now-build": "yarn run build",
-    "dev": "nodemon --exec babel-node src/index.js",
-    "deploy:db": "cd prisma && prisma deploy --env-file ../.env"
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
+    "deploy:db": "cd prisma/prod && prisma deploy --env-file ../../.env",
+    "deploy:db:dev": "cd prisma/dev && prisma deploy --env-file ../../.env"
   },
   "keywords": [],
   "author": "ahrbil",
