@@ -10,6 +10,7 @@ import { uploadImage, isHavePermission } from "../utils";
 import validationSchema from "../input-validation";
 import throwListError from "../utils/format-list-error";
 import isLoggedIn from "../utils/is-logged-in";
+import { questionPayload } from "../fragments";
 // import { prisma } from "../generated/prisma-client";
 
 const Mutation = {
@@ -31,6 +32,7 @@ const Mutation = {
     updateCreateQuestionRepScore(context.user.id);
     return newQuestion;
   },
+  // create an answer and send notification to question owner
   createAnswer: async (parent, args, context) => {
     isLoggedIn(context);
     const newAnswer = await context.prisma.createAnswer({
@@ -39,6 +41,50 @@ const Mutation = {
       answeredTo: { connect: { id: args.questionId } }
     });
     updateCreateAnswerRepScore(context.user.id, args.questionId);
+    // make a notification
+    // 1 get question
+    const questionInfo = await context.prisma
+      .question({ id: args.questionId })
+      .$fragment(questionPayload);
+    // 2 check for existing notifications
+    const unreadNotifications = await context.prisma.notifications({
+      where: {
+        notifier: {
+          id: questionInfo.askedBy.id
+        },
+        read: false,
+        payload_contains: args.questionId
+      }
+    });
+    // if unreadNotifications exists update its actors
+    // else create new notification
+    if (unreadNotifications && unreadNotifications.length) {
+      await context.prisma.updateNotification({
+        where: {
+          id: unreadNotifications[0].id
+        },
+        data: {
+          actors: {
+            connect: {
+              id: context.user.id
+            }
+          }
+        }
+      });
+    } else {
+      // 3 create notification
+      const { askedBy, ...payload } = questionInfo;
+      // new notification
+      await context.prisma.createNotification({
+        action: "ANSWERED",
+        actors: { connect: [{ id: context.user.id }] },
+        notifier: { connect: { id: askedBy.id } },
+        payload: JSON.stringify(payload)
+      });
+    }
+    // TODO move creating notifications to a separate thread
+    // so we can speed up creating new answers
+
     return newAnswer;
   },
   createTag: async (parent, args, context) => {
