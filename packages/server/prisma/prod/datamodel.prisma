@@ -3,7 +3,7 @@ enum NotificationAction {
   UPVOTE
 }
 type User {
-  id: ID! @unique
+  id: ID! @id
   facebookId: String @unique
   googleId: String @unique
   userName: String
@@ -14,49 +14,51 @@ type User {
   MyInternships: [Internship!]!
   Notifications: [Notification!]!
     @relation(name: "UserNotifications", onDelete: CASCADE)
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  repScore: Int! @default(value: "0")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  repScore: Int! @default(value: 0)
 }
 type Question {
-  id: ID! @unique
+  id: ID! @id
   header: String!
   body: String
   askedBy: User!
   answers: [Answer!]! @relation(name: "AnswersOfQuestion", onDelete: CASCADE)
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 type Answer {
-  id: ID! @unique
+  id: ID! @id
   body: String!
   answeredBy: User!
   answeredTo: Question! @relation(name: "AnswersOfQuestion")
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 type Internship {
-  id: ID! @unique
+  id: ID! @id
   title: String!
   location: String!
   description: String
   postedBy: User!
   avatar: String
   tags: [Tag!]!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 type Tag {
-  id: ID! @unique
+  id: ID! @id
   name: String! @unique
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 type Notification {
-  id: ID! @unique
+  id: ID! @id
   notifier: User! @relation(name: "UserNotifications")
-  read: Boolean! @default(value: "false")
+  seen: Boolean! @default(value: false)
   action: NotificationAction!
   actors: [User!]! @relation(name: "UsersInNotification")
   payload: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
