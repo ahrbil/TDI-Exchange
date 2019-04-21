@@ -9,8 +9,11 @@ import authRoute from "./routes/auth";
 import initPassport from "./passport";
 import typeDefs from "./typeDefs";
 import { IS_PROD, PORT } from "./constants";
+import { initEvents } from "./events";
 
 initPassport();
+
+initEvents();
 
 const app = express();
 
