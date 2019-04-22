@@ -28,11 +28,7 @@ const DropDown = ({ children, overlay }) => {
       }}
     >
       <Header active={expend}>{children}</Header>
-      {expend && (
-        <DropDownContent>
-          <ul>{overlay}</ul>
-        </DropDownContent>
-      )}
+      {expend && <DropDownContent>{overlay}</DropDownContent>}
     </DropDownWrapper>
   );
 };

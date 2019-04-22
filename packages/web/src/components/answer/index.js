@@ -119,7 +119,7 @@ const AnswerStyle = styled.div`
   ${DropDownWrapper} {
     display: flex;
     justify-content: flex-end;
-    padding-right: 12px;
+    margin-right: 16px;
   }
   &:hover,
   &:active,
