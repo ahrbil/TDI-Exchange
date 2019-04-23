@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "@reach/router";
 
 import Logo from "../logo";
@@ -20,6 +20,7 @@ import {
 import { Container } from "../style";
 import Search from "../search";
 import Icon from "../icons";
+import Notifications from "../notifications";
 
 class Header extends React.Component {
   state = {
@@ -76,7 +77,12 @@ class Header extends React.Component {
                       <SearchToggler onClick={this.openSearchMode}>
                         <Icon iconName="search" />
                       </SearchToggler>
-                      {currentUser && <Profile user={{ ...currentUser }} />}
+                      {currentUser && (
+                        <Fragment>
+                          <Notifications />
+                          <Profile user={{ ...currentUser }} />
+                        </Fragment>
+                      )}
                       {!currentUser && (
                         <Link to="/sign-in">
                           <Button small>Sign In</Button>
