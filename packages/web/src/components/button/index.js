@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 
 import RichBtn, { InputFileBtn } from "./editorBtns";
 import Loader from "../loader";
+import { SvgWrapper } from "../icons";
 
 const Button = ({
   style,
@@ -94,7 +95,7 @@ const IconButtonStyle = styled(TextButtonStyle)`
     color: ${props => props.theme.color.primary};
     background: none;
   }
-  div {
+  ${SvgWrapper} {
     width: 21px;
   }
 `;

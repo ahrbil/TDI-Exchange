@@ -15,7 +15,8 @@ import {
   KeyboardArrowUp,
   KeyboardArrowDown,
   Edit,
-  Delete
+  Delete,
+  Notifications
 } from "styled-icons/material";
 import { ImageAlt } from "styled-icons/boxicons-solid";
 import { SignOutAlt, Camera, ArrowLeft } from "styled-icons/fa-solid";
@@ -98,6 +99,8 @@ const Glyph = ({ iconName }) => {
       return <Gear />;
     case "squareDots":
       return <SquareDots />;
+    case "notifications":
+      return <Notifications />;
     default:
       break;
   }
