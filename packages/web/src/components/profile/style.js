@@ -22,14 +22,15 @@ export const Avatar = styled.div`
 export const UserAvatar = styled.button`
   width: 32px;
   height: 32px;
-  background: none;
+  background: aliceblue;
   display: block;
   cursor: pointer;
+  border-radius: 100%;
+  overflow: hidden;
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 100%;
   }
 `;
 
