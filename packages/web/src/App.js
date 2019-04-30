@@ -1,6 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { ApolloProvider } from "react-apollo";
+import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
 
 import "./App.css";
 import theme from "./theme";
@@ -14,17 +15,19 @@ import { apolloClient } from "./apolloClient";
 
 const App = () => (
   <ApolloProvider client={apolloClient}>
-    <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <SearchProvider>
-          <Header />
-          <Wrapper>
-            <Routes />
-          </Wrapper>
-          <Footer />
-        </SearchProvider>
-      </AuthProvider>
-    </ThemeProvider>
+    <ApolloHooksProvider client={apolloClient}>
+      <ThemeProvider theme={theme}>
+        <AuthProvider>
+          <SearchProvider>
+            <Header />
+            <Wrapper>
+              <Routes />
+            </Wrapper>
+            <Footer />
+          </SearchProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </ApolloHooksProvider>
   </ApolloProvider>
 );
 
