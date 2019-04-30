@@ -29,6 +29,7 @@
     "react": "^16.8.4",
     "react-adopt": "^0.6.0",
     "react-apollo": "^2.3.2",
+    "react-apollo-hooks": "^0.4.5",
     "react-content-loader": "^4.0.1",
     "react-dom": "^16.8.4",
     "react-epic-spinners": "^0.2.1",
