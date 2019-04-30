@@ -73,3 +73,7 @@ type Mutation {
   updateAnswer(answerId: ID!, body: String!): Answer!
   deleteAnswer(answerId: ID!): Boolean!
 }
+
+type Subscription {
+  newNotification: Notification
+}
