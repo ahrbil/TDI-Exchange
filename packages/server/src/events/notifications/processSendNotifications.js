@@ -1,8 +1,9 @@
 import prisma from "../../prisma";
 import { questionPayload } from "../../fragments";
+import pubSub, { NEW_NOTIFICATION } from "../../subscriptions";
 
 const processSendNotifications = async ({ questionId, currentUserId }) => {
-  // 1 get question
+  // get question
   const questionInfo = await prisma
     .question({ id: questionId })
     .$fragment(questionPayload);
@@ -11,11 +12,17 @@ const processSendNotifications = async ({ questionId, currentUserId }) => {
     return;
   }
   const { askedBy, ...payload } = questionInfo;
-  await prisma.createNotification({
+  // create notification
+  const newNotification = await prisma.createNotification({
     action: "ANSWERED",
     actors: { connect: [{ id: currentUserId }] },
     notifier: { connect: { id: askedBy.id } },
     payload: JSON.stringify(payload)
+  });
+  // publish the new notification for subscribed user
+  pubSub.publish(NEW_NOTIFICATION, {
+    id: newNotification.id,
+    notifierId: askedBy.id
   });
 };
 export default processSendNotifications;
