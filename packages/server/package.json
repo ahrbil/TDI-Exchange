@@ -8,7 +8,7 @@
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "build": "rimraf dist/ && cross-env NODE_ENV=production babel src --out-dir dist --copy-files",
     "now-build": "yarn run build",
-    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
+    "dev": "cross-env NODE_ENV=development cross-env DEBUG=server nodemon --exec babel-node src/index.js",
     "deploy:db": "cd prisma/prod && prisma deploy --env-file ../../.env",
     "deploy:db:dev": "cd prisma/dev && prisma deploy --env-file ../../.env"
   },
@@ -21,6 +21,7 @@
     "cloudinary": "^1.13.2",
     "cookie-session": "^2.0.0-beta.3",
     "cors": "^2.8.5",
+    "debug": "^4.1.1",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "graphql": "14.0.0",
