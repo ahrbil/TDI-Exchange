@@ -61,6 +61,7 @@ type Query {
     where: InternshipWhereInput
   ): Internships!
   tags(first: Int, where: TagWhereInput): [Tag!]!
+  allNotifications: [Notification!]!
 }
 
 type Mutation {
