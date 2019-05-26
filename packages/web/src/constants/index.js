@@ -8,3 +8,6 @@ export const GQL_URI = IS_PROD ? "/api" : "http://localhost:4000/api";
 export const HOST_URL = IS_PROD
   ? "https://tdi-exchange.now.sh"
   : "http://localhost:4000";
+export const WS_URI = IS_PROD
+  ? "wss://tdi-exchange.now.sh/websocket"
+  : "ws://localhost:4000/websocket";
