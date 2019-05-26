@@ -10,6 +10,7 @@ import { IconButton } from "../button";
 import Loader, { Wrapper } from "../loader";
 import { NEW_NOTIFICATION_SUBSCRIBE, ALL_NOTIFICATIONS } from "../../queries";
 import { Avatar } from "../profile/style";
+import { getRelativeTimePosted } from "../../utils";
 
 const DropDownMenu = ({ notifications, markAllNotificationsSeen }) => {
   // mark all notifications as seen on component mounts
@@ -34,6 +35,9 @@ const DropDownMenu = ({ notifications, markAllNotificationsSeen }) => {
               <p>
                 <strong>answered your question:</strong> {question.header}
               </p>
+              <span className="time-stamp">
+                {getRelativeTimePosted(notification.createdAt)}
+              </span>
             </DropDownItem>
           </Link>
         );
@@ -98,6 +102,11 @@ const NotificationsBell = styled.div`
   }
   ${DropDownItemStyle} {
     flex-wrap: wrap;
+    .time-stamp {
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin: 0.4rem 0;
+    }
     h3 {
       font-size: 1rem;
       font-weight: 500;
