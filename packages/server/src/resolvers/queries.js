@@ -50,6 +50,13 @@ const Query = {
       first: args.first
     });
     return tags;
+  },
+  allNotifications: async (parent, args, context) => {
+    isLoggedIn(context);
+    const notifications = await context.prisma.notifications({
+      where: { notifier: { id: context.user.id } }
+    });
+    return notifications;
   }
 };
 
