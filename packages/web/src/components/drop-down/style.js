@@ -20,11 +20,14 @@ export const DropDownContent = styled.ul`
 `;
 export const DropDownItemStyle = styled.li`
   padding: 8px 16px;
+  margin-bottom: 0.3rem;
   transition: all 0.2s ease-in;
   cursor: pointer;
   display: flex;
+  background-color: ${props => (props.active ? "rgb(247, 249, 250)" : "white")};
   &:last-of-type {
     border-bottom: none;
+    margin-bottom: 0.3rem;
   }
   &:hover {
     background-color: rgb(247, 249, 250);
