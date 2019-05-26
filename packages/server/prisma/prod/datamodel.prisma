@@ -56,6 +56,7 @@ type Notification {
   id: ID! @id
   notifier: User! @relation(name: "UserNotifications")
   seen: Boolean! @default(value: false)
+  read: Boolean! @default(value: false)
   action: NotificationAction!
   actors: [User!]! @relation(name: "UsersInNotification")
   payload: String!
