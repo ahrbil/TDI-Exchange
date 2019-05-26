@@ -14,9 +14,8 @@ const Subscription = {
         return context.user.id === payload.notifierId;
       }
     ),
-    // we return the payload but all the notification fields gets resolved on its own
     resolve: async (payload, args, context) => {
-      return payload;
+      return payload.newNotification;
     }
   }
 };

@@ -21,8 +21,8 @@ const processSendNotifications = async ({ questionId, currentUserId }) => {
   });
   // publish the new notification for subscribed user
   pubSub.publish(NEW_NOTIFICATION, {
-    id: newNotification.id,
-    notifierId: askedBy.id
+    notifierId: askedBy.id,
+    newNotification
   });
 };
 export default processSendNotifications;
