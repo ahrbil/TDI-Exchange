@@ -16,7 +16,7 @@ import {
   KeyboardArrowDown,
   Edit,
   Delete,
-  Notifications
+  NotificationsNone
 } from "styled-icons/material";
 import { ImageAlt } from "styled-icons/boxicons-solid";
 import { SignOutAlt, Camera, ArrowLeft } from "styled-icons/fa-solid";
@@ -100,7 +100,7 @@ const Glyph = ({ iconName }) => {
     case "squareDots":
       return <SquareDots />;
     case "notifications":
-      return <Notifications />;
+      return <NotificationsNone />;
     default:
       break;
   }
