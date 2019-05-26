@@ -32,6 +32,20 @@ const INTERNSHIP_FRAGMENT = gql`
   }
 `;
 
+const NOTIFICATION_FRAGMENT = gql`
+  fragment notificationFragment on Notification {
+    id
+    payload
+    seen
+    read
+    createdAt
+    actors {
+      userName
+      avatar
+    }
+  }
+`;
+
 export const CURRENT_USER = gql`
   query CURRENT_USER {
     me {
@@ -173,4 +187,22 @@ export const DELETE_ANSWER = gql`
   mutation DELETE_ANSWER($answerId: ID!) {
     deleteAnswer(answerId: $answerId)
   }
+`;
+
+export const NEW_NOTIFICATION_SUBSCRIBE = gql`
+  subscription NEW_NOTIFICATION_SUBSCRIBE {
+    newNotification {
+      ...notificationFragment
+    }
+  }
+  ${NOTIFICATION_FRAGMENT}
+`;
+
+export const ALL_NOTIFICATIONS = gql`
+  query ALL_NOTIFICATIONS {
+    allNotifications {
+      ...notificationFragment
+    }
+  }
+  ${NOTIFICATION_FRAGMENT}
 `;
