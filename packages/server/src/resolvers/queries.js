@@ -1,6 +1,6 @@
 import isLoggedIn from "../utils/is-logged-in";
 
-// import { prisma } from "../../generated/prisma-client";
+// import { prisma } from "../generated/prisma-client";
 
 const Query = {
   me: async (parent, args, context) => {
@@ -54,7 +54,8 @@ const Query = {
   allNotifications: async (parent, args, context) => {
     isLoggedIn(context);
     const notifications = await context.prisma.notifications({
-      where: { notifier: { id: context.user.id } }
+      where: { notifier: { id: context.user.id } },
+      orderBy: args.orderBy || "createdAt_DESC"
     });
     return notifications;
   }

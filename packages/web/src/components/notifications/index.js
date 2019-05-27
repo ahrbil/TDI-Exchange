@@ -49,7 +49,9 @@ const DropDownMenu = ({ notifications, markAllNotificationsSeen }) => {
 const Notifications = () => {
   const [notifications, setNotifications] = React.useState([]);
   const notificationsSubs = useSubscription(NEW_NOTIFICATION_SUBSCRIBE);
-  const { data, loading } = useQuery(ALL_NOTIFICATIONS);
+  const { data, loading } = useQuery(ALL_NOTIFICATIONS, {
+    variables: { orderBy: "createdAt_DESC" }
+  });
   const counter = notifications.reduce((acc, notification) => {
     return notification.seen ? acc : acc + 1;
   }, 0);
