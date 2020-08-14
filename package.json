@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "lerna run start --parallel",
-    "build:web": "lerna run --scope web buld"
+    "build:web": "lerna run --scope web buld",
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff"
   },
