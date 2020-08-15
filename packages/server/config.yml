@@ -4,6 +4,7 @@ databases:
   default:
     connector: postgres
     host: DB_HOST
+    database: DB_NAME
     port: 5432
     user: DB_USER
     password: DB_PASSWORD
