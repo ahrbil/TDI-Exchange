@@ -10,3 +10,4 @@ databases:
     password: DB_PASSWORD
     migrations: true
     rawAccess: false
+    ssl: true
