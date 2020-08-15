@@ -10,9 +10,9 @@ ENV PRISMA_CONFIG_PATH ./packages/server/prisma/prisma.yml
 
 COPY ./packages/server/config.yml ./packages/server/prisma/prisma.yml
 
-RUN sed -i s/DB_HOST/$DB_HOST/g prisma.yml
-RUN sed -i s/DB_PASSWORD/$AUTH_DB_PASSWORD/g prisma.yml
-RUN sed -i s/DB_USER/$DB_USER/g prisma.yml
-RUN sed -i s/PRISMA_SECRET/$PRISMA_SECRET/g prisma.yml
+RUN sed -i s/DB_HOST/$DB_HOST/g ./packages/server/prisma/prisma.yml
+RUN sed -i s/DB_PASSWORD/$AUTH_DB_PASSWORD/g ./packages/server/prisma/prisma.yml
+RUN sed -i s/DB_USER/$DB_USER/g ./packages/server/prisma/prisma.yml
+RUN sed -i s/PRISMA_SECRET/$PRISMA_SECRET/g ./packages/server/prisma/prisma.yml
 
 EXPOSE 4466
