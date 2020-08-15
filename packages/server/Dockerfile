@@ -1,1 +1,18 @@
 FROM prismagraphql/prisma:1.34
+
+ARG DB_HOST
+ARG DB_USER
+ARG DB_PASSWORD
+ARG PRISMA_SECRET
+
+ARG PRISMA_CONFIG_PATH
+ENV PRISMA_CONFIG_PATH ./packages/server/prisma/prisma.yml
+
+COPY ./packages/server/config.yml ./packages/server/prisma/prisma.yml
+
+RUN sed -i s/DB_HOST/$DB_HOST/g prisma.yml
+RUN sed -i s/DB_PASSWORD/$AUTH_DB_PASSWORD/g prisma.yml
+RUN sed -i s/DB_USER/$DB_USER/g prisma.yml
+RUN sed -i s/PRISMA_SECRET/$PRISMA_SECRET/g prisma.yml
+
+EXPOSE 4466

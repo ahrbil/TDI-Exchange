@@ -1,0 +1,11 @@
+managementApiSecret: PRISMA_SECRET
+port: 4466
+databases:
+  default:
+    connector: postgres
+    host: DB_HOST
+    port: 5432
+    user: DB_USER
+    password: DB_PASSWORD
+    migrations: true
+    rawAccess: false
